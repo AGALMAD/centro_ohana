@@ -1,0 +1,27 @@
+.nav {
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  height: 12vh;
+  background-color: rgb(255, 216, 216);
+}
+
+.elements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-right: 20px;
+}
+
+.elements * {
+  list-style: none;
+}
+
+.logo {
+  height: 90%;
+}
