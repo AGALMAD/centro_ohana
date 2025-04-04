@@ -1,4 +1,4 @@
-package com.Ohana.OhanaServer.Config;
+package com.Ohana.OhanaServer.Config.Jwt;
 
 import java.io.IOException;
 

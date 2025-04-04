@@ -1,6 +1,6 @@
 package com.Ohana.OhanaServer.Services;
 
-import com.Ohana.OhanaServer.Config.JwtService;
+import com.Ohana.OhanaServer.Config.Jwt.JwtService;
 import com.Ohana.OhanaServer.Controllers.AuthRequest;
 import com.Ohana.OhanaServer.Controllers.AuthResponse;
 import com.Ohana.OhanaServer.Models.Role;

@@ -1,10 +1,12 @@
 package com.Ohana.OhanaServer.Config;
 
+import com.Ohana.OhanaServer.Config.Jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -23,13 +25,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         return http
-                .csrf(csrf ->
-                        csrf
-                                .disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest ->
                         authRequest
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager->
                         sessionManager
