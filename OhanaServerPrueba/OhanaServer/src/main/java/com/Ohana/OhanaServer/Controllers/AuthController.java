@@ -3,6 +3,7 @@ package com.Ohana.OhanaServer.Controllers;
 
 import com.Ohana.OhanaServer.Models.Role;
 import com.Ohana.OhanaServer.Models.User;
+import com.Ohana.OhanaServer.Services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,20 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-
+    private final AuthService authService;
 
     @PostMapping(value = "login")
-    public ResponseEntity<String> login()
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request)
     {
-        return ResponseEntity.ok("Login OK");
+        return ResponseEntity.ok(authService.login(request));
     }
 
     @PostMapping(value = "register")
-    public User register()
+    public ResponseEntity<AuthResponse> register(@RequestBody AuthRequest request)
     {
-        User user = new User();
-        user.setUsername("Ale");
-
-        return user;
+        return ResponseEntity.ok(authService.register(request));
     }
 }
