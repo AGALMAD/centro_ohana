@@ -1,4 +1,4 @@
-package com.Ohana.OhanaServer.Controllers;
+package com.Ohana.OhanaServer.Controllers.Auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

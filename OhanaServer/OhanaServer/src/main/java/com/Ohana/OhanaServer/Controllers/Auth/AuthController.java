@@ -1,8 +1,6 @@
-package com.Ohana.OhanaServer.Controllers;
+package com.Ohana.OhanaServer.Controllers.Auth;
 
 
-import com.Ohana.OhanaServer.Models.Role;
-import com.Ohana.OhanaServer.Models.User;
 import com.Ohana.OhanaServer.Services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
