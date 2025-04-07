@@ -1,10 +1,10 @@
-package com.OhanaCenter.Server;
+package com.Ohana.OhanaServer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class OhanaServerApplicationTests {
 
 	@Test
 	void contextLoads() {

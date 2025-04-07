@@ -1,0 +1,7 @@
+-- Tabla para usuarios
+CREATE TABLE IF NOT EXISTS users(
+    id UUID DEFAULT RANDOM_UUID() PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    role VARCHAR(10) DEFAULT 'USER' NOT NULL
+);
