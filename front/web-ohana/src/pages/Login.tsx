@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./Login.css";
+import { AuthRequest } from "../models/auth-request";
+import AuthService from "../services/AuthService";
 
 function Login() {
   const FORM_TYPES = {
     LOGIN: "login",
     SIGNUP: "signup",
   };
+
+  const API_URL = import.meta.env.VITE_API_URL + "auth";
 
   //Para saber si quiere iniciar sesión o registrarse
   const [formType, setFormType] = useState(FORM_TYPES.LOGIN);
@@ -15,15 +19,19 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formType === FORM_TYPES.LOGIN) {
-      // Lógica para iniciar sesión
-      console.log("Iniciar sesión con:", { username, password });
-    } else {
-      // Lógica para registrarse
-      console.log("Registrarse con:", { username, password });
+    const requestBody: AuthRequest = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      AuthService.login(requestBody);
+    } catch (error: any) {
+      console.error("Error:", error);
+    } finally {
     }
   };
 
