@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import "./Login.css";
 import { AuthRequest } from "../models/auth-request";
-import AuthService from "../services/AuthService";
+import AuthService from "../services/authService";
 
 function Login() {
   const FORM_TYPES = {
@@ -28,10 +28,16 @@ function Login() {
     };
 
     try {
-      AuthService.login(requestBody);
+      const response =
+        formType === FORM_TYPES.LOGIN
+          ? await AuthService.login(requestBody)
+          : await AuthService.register(requestBody);
+
+      if (response) {
+        console.log("Response:", response);
+      }
     } catch (error: any) {
       console.error("Error:", error);
-    } finally {
     }
   };
 
@@ -42,7 +48,6 @@ function Login() {
     } else if (name === "password") {
       setPassword(value);
     }
-    console.log("Valor cambiado:", { name, value });
   };
 
   return (
