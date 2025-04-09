@@ -9,9 +9,11 @@ const AuthService = {
       password: request.password,
     });
 
-    console.log("Login response:", response);
-    localStorage.setItem("token", response.data.token);
+    if (!response.success || !response.data?.token) {
+      throw new Error("Login failed: Token not received");
+    }
 
+    localStorage.setItem("token", response.data.token);
     return response.data;
   },
 
