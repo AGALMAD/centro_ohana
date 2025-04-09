@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -34,5 +38,50 @@ public class UserService {
 
     }
 
+    public List<UserDto> getAllUsers(){
+
+        List<User> users = userRepository.findAll();
+        return userMapper.userToUserDto(users);
+    }
+
+    public UserDto updateUser(String userId, NewUserRequest newData){
+
+        try {
+            Optional<User> optionalUser = userRepository.findById(UUID.fromString(userId));
+
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setUsername(newData.getUsername());
+                user.setPassword(passwordEncoder.encode(newData.getPassword()));
+
+                userRepository.save(user);
+                return userMapper.userToUserDto(user);
+            }
+
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+        return null;
+
+    }
+
+    public UserDto deleteUser(String userId){
+
+        try {
+            Optional<User> optionalUser = userRepository.findById(UUID.fromString(userId));
+
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                userRepository.delete(user);
+                return userMapper.userToUserDto(user);
+            }
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
+
+
+        return null;
+    }
 
 }

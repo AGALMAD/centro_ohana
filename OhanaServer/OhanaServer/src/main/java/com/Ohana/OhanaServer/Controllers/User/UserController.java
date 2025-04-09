@@ -1,5 +1,6 @@
 package com.Ohana.OhanaServer.Controllers.User;
 
+import com.Ohana.OhanaServer.Models.User;
 import com.Ohana.OhanaServer.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,26 +22,30 @@ public class UserController {
 
     }
 
-/*
+
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping(value = "/allUsers")
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        // Lógica para obtener todos los usuarios
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
 
     @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        // Lógica para actualizar la información de un usuario
+    public ResponseEntity<Void> updateUser(@PathVariable String id, @RequestBody NewUserRequest newData) {
+       UserDto userDto = userService.updateUser(id,newData);
+
+        return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
 
     @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        // Lógica para eliminar un usuario por su ID
+    public ResponseEntity<UserDto> deleteUser(@PathVariable String id) {
+        UserDto userDto = userService.deleteUser(id);
+        return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
- */
+
 
 }
