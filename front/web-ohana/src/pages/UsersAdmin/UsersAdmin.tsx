@@ -1,7 +1,12 @@
 import React from "react";
+import Navbar from "../../components/Navbar";
 
 function UsersAdmin() {
-  return <div>UsersAdmin</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default UsersAdmin;

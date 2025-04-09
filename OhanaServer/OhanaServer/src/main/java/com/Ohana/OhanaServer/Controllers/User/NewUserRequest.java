@@ -1,4 +1,4 @@
-package com.Ohana.OhanaServer.Controllers;
+package com.Ohana.OhanaServer.Controllers.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthRequest {
+public class NewUserRequest {
     String username;
     String password;
 }
