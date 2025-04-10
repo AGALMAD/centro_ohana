@@ -8,6 +8,7 @@ import com.Ohana.OhanaServer.Models.Role;
 import com.Ohana.OhanaServer.Models.User;
 import com.Ohana.OhanaServer.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,6 +29,7 @@ public class UserService {
 
 
     public UserDto register(NewUserRequest request) {
+
 
         User user = User.builder()
                 .username(request.getUsername())
@@ -52,21 +55,55 @@ public class UserService {
             Optional<User> optionalUser = userRepository.findById(UUID.fromString(newData.getId()));
 
             if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                user.setUsername(newData.getUsername());
-                user.setPassword(passwordEncoder.encode(newData.getPassword()));
+                return updateUserInDB(optionalUser.get(),
+                        NewUserRequest.builder()
+                        .username(newData.getUsername())
+                        .password(newData.getPassword())
+                        .build()
+                );
 
-                userRepository.save(user);
-                return userMapper.userToUserDto(user);
             }
 
         }catch (Exception e){
-            System.out.println(e.toString());
+            log.error("e: ", e);
         }
 
         return null;
 
     }
+
+    public UserDto updateAuthenticatedUser(String username, NewUserRequest newData){
+
+        try {
+            Optional<User> optionalUser = userRepository.findByUsername(username);
+
+            if (optionalUser.isPresent()) {
+                return updateUserInDB(optionalUser.get(), newData);
+            }
+
+        }catch (Exception e){
+            log.error("e: ", e);
+        }
+
+        return null;
+
+    }
+
+    private UserDto updateUserInDB(User user, NewUserRequest newData) {
+
+        if (newData.getUsername() != null && !newData.getUsername().isBlank()) {
+            user.setUsername(newData.getUsername().trim());
+        }
+
+        if (newData.getPassword() != null && !newData.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(newData.getPassword()));
+        }
+
+        User updatedUser = userRepository.save(user);
+        return userMapper.userToUserDto(updatedUser);
+    }
+
+
 
     public UserDto deleteUser(String userId){
 
@@ -79,7 +116,7 @@ public class UserService {
                 return userMapper.userToUserDto(user);
             }
         }catch (Exception e){
-            System.out.println(e.toString());
+            log.error("e: ", e);
         }
 
 

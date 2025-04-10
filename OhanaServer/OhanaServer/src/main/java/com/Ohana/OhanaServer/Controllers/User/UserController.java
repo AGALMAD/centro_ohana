@@ -34,21 +34,21 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping
     public ResponseEntity<Void> updateUser(@RequestBody UpdateUserRequest newData) {
-       UserDto userDto = userService.updateUser(newData);
+        UserDto userDto = userService.updateUser(newData);
 
         return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-    /*
+
     @PutMapping("/me")
     public ResponseEntity<UserDto> updateCurrentUser(@RequestBody NewUserRequest newUser, Principal principal) {
         String username = principal.getName();
 
-        UserDto updatedUser = userService.updateUser(username, newUser);
+        UserDto updatedUser = userService.updateAuthenticatedUser(username, newUser);
 
         return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
     }
-    */
+
 
 
     @CrossOrigin(origins = "http://localhost:5173")
