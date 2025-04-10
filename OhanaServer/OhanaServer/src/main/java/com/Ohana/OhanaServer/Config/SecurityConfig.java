@@ -1,6 +1,7 @@
 package com.Ohana.OhanaServer.Config;
 
 import com.Ohana.OhanaServer.Config.Jwt.JwtAuthenticationFilter;
+import com.Ohana.OhanaServer.Models.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -32,7 +33,7 @@ public class SecurityConfig {
                         authRequest
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/users/**").permitAll()
+                                .requestMatchers("/api/users/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager->
