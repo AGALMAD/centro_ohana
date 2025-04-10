@@ -33,10 +33,10 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping
-    public ResponseEntity<Void> updateUser(@RequestBody UpdateUserRequest newData) {
+    public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserRequest newData) {
         UserDto userDto = userService.updateUser(newData);
 
-        return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return userDto != null ? ResponseEntity.ok(userDto) : ResponseEntity.notFound().build();
     }
 
 
@@ -53,9 +53,9 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping
-    public ResponseEntity<UserDto> deleteUser(@RequestBody String id) {
-        UserDto userDto = userService.deleteUser(id);
-        return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    public ResponseEntity<UserDto> deleteUser(@RequestBody DeleteUserRequest deleteUserRequest) {
+        UserDto userDto = userService.deleteUser(deleteUserRequest.id);
+        return userDto != null ? ResponseEntity.ok(userDto): ResponseEntity.notFound().build();
     }
 
 
