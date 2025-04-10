@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -24,24 +25,35 @@ public class UserController {
 
 
     @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping(value = "/allUsers")
+    @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
 
     @CrossOrigin(origins = "http://localhost:5173")
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable String id, @RequestBody NewUserRequest newData) {
-       UserDto userDto = userService.updateUser(id,newData);
+    @PutMapping
+    public ResponseEntity<Void> updateUser(@RequestBody UpdateUserRequest newData) {
+       UserDto userDto = userService.updateUser(newData);
 
         return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
+    /*
+    @PutMapping("/me")
+    public ResponseEntity<UserDto> updateCurrentUser(@RequestBody NewUserRequest newUser, Principal principal) {
+        String username = principal.getName();
+
+        UserDto updatedUser = userService.updateUser(username, newUser);
+
+        return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+    }
+    */
+
 
     @CrossOrigin(origins = "http://localhost:5173")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable String id) {
+    @DeleteMapping
+    public ResponseEntity<UserDto> deleteUser(@RequestBody String id) {
         UserDto userDto = userService.deleteUser(id);
         return userDto != null ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }

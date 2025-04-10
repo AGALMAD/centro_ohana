@@ -1,6 +1,7 @@
 package com.Ohana.OhanaServer.Services;
 
 import com.Ohana.OhanaServer.Controllers.User.NewUserRequest;
+import com.Ohana.OhanaServer.Controllers.User.UpdateUserRequest;
 import com.Ohana.OhanaServer.Controllers.User.UserDto;
 import com.Ohana.OhanaServer.Mappers.UserMapper;
 import com.Ohana.OhanaServer.Models.Role;
@@ -26,6 +27,7 @@ public class UserService {
 
 
     public UserDto register(NewUserRequest request) {
+
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode( request.getPassword()))
@@ -44,10 +46,10 @@ public class UserService {
         return userMapper.userToUserDto(users);
     }
 
-    public UserDto updateUser(String userId, NewUserRequest newData){
+    public UserDto updateUser(UpdateUserRequest newData){
 
         try {
-            Optional<User> optionalUser = userRepository.findById(UUID.fromString(userId));
+            Optional<User> optionalUser = userRepository.findById(UUID.fromString(newData.getId()));
 
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
