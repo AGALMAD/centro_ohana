@@ -35,7 +35,7 @@ const UserService = {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("All Users response", response);
+    console.log("Authenticated user response", response);
     return response.data;
   },
 

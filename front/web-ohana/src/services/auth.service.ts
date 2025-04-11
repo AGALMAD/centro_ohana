@@ -17,6 +17,9 @@ const AuthService = {
     localStorage.setItem("token", response.data.token);
     return response.data;
   },
+  logout: async (): Promise<void> => {
+    localStorage.removeItem("token");
+  },
 };
 
 export default AuthService;
