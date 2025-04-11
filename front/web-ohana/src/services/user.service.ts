@@ -1,7 +1,7 @@
 import { NewUserRequest } from "../models/new-user-request";
 import { UpdateUserRequest } from "../models/update-user-request";
 import { UserResponse } from "../models/user-response";
-import ApiService from "./apiService";
+import ApiService from "./api.service";
 
 const UserService = {
   register: async (request: NewUserRequest): Promise<UserResponse> => {
@@ -19,6 +19,17 @@ const UserService = {
   },
   getAllUsers: async (): Promise<UserResponse[]> => {
     const response = await ApiService.get<UserResponse[]>("users", {});
+
+    if (!response.success) {
+      throw new Error("Login failed: Token not received");
+    }
+
+    console.log("All Users response", response);
+    return response.data;
+  },
+
+  getAuthenticatedUser: async (): Promise<UserResponse> => {
+    const response = await ApiService.get<UserResponse>("users/me", {});
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./Login.css";
 import { AuthRequest } from "../../models/auth-request";
-import AuthService from "../../services/authService";
+import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 

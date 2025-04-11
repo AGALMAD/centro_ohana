@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
-import classes from "./Navbar.module.css";
 
 const styles = {
   link: "hover:bg-white hover:text-slate-800 py-1 px-2 rounded-md transition-colors duration-700 block",
@@ -11,7 +10,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className={`${classes.navbar} shadow-lg`}>
+    <nav className="bg-[#f8efea] shadow-lg">
       <div className="flex justify-between container items-center mx-auto">
         <img src="/logo-ohana.webp" alt="Logo" className="w-16" />
 
@@ -19,22 +18,22 @@ export default function Navbar() {
         <ul className="hidden md:flex space-x-4">
           <li>
             <a href="/88" className={styles.link}>
-              Servicios
+              <h5>Servicios</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Talleres
+              <h5>Talleres</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Blog
+              <h5>Blog</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Conócenos
+              <h5>Conócenos</h5>
             </a>
           </li>
         </ul>

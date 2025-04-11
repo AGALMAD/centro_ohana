@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    UUID id;
+    String id;
     String username;
-    Role role;
+    String role;
 }

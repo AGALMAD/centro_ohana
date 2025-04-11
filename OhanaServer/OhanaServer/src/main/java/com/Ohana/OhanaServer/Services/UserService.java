@@ -43,6 +43,19 @@ public class UserService {
 
     }
 
+    public UserDto getUserByUsername(String username){
+
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if(optionalUser.isPresent())
+            return userMapper.userToUserDto(optionalUser.get());
+
+
+        return null;
+
+
+    }
+
     public List<UserDto> getAllUsers(){
 
         List<User> users = userRepository.findAll();

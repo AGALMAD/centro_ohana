@@ -1,14 +1,8 @@
 // src/services/ApiService.ts
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { Result } from "../models/result";
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}`;
-
-export interface Result<T = void> {
-  success: boolean;
-  status: number;
-  data?: T;
-  error?: string;
-}
 
 const getToken = (): string | null => {
   return localStorage.getItem("token");
@@ -35,17 +29,12 @@ async function sendRequest<T>(
   try {
     const response = await request;
 
-    return {
-      success: true,
-      status: response.status,
-      data: response.data,
-    };
+    return Result.success<T>(response.status, response.data);
   } catch (error: any) {
-    return {
-      success: false,
-      status: error.response?.status || -1,
-      error: error.message || "Unknown error",
-    };
+    return Result.error<T>(
+      error.response?.status || -1,
+      error.message || "Unknown error"
+    );
   }
 }
 

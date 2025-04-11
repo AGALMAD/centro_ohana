@@ -1,6 +1,6 @@
 import { AuthRequest } from "../models/auth-request";
 import { AuthResponse } from "../models/auth-response";
-import ApiService from "./apiService";
+import ApiService from "./api.service";
 
 const AuthService = {
   login: async (request: AuthRequest): Promise<AuthResponse> => {

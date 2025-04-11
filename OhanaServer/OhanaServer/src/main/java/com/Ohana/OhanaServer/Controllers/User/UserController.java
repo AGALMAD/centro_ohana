@@ -40,6 +40,17 @@ public class UserController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping(value = "/me")
+    public ResponseEntity<UserDto> getAthenticatedUser(Principal principal) {
+
+        String username = principal.getName();
+        UserDto user = userService.getUserByUsername(username);
+
+
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
     @PutMapping("/me")
     public ResponseEntity<UserDto> updateCurrentUser(@RequestBody NewUserRequest newUser, Principal principal) {
         String username = principal.getName();
