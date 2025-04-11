@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { UserResponse } from "../../models/user-response";
 import UserService from "../../services/user.service";
+import Modal from "../../components/Modal"; // Asegúrate de importar el Modal
+import CreateOrUpdateUser from "../../components/CreateOrUpdateUserForm";
 
 function UsersAdmin() {
   const [currentUser, setCurrentUser] = useState<UserResponse>(null);
   const [allUsers, setAllUsers] = useState<UserResponse[]>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<UserResponse>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,11 +37,18 @@ function UsersAdmin() {
   }, []);
 
   const handleEditUser = (userId: string) => {
-    console.log("Edit user with ID:", userId);
+    const user = allUsers.find((user) => user.id === userId);
+    setSelectedUser(user);
+    setIsModalOpen(true);
   };
 
   const handleDeleteUser = (userId: string) => {
     console.log("Delete user with ID:", userId);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedUser(null);
   };
 
   return (
@@ -157,6 +168,17 @@ function UsersAdmin() {
           </table>
         </div>
       </main>
+
+      {/* Modal para editar usuario */}
+      <Modal
+        title="Editar Usuario"
+        open={isModalOpen}
+        onClose={handleModalClose}
+      >
+        {selectedUser && (
+          <div>{<CreateOrUpdateUser user={selectedUser} />}</div>
+        )}
+      </Modal>
     </>
   );
 }
