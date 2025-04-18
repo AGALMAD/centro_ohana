@@ -1,1 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import "tailwindcss";
+
+:root {
+  --color-primary: #a25e5d;
+  --color-secondary: #3c1071;
+  --color-terciary: #bcccc2;
+  --color-bg: #f8efea;
+  --color-text-dark: #1e1e1e;
+
+  --font-title: "Playfair Display", serif;
+  --font-body: "Lato", sans-serif;
+}
