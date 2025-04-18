@@ -10,7 +10,10 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-[var(--color-bg)] text-[var(--color-secondary)] shadow-lg relative w-full z-2">
+    <nav
+      className="font-(family-name:--font-body) bg-[var(--color-bg)] 
+    text-[var(--color-secondary)] shadow-lg relative w-full z-2"
+    >
       <div className="flex justify-between container items-center mx-auto">
         <img src="/logo-ohana.webp" alt="Logo" className="w-16" />
 
