@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 
@@ -10,33 +10,30 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav
-      className="font-(family-name:--font-body) bg-[var(--color-bg)] 
-    text-[var(--color-secondary)] shadow-lg relative w-full z-2"
-    >
+    <nav className="bg-[#f8efea] shadow-lg">
       <div className="flex justify-between container items-center mx-auto">
         <img src="/logo-ohana.webp" alt="Logo" className="w-16" />
 
         {/* PANTALLA GRANDE */}
         <ul className="hidden md:flex space-x-4">
           <li>
-            <a href="/" className={styles.link}>
-              Servicios
+            <a href="/88" className={styles.link}>
+              <h5>Servicios</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Talleres
+              <h5>Talleres</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Blog
+              <h5>Blog</h5>
             </a>
           </li>
           <li>
             <a href="#" className={styles.link}>
-              Conócenos
+              <h5>Conócenos</h5>
             </a>
           </li>
         </ul>
@@ -58,7 +55,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <ul className="md:hidden flex flex-col text-center space-y-3 mt-4">
           <li>
-            <a href="/" className={styles.link}>
+            <a href="/88" className={styles.link}>
               Servicios
             </a>
           </li>
