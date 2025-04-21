@@ -1,6 +1,6 @@
 import { AuthRequest } from "../models/auth-request";
 import { AuthResponse } from "../models/auth-response";
-import ApiService from "./api.service";
+import apiService from "./api.service";
 import userService from "./user.service";
 
 class AuthService {
@@ -10,7 +10,7 @@ class AuthService {
   constructor() {}
 
   async login(request: AuthRequest): Promise<AuthResponse> {
-    const response = await ApiService.post<AuthResponse>(this.LOGIN_URL, {
+    const response = await apiService.post<AuthResponse>(this.LOGIN_URL, {
       username: request.username,
       password: request.password,
     });
@@ -22,7 +22,7 @@ class AuthService {
     console.log("Login response:", response);
     //guarda el token
     localStorage.setItem("token", response.data.token);
-    ApiService.jwt = response.data.token;
+    apiService.jwt = response.data.token;
 
     //almacena el usuario autenticado
     userService.currentUser = await userService.getAuthenticatedUser();
@@ -34,7 +34,7 @@ class AuthService {
   public async logout(): Promise<void> {
     console.log("Logging out...");
     localStorage.removeItem(this.TOKEN_KEY);
-    ApiService.jwt = null;
+    apiService.jwt = null;
   }
 }
 

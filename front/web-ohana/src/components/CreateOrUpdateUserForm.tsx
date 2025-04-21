@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { UserResponse } from "../models/user-response";
-import UserService from "../services/user.service";
 import { NewUserRequest } from "../models/new-user-request";
 import { UpdateUserRequest } from "../models/update-user-request";
 import userService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  user: UserResponse;
-  onSubmit?: (user: UpdateUserRequest) => void;
+  user?: UserResponse;
+  onSubmit?: (user: UpdateUserRequest | NewUserRequest) => void;
   onClose?: () => void;
 };
 
 function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState(user.username);
+  const [username, setUsername] = useState(user?.username || "");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  const isEditing = !!user;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,25 +28,35 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
     setError(null);
 
     try {
-      const updatedUser: UpdateUserRequest = {
-        id: user.id,
-        username: username,
-        password: password || undefined, // Si no hay contraseña, se envía como undefined
-      };
-
-      await onSubmit?.(updatedUser);
+      if (isEditing) {
+        const updatedUser: UpdateUserRequest = {
+          id: user!.id,
+          username,
+          password: password || undefined,
+        };
+        await onSubmit?.(updatedUser);
+        if (user!.id === userService.currentUser?.id) {
+          navigate("/login");
+        }
+      } else {
+        const newUser: NewUserRequest = {
+          username,
+          password,
+        };
+        await onSubmit?.(newUser);
+      }
 
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        onClose?.(); // Cierra el modal
-        // Si se actualiza el usuario actual, redirige a la página de inicio de sesión
-        if (user.id === userService.currentUser?.id) {
-          navigate("/login");
-        }
+        onClose?.();
       }, 1500);
     } catch (err) {
-      setError("Error al actualizar el usuario.");
+      setError(
+        isEditing
+          ? "Error al actualizar el usuario."
+          : "Error al crear el usuario."
+      );
     } finally {
       setLoading(false);
     }
@@ -68,20 +79,23 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
 
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Nueva Contraseña
+          {isEditing ? "Nueva Contraseña" : "Contraseña"}
         </label>
         <input
           type="password"
           value={password}
-          placeholder="Dejar en blanco para no cambiar"
           onChange={(e) => setPassword(e.target.value)}
           className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+          placeholder={isEditing ? "Dejar en blanco para no cambiar" : ""}
+          required={!isEditing}
         />
       </div>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
       {success && (
-        <p className="text-green-500 text-sm">¡Usuario actualizado!</p>
+        <p className="text-green-500 text-sm">
+          ¡{isEditing ? "Usuario actualizado" : "Usuario creado"}!
+        </p>
       )}
 
       <div className="flex justify-end space-x-2">

@@ -42,7 +42,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping(value = "/me")
-    public ResponseEntity<UserDto> getAthenticatedUser(Principal principal) {
+    public ResponseEntity<UserDto> getAuthenticatedUser(Principal principal) {
 
         String username = principal.getName();
         UserDto user = userService.getUserByUsername(username);
@@ -52,21 +52,12 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
-    @PutMapping("/me")
-    public ResponseEntity<UserDto> updateCurrentUser(@RequestBody NewUserRequest newUser, Principal principal) {
-        String username = principal.getName();
-
-        UserDto updatedUser = userService.updateAuthenticatedUser(username, newUser);
-
-        return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserDto> deleteUser(@PathVariable String id) {
+        UserDto userDto = userService.deleteUser(id);
+        return userDto != null ? ResponseEntity.ok(userDto) : ResponseEntity.notFound().build();
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
-    @DeleteMapping
-    public ResponseEntity<UserDto> deleteUser(@RequestBody DeleteUserRequest deleteUserRequest) {
-        UserDto userDto = userService.deleteUser(deleteUserRequest.id);
-        return userDto != null ? ResponseEntity.ok(userDto): ResponseEntity.notFound().build();
-    }
 
 
 

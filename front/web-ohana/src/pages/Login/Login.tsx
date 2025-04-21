@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./Login.css";
 import { AuthRequest } from "../../models/auth-request";
-import AuthService from "../../services/auth.service";
+import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
@@ -31,7 +31,7 @@ function Login() {
     };
 
     try {
-      const response = await AuthService.login(requestBody);
+      const response = await authService.login(requestBody);
 
       if (response) {
         Swal.fire({
