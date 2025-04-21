@@ -17,32 +17,27 @@ function UsersAdmin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("User", userService.currentUser);
-
     const fetchData = async () => {
-      userService.currentUser = await userService.getAuthenticatedUser();
-      console.log("Current User", userService.currentUser);
-
-      // Verifica si el usuario actual tiene el rol de ADMIN
-      if (userService.currentUser && userService.currentUser.role !== "ADMIN") {
-        console.error(
-          "Acceso denegado. Solo los administradores pueden acceder."
-        );
-
-        navigate("/");
-
-        return;
-      }
-
       try {
-        const allUsers = await UserService.getAllUsers();
-        if (allUsers) {
-          setAllUsers(allUsers);
-        } else {
-          console.error("No users found.");
+        const authenticatedUser = await userService.getAuthenticatedUser();
+        userService.currentUser = authenticatedUser;
+
+        if (!authenticatedUser || authenticatedUser.role !== "ADMIN") {
+          console.error(
+            "Acceso denegado. Solo los administradores pueden acceder."
+          );
+          navigate("/");
+          return;
         }
+
+        const allUsers = await UserService.getAllUsers();
+        const filtered = allUsers.filter(
+          (user) => user.id !== authenticatedUser.id
+        );
+        setAllUsers(filtered);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error de autenticación:", error);
+        navigate("/");
       }
     };
 
