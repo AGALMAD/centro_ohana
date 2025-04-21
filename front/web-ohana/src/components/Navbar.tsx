@@ -20,23 +20,28 @@ export default function Navbar() {
         {/* PANTALLA GRANDE */}
         <ul className="hidden md:flex space-x-4">
           <li>
-            <a href="/" className={styles.link}>
+            <a href="/servicios" className={styles.link}>
               Servicios
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a href="/talleres" className={styles.link}>
               Talleres
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a href="/blog" className={styles.link}>
               Blog
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a href="/conocenos" className={styles.link}>
               Conócenos
+            </a>
+          </li>
+          <li>
+            <a href="/contacto" className={styles.link}>
+              Contacto
             </a>
           </li>
         </ul>
