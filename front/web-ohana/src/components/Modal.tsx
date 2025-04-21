@@ -11,9 +11,14 @@ function Modal({ title, open, children, onClose }: Props) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      {/* Modal */}
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50 bg-[#ffffff00] bg-opacity-50"
+      onClick={onClose} // clic fuera del modal
+    >
+      <div
+        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
+        onClick={(e) => e.stopPropagation()} // evita que el clic dentro cierre el modal
+      >
         <header className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-semibold">{title}</h1>
           <button

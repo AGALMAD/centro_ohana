@@ -62,22 +62,6 @@ class UserService {
     return response.data;
   }
 
-  public async updateAuthenticatedUserData(
-    request: NewUserRequest
-  ): Promise<UserResponse> {
-    const response = await ApiService.put<UserResponse>("users/me", {
-      username: request.username,
-      password: request.password,
-    });
-
-    if (!response.success) {
-      throw new Error("Login failed: Token not received");
-    }
-
-    console.log("Update Authenticated User response:", response);
-    return response.data;
-  }
-
   public async deleteUser(userId: string): Promise<UserResponse> {
     const response = await ApiService.delete<UserResponse>("users", {
       id: userId,

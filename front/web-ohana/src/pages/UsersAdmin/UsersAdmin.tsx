@@ -6,11 +6,12 @@ import Modal from "../../components/Modal";
 import CreateOrUpdateUser from "../../components/CreateOrUpdateUserForm";
 import userService from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { UpdateUserRequest } from "../../models/update-user-request";
 
 function UsersAdmin() {
-  const [allUsers, setAllUsers] = useState<UserResponse[]>(null);
+  const [allUsers, setAllUsers] = useState<UserResponse[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<UserResponse>(null);
+  const [selectedUser, setSelectedUser] = useState<UserResponse | null>(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -42,10 +43,9 @@ function UsersAdmin() {
     };
 
     fetchData();
-  }, []);
+  }, []); // Aquí eliminamos `isUsersChanged`, ya que ahora vamos a actualizar manualmente
 
-  const handleEditUser = (userId: string) => {
-    const user = allUsers.find((user) => user.id === userId);
+  const handleEditUser = (user: UserResponse) => {
     setSelectedUser(user);
     setIsModalOpen(true);
   };
@@ -62,10 +62,9 @@ function UsersAdmin() {
   return (
     <>
       <Navbar />
-
       <main className="flex justify-center mt-20 h-[100vh]">
         <div className="max-w-3xl w-full px-4 py-6 bg-[#f8efea] rounded-lg shadow-xl">
-          {/* Apartado del Usuario Actual  */}
+          {/* Apartado del Usuario Actual */}
           {userService.currentUser && (
             <div className="mb-6 p-4 bg-purple-100 rounded-md">
               <h2 className="text-xl font-semibold text-purple-900 mb-4 text-center">
@@ -85,7 +84,6 @@ function UsersAdmin() {
                     </th>
                   </tr>
                 </thead>
-
                 <tbody className="bg-white divide-y divide-gray-200">
                   <tr className="text-sm text-gray-700 bg-purple-200 hover:bg-purple-300">
                     <td className="px-3 py-2 text-center">
@@ -97,9 +95,7 @@ function UsersAdmin() {
                     <td className="px-3 py-2 text-center space-x-2">
                       <button
                         className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        onClick={() =>
-                          handleEditUser(userService.currentUser.id)
-                        }
+                        onClick={() => handleEditUser(userService.currentUser)}
                       >
                         Editar
                       </button>
@@ -153,7 +149,7 @@ function UsersAdmin() {
                     <td className="px-3 py-2 text-center space-x-2">
                       <button
                         className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        onClick={() => handleEditUser(user.id)}
+                        onClick={() => handleEditUser(user)}
                       >
                         Editar
                       </button>
@@ -188,7 +184,29 @@ function UsersAdmin() {
         onClose={handleModalClose}
       >
         {selectedUser && (
-          <div>{<CreateOrUpdateUser user={selectedUser} />}</div>
+          <div>
+            <CreateOrUpdateUser
+              user={selectedUser}
+              onSubmit={async (updatedUser: UpdateUserRequest) => {
+                // Actualiza el usuario
+                await UserService.updateUserData(updatedUser);
+
+                // Actualiza el usuario en el estado local
+                setAllUsers(
+                  (prevUsers) =>
+                    prevUsers?.map((user) =>
+                      user.id === updatedUser.id
+                        ? { ...user, ...updatedUser }
+                        : user
+                    ) || []
+                );
+
+                setIsModalOpen(false);
+                setSelectedUser(null);
+              }}
+              onClose={handleModalClose}
+            />
+          </div>
         )}
       </Modal>
     </>
