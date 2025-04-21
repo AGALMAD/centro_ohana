@@ -51,6 +51,7 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping("/me")
     public ResponseEntity<UserDto> updateCurrentUser(@RequestBody NewUserRequest newUser, Principal principal) {
         String username = principal.getName();
@@ -59,8 +60,6 @@ public class UserController {
 
         return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
     }
-
-
 
     @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping

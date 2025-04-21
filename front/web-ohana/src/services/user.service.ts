@@ -1,10 +1,15 @@
 import { NewUserRequest } from "../models/new-user-request";
 import { UpdateUserRequest } from "../models/update-user-request";
 import { UserResponse } from "../models/user-response";
+import apiService from "./api.service";
 import ApiService from "./api.service";
 
-const UserService = {
-  register: async (request: NewUserRequest): Promise<UserResponse> => {
+class UserService {
+  public currentUser: UserResponse | null = null;
+
+  constructor() {}
+
+  public async register(request: NewUserRequest): Promise<UserResponse> {
     const response = await ApiService.post<UserResponse>("users", {
       username: request.username,
       password: request.password,
@@ -16,8 +21,9 @@ const UserService = {
 
     console.log("Register response:", response);
     return response.data;
-  },
-  getAllUsers: async (): Promise<UserResponse[]> => {
+  }
+
+  public async getAllUsers(): Promise<UserResponse[]> {
     const response = await ApiService.get<UserResponse[]>("users", {});
 
     if (!response.success) {
@@ -26,9 +32,9 @@ const UserService = {
 
     console.log("All Users response", response);
     return response.data;
-  },
+  }
 
-  getAuthenticatedUser: async (): Promise<UserResponse> => {
+  public async getAuthenticatedUser(): Promise<UserResponse> {
     const response = await ApiService.get<UserResponse>("users/me", {});
 
     if (!response.success) {
@@ -37,9 +43,11 @@ const UserService = {
 
     console.log("Authenticated user response", response);
     return response.data;
-  },
+  }
 
-  updateUserData: async (request: UpdateUserRequest): Promise<UserResponse> => {
+  public async updateUserData(
+    request: UpdateUserRequest
+  ): Promise<UserResponse> {
     const response = await ApiService.put<UserResponse>("users", {
       id: request.id,
       username: request.username,
@@ -52,11 +60,11 @@ const UserService = {
 
     console.log("Update User response:", response);
     return response.data;
-  },
+  }
 
-  updateAuthenticatedUserData: async (
+  public async updateAuthenticatedUserData(
     request: NewUserRequest
-  ): Promise<UserResponse> => {
+  ): Promise<UserResponse> {
     const response = await ApiService.put<UserResponse>("users/me", {
       username: request.username,
       password: request.password,
@@ -68,9 +76,9 @@ const UserService = {
 
     console.log("Update Authenticated User response:", response);
     return response.data;
-  },
+  }
 
-  deleteUser: async (userId: string): Promise<UserResponse> => {
+  public async deleteUser(userId: string): Promise<UserResponse> {
     const response = await ApiService.delete<UserResponse>("users", {
       id: userId,
     });
@@ -81,7 +89,7 @@ const UserService = {
 
     console.log("Delete User response:", response);
     return response.data;
-  },
-};
+  }
+}
 
-export default UserService;
+export default new UserService();

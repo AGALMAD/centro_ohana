@@ -1,10 +1,16 @@
 import { AuthRequest } from "../models/auth-request";
 import { AuthResponse } from "../models/auth-response";
 import ApiService from "./api.service";
+import userService from "./user.service";
 
-const AuthService = {
-  login: async (request: AuthRequest): Promise<AuthResponse> => {
-    const response = await ApiService.post<AuthResponse>("auth/login", {
+class AuthService {
+  private readonly TOKEN_KEY = "token";
+  private readonly LOGIN_URL = "auth/login";
+
+  constructor() {}
+
+  async login(request: AuthRequest): Promise<AuthResponse> {
+    const response = await ApiService.post<AuthResponse>(this.LOGIN_URL, {
       username: request.username,
       password: request.password,
     });
@@ -14,12 +20,22 @@ const AuthService = {
     }
 
     console.log("Login response:", response);
+    //guarda el token
     localStorage.setItem("token", response.data.token);
-    return response.data;
-  },
-  logout: async (): Promise<void> => {
-    localStorage.removeItem("token");
-  },
-};
+    ApiService.jwt = response.data.token;
 
-export default AuthService;
+    //almacena el usuario autenticado
+    userService.currentUser = await userService.getAuthenticatedUser();
+    console.log("Authenticated user:", userService.currentUser);
+
+    return response.data;
+  }
+
+  public async logout(): Promise<void> {
+    console.log("Logging out...");
+    localStorage.removeItem(this.TOKEN_KEY);
+    ApiService.jwt = null;
+  }
+}
+
+export default new AuthService();

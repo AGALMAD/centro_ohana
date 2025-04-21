@@ -36,19 +36,14 @@ public class UserSeeder implements ApplicationRunner {
 
         List<User> users = List.of(
                 User.builder()
-                        .username("admin1")
-                        .password(passwordEncoder.encode("admin1"))
+                        .username("admin")
+                        .password(passwordEncoder.encode("admin"))
                         .role(Role.ADMIN)
                         .build(),
                 User.builder()
-                        .username("admin2")
-                        .password(passwordEncoder.encode("admin2"))
-                        .role(Role.ADMIN)
-                        .build(),
-                User.builder()
-                        .username("admin3")
-                        .password(passwordEncoder.encode("admin3"))
-                        .role(Role.ADMIN)
+                        .username("editor")
+                        .password(passwordEncoder.encode("editor"))
+                        .role(Role.EDITOR)
                         .build(),
                 User.builder()
                         .username("user")

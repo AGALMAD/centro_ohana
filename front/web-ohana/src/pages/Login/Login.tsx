@@ -5,6 +5,7 @@ import { AuthRequest } from "../../models/auth-request";
 import AuthService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import apiService from "../../services/api.service";
 
 function Login() {
   const FORM_TYPES = {
@@ -21,6 +22,8 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    apiService.jwt = null; // Limpiar el token JWT antes de iniciar sesión
 
     const requestBody: AuthRequest = {
       username: username,

@@ -1,93 +1,102 @@
-// src/services/ApiService.ts
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Result } from "../models/result";
 
-const BASE_URL = `${import.meta.env.VITE_API_URL}`;
+class ApiService {
+  private readonly TOKEN_KEY = "token";
+  private readonly BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
-const getToken = (): string | null => {
-  return localStorage.getItem("token");
-};
+  public jwt: string | null = null;
 
-const getHeaders = (
-  accept?: string,
-  contentType: string = "application/json"
-) => {
-  const token = getToken();
-  const headers: any = {
-    Authorization: token ? `Bearer ${token}` : "",
-    "Content-Type": contentType,
-  };
-
-  if (accept) headers["Accept"] = accept;
-
-  return headers;
-};
-
-async function sendRequest<T>(
-  request: Promise<AxiosResponse<any>>
-): Promise<Result<T>> {
-  try {
-    const response = await request;
-
-    return Result.success<T>(response.status, response.data);
-  } catch (error: any) {
-    return Result.error<T>(
-      error.response?.status || -1,
-      error.message || "Unknown error"
-    );
+  constructor() {
+    this.jwt = localStorage.getItem(this.TOKEN_KEY) || null;
   }
-}
 
-const ApiService = {
-  get: async <T = void>(
+  private getHeaders(
+    accept?: string,
+    contentType: string = "application/json"
+  ): Record<string, string> {
+    const token = this.jwt;
+    const headers: Record<string, string> = {
+      Authorization: token ? `Bearer ${token}` : "",
+      "Content-Type": contentType,
+    };
+
+    if (accept) headers["Accept"] = accept;
+
+    return headers;
+  }
+
+  private async sendRequest<T>(
+    request: Promise<AxiosResponse<any>>
+  ): Promise<Result<T>> {
+    try {
+      const response = await request;
+      return Result.success<T>(response.status, response.data);
+    } catch (error: any) {
+      return Result.error<T>(
+        error.response?.status || -1,
+        error.message || "Unknown error"
+      );
+    }
+  }
+
+  async get<T = void>(
     path: string,
     params: any = {},
     responseType?: string
-  ): Promise<Result<T>> => {
+  ): Promise<Result<T>> {
     const config: AxiosRequestConfig = {
-      headers: getHeaders(responseType),
+      headers: this.getHeaders(responseType),
       params,
     };
 
-    return sendRequest<T>(axios.get(`${BASE_URL}${path}`, config));
-  },
+    return this.sendRequest<T>(axios.get(`${this.BASE_URL}${path}`, config));
+  }
 
-  post: async <T = void>(
+  async post<T = void>(
     path: string,
     body: any = {},
     contentType?: string
-  ): Promise<Result<T>> => {
+  ): Promise<Result<T>> {
     const config: AxiosRequestConfig = {
-      headers: getHeaders(undefined, contentType),
+      headers: this.getHeaders(undefined, contentType),
     };
 
-    return sendRequest<T>(axios.post(`${BASE_URL}${path}`, body, config));
-  },
+    if (body instanceof FormData) {
+      delete config.headers["Content-Type"];
+    }
 
-  put: async <T = void>(
+    return this.sendRequest<T>(
+      axios.post(`${this.BASE_URL}${path}`, body, config)
+    );
+  }
+
+  async put<T = void>(
     path: string,
     body: any = {},
     contentType?: string
-  ): Promise<Result<T>> => {
+  ): Promise<Result<T>> {
     const config: AxiosRequestConfig = {
-      headers: getHeaders(undefined, contentType),
+      headers: this.getHeaders(undefined, contentType),
     };
 
-    return sendRequest<T>(axios.put(`${BASE_URL}${path}`, body, config));
-  },
+    return this.sendRequest<T>(
+      axios.put(`${this.BASE_URL}${path}`, body, config)
+    );
+  }
 
-  delete: async <T = void>(
+  async delete<T = void>(
     path: string,
     params: any = {},
     contentType?: string
-  ): Promise<Result<T>> => {
+  ): Promise<Result<T>> {
     const config: AxiosRequestConfig = {
-      headers: getHeaders(undefined, contentType),
+      headers: this.getHeaders(undefined, contentType),
       params,
     };
 
-    return sendRequest<T>(axios.delete(`${BASE_URL}${path}`, config));
-  },
-};
+    return this.sendRequest<T>(axios.delete(`${this.BASE_URL}${path}`, config));
+  }
+}
 
-export default ApiService;
+export default new ApiService();

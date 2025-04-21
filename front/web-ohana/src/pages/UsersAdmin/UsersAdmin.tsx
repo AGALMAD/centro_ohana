@@ -2,26 +2,39 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { UserResponse } from "../../models/user-response";
 import UserService from "../../services/user.service";
-import Modal from "../../components/Modal"; // Asegúrate de importar el Modal
+import Modal from "../../components/Modal";
 import CreateOrUpdateUser from "../../components/CreateOrUpdateUserForm";
+import userService from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 function UsersAdmin() {
-  const [currentUser, setCurrentUser] = useState<UserResponse>(null);
   const [allUsers, setAllUsers] = useState<UserResponse[]>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserResponse>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user = await UserService.getAuthenticatedUser();
-        if (user) {
-          setCurrentUser(user);
-        } else {
-          localStorage.removeItem("token");
-          console.error("No authenticated user found.");
-        }
+  const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("User", userService.currentUser);
+
+    const fetchData = async () => {
+      userService.currentUser = await userService.getAuthenticatedUser();
+      console.log("Current User", userService.currentUser);
+
+      // Verifica si el usuario actual tiene el rol de ADMIN
+      if (userService.currentUser && userService.currentUser.role !== "ADMIN") {
+        console.error(
+          "Acceso denegado. Solo los administradores pueden acceder."
+        );
+
+        navigate("/");
+
+        return;
+      }
+
+      try {
         const allUsers = await UserService.getAllUsers();
         if (allUsers) {
           setAllUsers(allUsers);
@@ -58,7 +71,7 @@ function UsersAdmin() {
       <main className="flex justify-center mt-20 h-[100vh]">
         <div className="max-w-3xl w-full px-4 py-6 bg-[#f8efea] rounded-lg shadow-xl">
           {/* Apartado del Usuario Actual  */}
-          {currentUser && (
+          {userService.currentUser && (
             <div className="mb-6 p-4 bg-purple-100 rounded-md">
               <h2 className="text-xl font-semibold text-purple-900 mb-4 text-center">
                 Usuario Actual
@@ -81,21 +94,25 @@ function UsersAdmin() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   <tr className="text-sm text-gray-700 bg-purple-200 hover:bg-purple-300">
                     <td className="px-3 py-2 text-center">
-                      {currentUser.username}
+                      {userService.currentUser.username}
                     </td>
                     <td className="px-3 py-2 text-center">
-                      {currentUser.role}
+                      {userService.currentUser.role}
                     </td>
                     <td className="px-3 py-2 text-center space-x-2">
                       <button
                         className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        onClick={() => handleEditUser(currentUser.id)}
+                        onClick={() =>
+                          handleEditUser(userService.currentUser.id)
+                        }
                       >
                         Editar
                       </button>
                       <button
                         className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                        onClick={() => handleDeleteUser(currentUser.id)}
+                        onClick={() =>
+                          handleDeleteUser(userService.currentUser.id)
+                        }
                       >
                         Eliminar
                       </button>
