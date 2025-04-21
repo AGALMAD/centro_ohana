@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+import React, { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
 import "./Login.css";
+import { AuthRequest } from "../../models/auth-request";
+import authService from "../../services/auth.service";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import apiService from "../../services/api.service";
 
 function Login() {
   const FORM_TYPES = {
@@ -8,22 +13,47 @@ function Login() {
     SIGNUP: "signup",
   };
 
-  //Para saber si quiere iniciar sesión o registrarse
-  const [formType, setFormType] = useState(FORM_TYPES.LOGIN);
+  const navigate = useNavigate();
 
   //Para almacenar el nombre de usuario y la contraseña
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formType === FORM_TYPES.LOGIN) {
-      // Lógica para iniciar sesión
-      console.log("Iniciar sesión con:", { username, password });
-    } else {
-      // Lógica para registrarse
-      console.log("Registrarse con:", { username, password });
+    apiService.jwt = null; // Limpiar el token JWT antes de iniciar sesión
+
+    const requestBody: AuthRequest = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const response = await authService.login(requestBody);
+
+      if (response) {
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "Has iniciado sesión correctamente.",
+          icon: "success",
+          confirmButtonText: "Continuar",
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          toast: true,
+        }).then(() => {
+          navigate("/");
+        });
+      }
+    } catch (error: any) {
+      console.error("Error:", error);
+      setError("Nombre de usuario o contraseña incorrectos.");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
     }
   };
 
@@ -34,7 +64,6 @@ function Login() {
     } else if (name === "password") {
       setPassword(value);
     }
-    console.log("Valor cambiado:", { name, value });
   };
 
   return (
@@ -42,23 +71,8 @@ function Login() {
       <Navbar />
 
       <main className="max-w-md mx-auto mt-20 p-6 bg-[#fde4ff] shadow-lg rounded-xl">
-        <div className="flex justify-center gap-8  mb-4">
-          <h1
-            onClick={() => setFormType(FORM_TYPES.LOGIN)}
-            className={`${
-              formType === FORM_TYPES.LOGIN ? "focus" : "not-focus"
-            }`}
-          >
-            Iniciar Sesión
-          </h1>
-          <h1
-            onClick={() => setFormType(FORM_TYPES.SIGNUP)}
-            className={`${
-              formType === FORM_TYPES.SIGNUP ? "focus" : "not-focus"
-            }`}
-          >
-            Registro
-          </h1>
+        <div className="flex justify-center gap-8 mb-12">
+          <h1 className="text-2xl font-bold text-[#6A0572]">Iniciar Sesión</h1>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
@@ -97,11 +111,15 @@ function Login() {
             />
           </div>
 
+          {error && (
+            <div className="text-red-500 font-bold text-sm mt-2">{error}</div>
+          )}
+
           <button
             type="submit"
             className="w-full bg-[#6A0572] text-white py-2 px-4 rounded hover:bg-[#784a7b] font-bold cursor-pointer transition duration-200"
           >
-            {FORM_TYPES.LOGIN === formType ? "Iniciar Sesión" : "Registrarse"}
+            Iniciar Sesión
           </button>
         </form>
       </main>
