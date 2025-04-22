@@ -1,4 +1,88 @@
 package com.Ohana.OhanaServer.Services;
 
+import com.Ohana.OhanaServer.Controllers.Activity.NewActivity;
+import com.Ohana.OhanaServer.Controllers.Activity.UpdateActivityRequest;
+import com.Ohana.OhanaServer.Models.Activity;
+import com.Ohana.OhanaServer.Models.Image;
+import com.Ohana.OhanaServer.Repositories.ActivityRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class ActivityService {
+
+    private final ActivityRepository activityRepository;
+    private final ImageService imageService;
+
+
+    public List<Activity> getAllActivities(){
+        return activityRepository.findAll();
+    }
+
+
+    public Activity getActivityById(String id) {
+        UUID uuid = UUID.fromString(id);
+        Optional<Activity> activity = activityRepository.findById(uuid);
+
+        return activity.orElse(null);
+    }
+
+    public Activity createActivity(NewActivity newActivity) {
+        try {
+
+            String imageUrl = null;
+            if (newActivity.getImage() != null) {
+                Image savedImage = imageService.saveImage(newActivity.getImage());
+                imageUrl = savedImage.getPath();
+            }
+
+            Activity activity = Activity.builder()
+                    .title(newActivity.getTitle())
+                    .imageUrl(imageUrl != null ? imageUrl : "")
+                    .description(newActivity.getDescription())
+                    .startDate(newActivity.getStartDate())
+                    .endDate(newActivity.getEndDate())
+                    .startTime(newActivity.getStartTime())
+                    .endTime(newActivity.getEndTime())
+                    .postLink(newActivity.getPostLink())
+                    .build();
+
+            //Guardar los párrafos
+
+
+            return activityRepository.save(activity);
+
+        } catch (Exception e) {
+            log.error("Error al crear la actividad", e);
+            throw new RuntimeException("Error al crear la actividad", e);
+        }
+    }
+
+
+    public Activity updateActivity(UpdateActivityRequest newData) {
+        throw new NotImplementedException();
+    }
+
+
+
+    public Activity deleteById(String id) {
+        UUID uuid = UUID.fromString(id);
+        Optional<Activity> activity = activityRepository.findById(uuid);
+
+        if (activity.isPresent()) {
+            activityRepository.deleteById(uuid);
+            return activity.get();
+        } else {
+            return null;
+        }
+    }
+
 }

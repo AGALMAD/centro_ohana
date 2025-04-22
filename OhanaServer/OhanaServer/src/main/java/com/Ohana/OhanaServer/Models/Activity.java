@@ -22,6 +22,9 @@ public class Activity {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
+    private String imageUrl;
+
     @Column(nullable = false, length = 1000)
     private String description;
 
