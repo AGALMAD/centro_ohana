@@ -3,13 +3,13 @@ package com.Ohana.OhanaServer.Services;
 import com.Ohana.OhanaServer.Controllers.Activity.NewActivity;
 import com.Ohana.OhanaServer.Controllers.Activity.UpdateActivityRequest;
 import com.Ohana.OhanaServer.Models.Activity;
-import com.Ohana.OhanaServer.Models.Image;
 import com.Ohana.OhanaServer.Repositories.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,20 +40,20 @@ public class ActivityService {
 
             String imageUrl = null;
             if (newActivity.getImage() != null) {
-                Image savedImage = imageService.saveImage(newActivity.getImage());
-                imageUrl = savedImage.getPath();
+                imageUrl = imageService.saveImage(newActivity.getImage());
             }
 
             Activity activity = Activity.builder()
                     .title(newActivity.getTitle())
                     .imageUrl(imageUrl != null ? imageUrl : "")
                     .description(newActivity.getDescription())
-                    .startDate(newActivity.getStartDate())
-                    .endDate(newActivity.getEndDate())
-                    .startTime(newActivity.getStartTime())
-                    .endTime(newActivity.getEndTime())
+                    .startDate(java.sql.Date.valueOf(newActivity.getStartDate()))
+                    .endDate(java.sql.Date.valueOf(newActivity.getEndDate()))
+                    .startTime(Time.valueOf(newActivity.getStartTime()))
+                    .endTime(Time.valueOf(newActivity.getEndTime()))
                     .postLink(newActivity.getPostLink())
                     .build();
+
 
             //Guardar los párrafos
 
