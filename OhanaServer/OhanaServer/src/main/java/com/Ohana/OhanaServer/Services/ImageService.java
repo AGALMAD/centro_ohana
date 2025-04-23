@@ -23,7 +23,7 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    private final Path root = Paths.get("images");
+    private final Path root = Paths.get("src/main/resources/static/activities");
 
 
     public Image saveImage(MultipartFile file) throws IOException {
