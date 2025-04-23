@@ -3,7 +3,9 @@ package com.Ohana.OhanaServer.Services;
 import com.Ohana.OhanaServer.Controllers.Activity.NewActivity;
 import com.Ohana.OhanaServer.Controllers.Activity.UpdateActivityRequest;
 import com.Ohana.OhanaServer.Models.Activity;
+import com.Ohana.OhanaServer.Models.Paragraph;
 import com.Ohana.OhanaServer.Repositories.ActivityRepository;
+import com.Ohana.OhanaServer.Repositories.ParagraphRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final ParagraphRepository paragraphRepository;
     private final ImageService imageService;
 
 
@@ -55,10 +58,25 @@ public class ActivityService {
                     .build();
 
 
-            //Guardar los párrafos
+            // Guardar actividad primero para obtener el ID
+            Activity savedActivity = activityRepository.save(activity);
 
 
-            return activityRepository.save(activity);
+            //Guarda los párrafos
+            List<Paragraph> paragraphs = newActivity.getParagraphs().stream()
+                    .map(p -> Paragraph.builder()
+                            .title(p.getTitle())
+                            .text(p.getText())
+                            .activity(savedActivity)
+                            .build())
+                    .toList();
+
+            paragraphRepository.saveAll(paragraphs);
+            savedActivity.setParagraphs(paragraphs);
+
+            //actividad con los párrafos guardados
+            return savedActivity;
+
 
         } catch (Exception e) {
             log.error("Error al crear la actividad", e);

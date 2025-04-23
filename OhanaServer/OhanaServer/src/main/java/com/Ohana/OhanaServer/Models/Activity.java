@@ -1,5 +1,6 @@
 package com.Ohana.OhanaServer.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -46,5 +47,7 @@ public class Activity {
 
 
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Paragraph> paragraphs;
+
 }

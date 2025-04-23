@@ -46,7 +46,7 @@ public class ActivityController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Activity> createActivity(
             @RequestParam("title") String title,
             @RequestParam(value = "description", required = false) String description,

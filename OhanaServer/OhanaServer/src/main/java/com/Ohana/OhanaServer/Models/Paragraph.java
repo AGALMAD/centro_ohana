@@ -1,5 +1,6 @@
 package com.Ohana.OhanaServer.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,9 @@ public class Paragraph {
 
     @ManyToOne
     @JoinColumn(name = "activity_id", nullable = false)
+    @JsonBackReference
     private Activity activity;
+
 
     @Column(nullable = false)
     private String title;
