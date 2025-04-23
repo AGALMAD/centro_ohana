@@ -2,13 +2,17 @@ package com.Ohana.OhanaServer.Controllers.Activity;
 
 import com.Ohana.OhanaServer.Models.Activity;
 import com.Ohana.OhanaServer.Services.ActivityService;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,23 +39,21 @@ public class ActivityController {
 
     }
 
-
-    @CrossOrigin(origins = "http://localhost:5173")
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Activity> createActivity(
             @RequestParam("title") String title,
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "startDate", required = false) Date startDate,
             @RequestParam(value = "endDate", required = false) Date endDate,
-            @RequestParam(value = "startTime", required = false) Time startTime,
-            @RequestParam(value = "endTime", required = false) Time endTime,
+            @RequestParam(value = "startTime", required = false) LocalDateTime startTime,
+            @RequestParam(value = "endTime", required = false) LocalDateTime endTime,
             @RequestParam(value = "postLink", required = false) String postLink,
             @RequestParam(value = "image", required = false) MultipartFile image,
             @RequestParam(value = "paragraphs", required = false) List<String> paragraphs
     ) {
-        throw new NotImplementedException();
+        return ResponseEntity.ok().build();
     }
-
 
     @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/{id}")
