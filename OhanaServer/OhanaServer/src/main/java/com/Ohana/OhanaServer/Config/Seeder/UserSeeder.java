@@ -53,7 +53,7 @@ public class UserSeeder implements ApplicationRunner {
         );
 
         userRepository.saveAll(users);
-        System.out.println("Usuarios administradores sembrados exitosamente.");
+        System.out.println("Usuarios guardados exitosamente.");
 
     }
 }
