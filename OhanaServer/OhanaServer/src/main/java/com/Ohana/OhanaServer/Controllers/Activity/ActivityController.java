@@ -1,25 +1,16 @@
 package com.Ohana.OhanaServer.Controllers.Activity;
 
-import com.Ohana.OhanaServer.Models.Activity;
+
 import com.Ohana.OhanaServer.Services.ActivityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,25 +24,25 @@ public class ActivityController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
-    public ResponseEntity<List<Activity>> getAllActivities() {
+    public ResponseEntity<List<ActivityReponse>> getAllActivities() {
         return ResponseEntity.ok(activityService.getAllActivities());
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/{id}")
-    public ResponseEntity<Activity> getActivityById(@PathVariable String id) {
-        Activity activity = activityService.getActivityById(id);
+    public ResponseEntity<ActivityReponse> getActivityById(@PathVariable String id) {
+        ActivityReponse activity = activityService.getActivityById(id);
         return activity != null ? ResponseEntity.ok(activity) : ResponseEntity.badRequest().build();
 
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @CrossOrigin(origins = "http://localhost:5173")
-    public ResponseEntity<Activity> createActivity(
+    public ResponseEntity<ActivityReponse> createActivity(
             @RequestParam("title") String title,
             @RequestParam(value = "description", required = false) String description,
-            @RequestParam(value = "startDate", required = false) LocalDate startDate,
-            @RequestParam(value = "endDate", required = false) LocalDate endDate,
+            @RequestParam(value = "startDate", required = false) String startDateStr,
+            @RequestParam(value = "endDate", required = false) String endDateStr,
             @RequestParam(value = "startTime", required = false) String  startTimeStr,
             @RequestParam(value = "endTime", required = false) String  endTimeStr,
             @RequestParam(value = "postLink", required = false) String postLink,
@@ -62,6 +53,10 @@ public class ActivityController {
         //Se pasa a lista
         List<NewParagraph> paragraphs = new ObjectMapper()
                 .readValue(paragraphsJson, new TypeReference<>() {});
+
+        //Pasa la fecha a LocalDate
+        LocalDate startDate = (startTimeStr != null) ? LocalDate.parse(startDateStr) : null;
+        LocalDate endDate = (endTimeStr != null) ? LocalDate.parse(endDateStr) : null;
 
         // Pasa las horas a LocalTime
         LocalTime startTime = (startTimeStr != null) ? LocalTime.parse(startTimeStr) : null;
@@ -79,15 +74,15 @@ public class ActivityController {
                 .paragraphs(paragraphs)
                 .build();
 
-        Activity createdActivity = activityService.createActivity(activity);
+        ActivityReponse createdActivity = activityService.createActivity(activity);
 
         return createdActivity != null ? ResponseEntity.ok(createdActivity) : ResponseEntity.badRequest().build();
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Activity> deleteUser(@PathVariable String id) {
-        Activity activity = activityService.deleteById(id);
+    public ResponseEntity<ActivityReponse> deleteUser(@PathVariable String id) {
+        ActivityReponse activity = activityService.deleteById(id);
         return activity != null ? ResponseEntity.ok(activity) : ResponseEntity.notFound().build();
     }
 

@@ -1,7 +1,10 @@
 package com.Ohana.OhanaServer.Services;
 
+import com.Ohana.OhanaServer.Controllers.Activity.ActivityReponse;
 import com.Ohana.OhanaServer.Controllers.Activity.NewActivity;
 import com.Ohana.OhanaServer.Controllers.Activity.UpdateActivityRequest;
+import com.Ohana.OhanaServer.Mappers.ActivityMapper;
+import com.Ohana.OhanaServer.Mappers.ParagraphMapper;
 import com.Ohana.OhanaServer.Models.Activity;
 import com.Ohana.OhanaServer.Models.Paragraph;
 import com.Ohana.OhanaServer.Repositories.ActivityRepository;
@@ -23,22 +26,27 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final ParagraphRepository paragraphRepository;
+    private final ParagraphMapper paragraphMapper;
+    private final ActivityMapper activityMapper;
     private final ImageService imageService;
 
 
-    public List<Activity> getAllActivities(){
-        return activityRepository.findAll();
+    public List<ActivityReponse> getAllActivities(){
+        return activityMapper.activityToActivityDto(activityRepository.findAll());
     }
 
 
-    public Activity getActivityById(String id) {
+    public ActivityReponse getActivityById(String id) {
         UUID uuid = UUID.fromString(id);
         Optional<Activity> activity = activityRepository.findById(uuid);
 
-        return activity.orElse(null);
+        if(!activity.isPresent())
+            return null;
+
+        return activityMapper.activityToActivityDto(activity.get());
     }
 
-    public Activity createActivity(NewActivity newActivity) {
+    public ActivityReponse createActivity(NewActivity newActivity) {
         try {
 
             String imageUrl = null;
@@ -75,7 +83,7 @@ public class ActivityService {
             savedActivity.setParagraphs(paragraphs);
 
             //actividad con los párrafos guardados
-            return savedActivity;
+            return activityMapper.activityToActivityDto(savedActivity);
 
 
         } catch (Exception e) {
@@ -91,13 +99,13 @@ public class ActivityService {
 
 
 
-    public Activity deleteById(String id) {
+    public ActivityReponse deleteById(String id) {
         UUID uuid = UUID.fromString(id);
         Optional<Activity> activity = activityRepository.findById(uuid);
 
         if (activity.isPresent()) {
             activityRepository.deleteById(uuid);
-            return activity.get();
+            return activityMapper.activityToActivityDto(activity.get());
         } else {
             return null;
         }
