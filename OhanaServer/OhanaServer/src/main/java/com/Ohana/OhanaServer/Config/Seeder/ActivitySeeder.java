@@ -29,11 +29,11 @@ public class ActivitySeeder implements ApplicationRunner {
 
     private void insertActivities() {
         List<Activity> activities = List.of(
-                createActivity("Taller de Pedagogía Infantil", "activities/image1.jpg", "Un taller para maestros de educación infantil.", "https://link1.com"),
-                createActivity("Taller de Pedagogía Crítica", "activities/image1.jpg", "Un taller enfocado en la pedagogía crítica y su aplicación en las aulas.", "https://link2.com"),
-                createActivity("Taller de Métodos de Enseñanza", "activities/image1.jpg", "Este taller enseña diversos métodos de enseñanza para mejorar la pedagogía.", "https://link3.com"),
-                createActivity("Taller de Psicopedagogía", "activities/image1.jpg", "En este taller abordamos la psicopedagogía en el proceso de aprendizaje.", "https://link4.com"),
-                createActivity("Taller de Innovación Educativa", "activities/image1.jpg", "Un taller centrado en la innovación en los métodos pedagógicos.", "https://link5.com")
+                createActivity("Taller de Pedagogía Infantil", "activities/image1.jpg", "Un taller para maestros de educación infantil.", "https://www.instagram.com/"),
+                createActivity("Taller de Pedagogía Crítica", "activities/image1.jpg", "Un taller enfocado en la pedagogía crítica y su aplicación en las aulas.", "https://www.instagram.com/"),
+                createActivity("Taller de Métodos de Enseñanza", "activities/image1.jpg", "Este taller enseña diversos métodos de enseñanza para mejorar la pedagogía.", "https://www.instagram.com/"),
+                createActivity("Taller de Psicopedagogía", "activities/image1.jpg", "En este taller abordamos la psicopedagogía en el proceso de aprendizaje.", "https://www.instagram.com/"),
+                createActivity("Taller de Innovación Educativa", "activities/image1.jpg", "Un taller centrado en la innovación en los métodos pedagógicos.", "https://www.instagram.com/")
         );
 
         activityRepository.saveAll(activities);

@@ -3,7 +3,7 @@ import { Result } from "../models/result";
 
 class ApiService {
   private readonly TOKEN_KEY = "token";
-  private readonly BASE_URL = `${import.meta.env.VITE_API_URL}`;
+  private readonly BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api`;
 
   public jwt: string | null = null;
 

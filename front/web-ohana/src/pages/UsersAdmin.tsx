@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
-import { UserResponse } from "../../models/user-response";
-import Modal from "../../components/Modal";
-import CreateOrUpdateUser from "../../components/CreateOrUpdateUserForm";
-import userService from "../../services/user.service";
+import Navbar from "../components/Navbar";
+import { UserResponse } from "../models/user-response";
+import Modal from "../components/Modal";
+import CreateOrUpdateUser from "../components/CreateOrUpdateUserForm";
+import userService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
-import authService from "../../services/auth.service";
+import authService from "../services/auth.service";
 import Swal from "sweetalert2";
 
 function UsersAdmin() {
@@ -113,14 +113,13 @@ function UsersAdmin() {
       <Navbar />
 
       {!loading && (
-        <main className="flex justify-center mt-20 h-[100vh]">
-          <div className="max-w-3xl w-full px-4 py-6 bg-[#f8efea] rounded-lg shadow-xl">
+        <main className="flex justify-center h-[100vh]">
+          <div className="max-w-3xl w-full mt-12 px-4 py-6 bg-[#f3f2f2] rounded-lg shadow-xl">
             {/* Apartado del Usuario Actual */}
             {!loading && userService.currentUser && (
-              <div className="mb-6 p-4 bg-purple-100 rounded-md">
-                <h2 className="text-xl font-semibold text-purple-900 mb-4 text-center">
-                  Usuario Actual
-                </h2>
+              <div className="mb-6 p-4 rounded-md">
+                <h2 className=" mb-8 text-center">Usuario Actual</h2>
+
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead className="bg-purple-100">
                     <tr>
@@ -169,9 +168,7 @@ function UsersAdmin() {
 
             {/* Tabla de usuarios */}
 
-            <h1 className="text-2xl font-semibold text-center mb-6">
-              Todos los Usuarios
-            </h1>
+            <h1 className=" text-center mb-8">Todos los Usuarios</h1>
 
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-purple-100">

@@ -24,8 +24,8 @@ class ActivityService {
 
     formData.append("title", activity.title);
     formData.append("description", activity.description);
-    formData.append("startDate", activity.startDate);
-    formData.append("endDate", activity.endDate);
+    formData.append("startDateStr", activity.startDate);
+    formData.append("endDateStr", activity.endDate);
     formData.append("startTimeStr", activity.startTimeStr);
     formData.append("endTimeStr", activity.endTimeStr);
     formData.append("postLink", activity.postLink);
@@ -35,6 +35,14 @@ class ActivityService {
     const response = await apiService.post<Activity>("/activity", activity);
     if (!response.success) {
       throw new Error("Failed to create activity");
+    }
+    return response.data;
+  }
+
+  async deleteActivity(id: string) {
+    const response = await apiService.delete(`/activity/${id}`);
+    if (!response.success) {
+      throw new Error("Failed to delete activity");
     }
     return response.data;
   }

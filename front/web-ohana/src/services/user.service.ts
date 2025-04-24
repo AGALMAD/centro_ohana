@@ -23,7 +23,7 @@ class UserService {
   }
 
   public async getAllUsers(): Promise<UserResponse[]> {
-    const response = await apiService.get<UserResponse[]>("users", {});
+    const response = await apiService.get<UserResponse[]>("/users", {});
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
@@ -34,7 +34,7 @@ class UserService {
   }
 
   public async getAuthenticatedUser(): Promise<UserResponse> {
-    const response = await apiService.get<UserResponse>("users/me", {});
+    const response = await apiService.get<UserResponse>("/users/me", {});
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
@@ -47,7 +47,7 @@ class UserService {
   public async updateUserData(
     request: UpdateUserRequest
   ): Promise<UserResponse> {
-    const response = await apiService.put<UserResponse>("users", {
+    const response = await apiService.put<UserResponse>("/users", {
       id: request.id,
       username: request.username,
       password: request.password,
@@ -62,7 +62,7 @@ class UserService {
   }
 
   public async deleteUser(userId: string): Promise<UserResponse> {
-    const response = await apiService.delete<UserResponse>(`users/${userId}`);
+    const response = await apiService.delete<UserResponse>(`/users/${userId}`);
 
     if (!response.success) {
       throw new Error("Delete user failed");
