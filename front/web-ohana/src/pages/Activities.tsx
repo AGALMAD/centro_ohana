@@ -37,11 +37,11 @@ function Activities() {
               key={activity.id}
               className="bg-[var(--color-bg)] rounded-xl shadow-xl p-6 flex items-start gap-4 max-w-lg mx-auto hover:shadow-2xl transition duration-300"
             >
-              {/* Imagen alargada, ocupa el 50% de ancho y altura */}
+              {/* Imagen que se ajusta automáticamente y mantiene su proporción */}
               <img
                 src={BASE_URL + activity.imageUrl}
                 alt={activity.title}
-                className="rounded-lg w-1/2 h-48 object-cover"
+                className="rounded-lg w-1/2 h-auto min-h-48 object-cover"
               />
 
               {/* Contenido a la derecha ocupando el 50% del espacio */}
