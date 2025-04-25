@@ -20,7 +20,7 @@ function Modal({ title, open, children, onClose }: Props) {
         onClick={(e) => e.stopPropagation()} // evita que el clic dentro cierre el modal
       >
         <header className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-semibold">{title}</h1>
+          <h3 className="text-xl font-semibold">{title}</h3>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 font-bold"

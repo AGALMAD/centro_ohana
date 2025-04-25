@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,29 +29,51 @@ public class ActivitySeeder implements ApplicationRunner {
     }
 
     private void insertActivities() {
+        Calendar cal = Calendar.getInstance();
+
+        // Actividades pasadas
+        cal.set(2023, Calendar.FEBRUARY, 15, 10, 0); // 15 Feb 2023
+        Date pastStart1 = cal.getTime();
+        cal.set(2023, Calendar.FEBRUARY, 15, 12, 0);
+        Date pastEnd1 = cal.getTime();
+
+        cal.set(2023, Calendar.MARCH, 10, 16, 0); // 10 Mar 2023
+        Date pastStart2 = cal.getTime();
+        cal.set(2023, Calendar.MARCH, 10, 18, 0);
+        Date pastEnd2 = cal.getTime();
+
+        // Actividad actual
+        Date now = new Date();
+        Date oneHourLater = new Date(now.getTime() + 3600000);
+
+        // Actividades futuras
+        cal.set(2025, Calendar.JUNE, 10, 10, 0);
+        Date futureStart1 = cal.getTime();
+        cal.set(2025, Calendar.JUNE, 10, 12, 0);
+        Date futureEnd1 = cal.getTime();
+
+        cal.set(2025, Calendar.AUGUST, 5, 15, 0);
+        Date futureStart2 = cal.getTime();
+        cal.set(2025, Calendar.AUGUST, 5, 17, 0);
+        Date futureEnd2 = cal.getTime();
+
         List<Activity> activities = List.of(
-                createActivity(
-                        "TALLER SEMANA BLANCA", "activities/imagen1.jpg", "¿Buscas un plan divertido y educativo para las mañanas de Semana Blanca? \uD83C\uDF1F En Ohana hemos preparado un taller lleno de actividades...", "https://www.instagram.com/"),
-                createActivity("PIJAMADA EN OHANA", "activities/imagen2.jpg", "✨ ¡Llega la Primera PIJAMADA de Ohana! \uD83C\uDFAD\uD83C\uDF19\u2028\u2028Una noche mágica para que los peques se diviertan...\n", "https://www.instagram.com/"),
-                createActivity("TALLER  AUTONOMÍA Y AUTOCUIDADO", "activities/imagen3.jpg", "\uD83D\uDD38Os presentamos dos talleres continuos, impartidos por nuestra terapeuta ocupacional \uD83E\uDD70.", "https://www.instagram.com/"),
-                createActivity("TALLER DE MOTRICIDAD", "activities/imagen4.jpg", "\uD83D\uDD38Os presentamos dos talleres continuos, impartidos por nuestra terapeuta ocupacional \uD83E\uDD70", "https://www.instagram.com/"),
-                createActivity("PRIMEROS AUXILIOS EN PEDIATRÍA", "activities/imagen5.jpg", "\uD83D\uDD14 Taller práctico de primeros auxilios en pediatría presencial \uD83C\uDFE5\uD83D\uDC76\n" +
-                        "\n" +
-                        "\uD83D\uDC69\u200D⚕\uFE0F Formadora: María Velasco...", "https://www.instagram.com/")
+                createActivity("TALLER SEMANA BLANCA", "activities/imagen1.jpg", "¿Buscas un plan divertido y educativo para las mañanas de Semana Blanca?...", "https://www.instagram.com/", pastStart1, pastEnd1),
+                createActivity("PIJAMADA EN OHANA", "activities/imagen2.jpg", "¡Llega la Primera PIJAMADA de Ohana!", "https://www.instagram.com/", pastStart2, pastEnd2),
+                createActivity("TALLER AUTONOMÍA Y AUTOCUIDADO", "activities/imagen3.jpg", "Talleres continuos impartidos por nuestra terapeuta ocupacional.", "https://www.instagram.com/", now, oneHourLater),
+                createActivity("TALLER DE MOTRICIDAD", "activities/imagen4.jpg", "Talleres continuos con nuestra terapeuta ocupacional.", "https://www.instagram.com/", futureStart1, futureEnd1),
+                createActivity("PRIMEROS AUXILIOS EN PEDIATRÍA", "activities/imagen5.jpg", "Taller práctico de primeros auxilios en pediatría presencial.", "https://www.instagram.com/", futureStart2, futureEnd2)
         );
 
         activityRepository.saveAll(activities);
         System.out.println("Talleres guardados exitosamente.");
     }
 
-    private Activity createActivity(String title, String imageUrl, String description, String postLink) {
-        Date startDate = new Date();
-        Date endDate = new Date(startDate.getTime() + 3600000);
 
+    private Activity createActivity(String title, String imageUrl, String description, String postLink, Date startDate, Date endDate) {
         Time startTime = new Time(startDate.getTime());
         Time endTime = new Time(endDate.getTime());
 
-        // Crear la actividad sin párrafos aún
         Activity activity = Activity.builder()
                 .title(title)
                 .imageUrl(imageUrl)
@@ -62,7 +85,6 @@ public class ActivitySeeder implements ApplicationRunner {
                 .postLink(postLink)
                 .build();
 
-        // Crear párrafos asociados a la actividad
         List<Paragraph> paragraphs = List.of(
                 Paragraph.builder()
                         .title("Introducción al taller")
@@ -76,9 +98,7 @@ public class ActivitySeeder implements ApplicationRunner {
                         .build()
         );
 
-        // Asignar los párrafos a la actividad
         activity.setParagraphs(paragraphs);
-
         return activity;
     }
 
