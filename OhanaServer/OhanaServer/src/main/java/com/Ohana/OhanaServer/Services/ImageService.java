@@ -29,7 +29,7 @@ public class ImageService {
         // Copia el archivo en la carpeta
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        return  "/activities/" + filename;
+        return  "activities/" + filename;
     }
 
 }

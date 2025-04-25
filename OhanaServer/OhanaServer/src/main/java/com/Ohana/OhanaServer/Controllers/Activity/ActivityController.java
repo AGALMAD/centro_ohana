@@ -36,15 +36,15 @@ public class ActivityController {
 
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @CrossOrigin(origins = "http://localhost:5173")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ActivityReponse> createActivity(
             @RequestParam("title") String title,
             @RequestParam( "description") String description,
-            @RequestParam("startDate") String startDateStr,
-            @RequestParam("endDate") String endDateStr,
-            @RequestParam("startTime") String  startTimeStr,
-            @RequestParam("endTime") String  endTimeStr,
+            @RequestParam("startDateStr") String startDateStr,
+            @RequestParam("endDateStr") String endDateStr,
+            @RequestParam("startTimeStr") String  startTimeStr,
+            @RequestParam("endTimeStr") String  endTimeStr,
             @RequestParam("postLink") String postLink,
             @RequestParam("image") MultipartFile image,
             @RequestParam("paragraphs") String paragraphsJson //hay que pasar los párrafos como json ya que el objeto no lo puede serializar

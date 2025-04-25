@@ -1,5 +1,6 @@
 package com.Ohana.OhanaServer.Config.Seeder;
 
+
 import com.Ohana.OhanaServer.Models.Activity;
 import com.Ohana.OhanaServer.Models.Paragraph;
 import com.Ohana.OhanaServer.Repositories.ActivityRepository;
@@ -8,9 +9,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Configuration
@@ -33,29 +34,29 @@ public class ActivitySeeder implements ApplicationRunner {
 
         // Actividades pasadas
         cal.set(2023, Calendar.FEBRUARY, 15, 10, 0); // 15 Feb 2023
-        Date pastStart1 = cal.getTime();
+        Date pastStart1 = new Date(cal.getTimeInMillis());
         cal.set(2023, Calendar.FEBRUARY, 15, 12, 0);
-        Date pastEnd1 = cal.getTime();
+        Date pastEnd1 = new Date(cal.getTimeInMillis());
 
         cal.set(2023, Calendar.MARCH, 10, 16, 0); // 10 Mar 2023
-        Date pastStart2 = cal.getTime();
+        Date pastStart2 = new Date(cal.getTimeInMillis());
         cal.set(2023, Calendar.MARCH, 10, 18, 0);
-        Date pastEnd2 = cal.getTime();
+        Date pastEnd2 = new Date(cal.getTimeInMillis());
 
         // Actividad actual
-        Date now = new Date();
-        Date oneHourLater = new Date(now.getTime() + 3600000);
+        Date now = new Date(System.currentTimeMillis());
+        Date oneHourLater = new Date(now.getTime() + 3600000); // Sumar 1 hora
 
         // Actividades futuras
         cal.set(2025, Calendar.JUNE, 10, 10, 0);
-        Date futureStart1 = cal.getTime();
+        Date futureStart1 = new Date(cal.getTimeInMillis());
         cal.set(2025, Calendar.JUNE, 10, 12, 0);
-        Date futureEnd1 = cal.getTime();
+        Date futureEnd1 = new Date(cal.getTimeInMillis());
 
         cal.set(2025, Calendar.AUGUST, 5, 15, 0);
-        Date futureStart2 = cal.getTime();
+        Date futureStart2 = new Date(cal.getTimeInMillis());
         cal.set(2025, Calendar.AUGUST, 5, 17, 0);
-        Date futureEnd2 = cal.getTime();
+        Date futureEnd2 = new Date(cal.getTimeInMillis());
 
         List<Activity> activities = List.of(
                 createActivity("TALLER SEMANA BLANCA", "activities/imagen1.jpg", "¿Buscas un plan divertido y educativo para las mañanas de Semana Blanca?...", "https://www.instagram.com/", pastStart1, pastEnd1),
@@ -68,7 +69,6 @@ public class ActivitySeeder implements ApplicationRunner {
         activityRepository.saveAll(activities);
         System.out.println("Talleres guardados exitosamente.");
     }
-
 
     private Activity createActivity(String title, String imageUrl, String description, String postLink, Date startDate, Date endDate) {
         Time startTime = new Time(startDate.getTime());

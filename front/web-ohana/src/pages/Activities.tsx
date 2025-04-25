@@ -5,6 +5,7 @@ import activityService from "../services/activity.service";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
+import CreateActivityForm from "../components/CreateActivityForm";
 
 function Activities() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
@@ -13,7 +14,6 @@ function Activities() {
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
-  const [activityToEdit, setActivityToEdit] = useState<Activity | null>(null);
 
   console.log("User", userService.currentUser);
 
@@ -77,21 +77,6 @@ function Activities() {
       key={activity.id}
       className="relative bg-[var(--color-bg)] rounded-xl shadow-xl p-6 flex items-start gap-4 max-w-lg mx-auto hover:shadow-2xl transition duration-300"
     >
-      {/* Botón de edición solo para admins */}
-      {(userService.currentUser?.role === "ADMIN" ||
-        userService.currentUser?.role === "EDITOR") && (
-        <button
-          className="absolute top-2 right-2 bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] text-white p-1 rounded-full shadow-md"
-          onClick={() => {
-            setActivityToEdit(activity);
-            setShowAdminView(true);
-          }}
-          title="Editar actividad"
-        >
-          ✏️
-        </button>
-      )}
-
       <img
         src={BASE_URL + activity.imageUrl}
         alt={activity.title}
@@ -133,6 +118,14 @@ function Activities() {
           NUESTROS TALLERES
         </h1>
 
+        {activities.length === 0 && (
+          <div className="text-center text-lg text-gray-500 mb-4">
+            No hay talleres disponibles en este momento.
+            <br />
+            Por favor, vuelve más tarde.
+          </div>
+        )}
+
         {/* Talleres */}
         {!loading && (
           <div className="w-full max-w-7xl">
@@ -160,6 +153,16 @@ function Activities() {
           </div>
         )}
 
+        <div>
+          <button
+            type="button"
+            onClick={() => setShowAdminView(true)}
+            className="bg-[#9a4c52] text-white text-3xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50 fixed bottom-8 right-8 z-20"
+          >
+            +
+          </button>
+        </div>
+
         {/* Spinner de carga */}
         {loading && (
           <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
@@ -167,13 +170,14 @@ function Activities() {
           </div>
         )}
 
-        {/* Vista de edición de actividad */}
+        {/* Vista de creación de actividad */}
         <Modal
-          title={"Realiza los cambios del taller "}
+          title={"Crea un nuevo taller "}
           open={showAdminView}
-          children={""}
           onClose={() => setShowAdminView(false)}
-        ></Modal>
+        >
+          <CreateActivityForm />
+        </Modal>
       </main>
     </>
   );

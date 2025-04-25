@@ -7,9 +7,11 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {ParagraphMapper.class, TimeMapper.class})
+@Mapper(componentModel = "spring", uses = {ParagraphMapper.class, TimeMapper.class, DateMapper.class})
 public interface ActivityMapper {
 
+    @Mapping(source = "startDate", target = "startDate") // El mapeo se manejará en DateMapper
+    @Mapping(source = "endDate", target = "endDate")     // El mapeo se manejará en DateMapper
     @Mapping(source = "paragraphs", target = "paragraphs")
     ActivityReponse activityToActivityDto(Activity activities);
 
