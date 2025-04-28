@@ -6,9 +6,12 @@ import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
 import CreateActivityForm from "../components/CreateActivityForm";
+import { useNavigate } from "react-router-dom";
 
 function Activities() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
+  const navigate = useNavigate();
+
   const [activities, setActivities] = useState<Activity[]>([]);
 
   const [loading, setLoading] = useState(true);
@@ -98,7 +101,7 @@ function Activities() {
         </p>
 
         <a
-          href={activity.postLink}
+          onClick={() => navigate(`/activity/${activity.id}`)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm font-semibold text-[var(--color-primary)] hover:underline text-center"
@@ -153,15 +156,18 @@ function Activities() {
           </div>
         )}
 
-        <div>
-          <button
-            type="button"
-            onClick={() => setShowAdminView(true)}
-            className="bg-[#9a4c52] text-white text-3xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50 fixed bottom-8 right-8 z-20"
-          >
-            +
-          </button>
-        </div>
+        {/* Botón de añadir actividad */}
+        {userService.currentUser?.role === "ADMIN" && (
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowAdminView(true)}
+              className="bg-[#9a4c52] text-white text-3xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50 fixed bottom-8 right-8 z-20"
+            >
+              +
+            </button>
+          </div>
+        )}
 
         {/* Spinner de carga */}
         {loading && (

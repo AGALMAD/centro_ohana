@@ -3,6 +3,7 @@ import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import UsersAdmin from "../pages/UsersAdmin";
 import Activities from "../pages/Activities";
+import Activity from "../pages/Activity";
 
 function AppRoutes() {
   return (
@@ -11,6 +12,8 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/users-admin" element={<UsersAdmin />} />
       <Route path="/activities" element={<Activities />} />
+      <Route path="/activity/:id" element={<Activity />} />
+
       <Route path="*" element={<h1>Página no encontrada</h1>} />
     </Routes>
   );
