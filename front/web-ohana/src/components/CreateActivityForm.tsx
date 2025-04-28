@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import activityService from "../services/activity.service";
 import { CreateActivityRequest } from "../models/create-activity-request";
 import { CreateParagraphRequest } from "../models/create-paragraph-request";
+import Swal from "sweetalert2";
 
 function CreateActivityForm() {
   const [data, setFormData] = useState<CreateActivityRequest>({
@@ -86,13 +87,31 @@ function CreateActivityForm() {
       const response = await activityService.createActivity(data);
 
       if (response) {
-        alert("Actividad creada exitosamente");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Actividad creada exitosamente",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("Error al crear la actividad");
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Error al crear la actividad",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
       console.error(error);
-      alert("Hubo un error al crear la actividad");
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Hubo un error al crear la actividad",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } finally {
       setLoading(false);
     }
