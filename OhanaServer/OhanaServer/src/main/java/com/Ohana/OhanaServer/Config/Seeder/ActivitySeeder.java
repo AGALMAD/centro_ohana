@@ -59,7 +59,7 @@ public class ActivitySeeder implements ApplicationRunner {
         Date futureEnd2 = new Date(cal.getTimeInMillis());
 
         List<Activity> activities = List.of(
-                createActivity("TALLER SEMANA BLANCA", "activities/imagen1.jpg", "¿Buscas un plan divertido y educativo para las mañanas de Semana Blanca?...", "https://www.instagram.com/", pastStart1, pastEnd1),
+                createActivity("TALLER SEMANA BLANCA", "activities/imagen1.jpg", "¿Buscas un plan divertido y educativo para las mañanas de Semana Blanca? \uD83C\uDF1F En Ohana hemos preparado un taller lleno de actividades para que los peques disfruten y aprendan mientras juegan.", "https://www.instagram.com/", pastStart1, pastEnd1),
                 createActivity("PIJAMADA EN OHANA", "activities/imagen2.jpg", "¡Llega la Primera PIJAMADA de Ohana!", "https://www.instagram.com/", pastStart2, pastEnd2),
                 createActivity("TALLER AUTONOMÍA Y AUTOCUIDADO", "activities/imagen3.jpg", "Talleres continuos impartidos por nuestra terapeuta ocupacional.", "https://www.instagram.com/", now, oneHourLater),
                 createActivity("TALLER DE MOTRICIDAD", "activities/imagen4.jpg", "Talleres continuos con nuestra terapeuta ocupacional.", "https://www.instagram.com/", futureStart1, futureEnd1),

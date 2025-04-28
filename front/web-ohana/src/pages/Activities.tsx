@@ -104,7 +104,7 @@ function Activities() {
           onClick={() => navigate(`/activity/${activity.id}`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-semibold text-[var(--color-primary)] hover:underline text-center"
+          className="text-sm font-semibold text-[var(--color-primary)] hover:underline text-center cursor-pointer"
         >
           Leer más...
         </a>
