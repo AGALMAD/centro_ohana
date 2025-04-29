@@ -9,6 +9,7 @@ import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
+import InstagramIcon from "../assets/instagram.png";
 
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
@@ -155,17 +156,32 @@ function ActivityPage() {
               </div>
             ))}
 
-            {/* Botón */}
-            <div className="text-center mt-8">
+            {/* Botón e Icono de Instagram */}
+            <div className="flex justify-center items-center mt-12">
               <a
                 href={`https://wa.me/34647494681?text=${encodeURIComponent(
-                  `Hola, estoy interesado en inscribirme en el taller "${activity.title.toLowerCase()}" `
+                  `Hola, estoy interesado en inscribirme en el taller "${activity.title.toLowerCase()}"`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[var(--color-primary)] mr-4 text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
+                title="Contactar por WhatsApp"
+                className="bg-[var(--color-primary)] text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
               >
                 Inscribirse
+              </a>
+
+              <a
+                href={activity.postLink || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-4"
+                title="Ver publicación en Instagram"
+              >
+                <img
+                  src={InstagramIcon}
+                  alt="Instagram"
+                  className="w-20 h-12 opacity-80 hover:opacity-100 transition-opacity"
+                />
               </a>
             </div>
           </div>

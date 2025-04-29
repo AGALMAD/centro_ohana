@@ -87,13 +87,19 @@ public class ActivitySeeder implements ApplicationRunner {
 
         List<Paragraph> paragraphs = List.of(
                 Paragraph.builder()
-                        .title("Introducción al taller")
-                        .text("Este párrafo introduce los temas que se cubrirán en el taller.")
+                        .text("✨ Actividades:\u2028\uD83C\uDFAD Pinta caras\u2028\uD83D\uDCD6 Cuentacuentos\u2028\uD83D\uDD8C\uFE0F Manualidades\u2028\uD83D\uDC69\u200D\uD83C\uDF73 Taller de cocina\u2028\uD83E\uDDE9 Juegos de mesa y sensoriales\u2028\uD83E\uDD38\u200D♂\uFE0F Motricidad y mucho más…")
                         .activity(activity)
                         .build(),
                 Paragraph.builder()
-                        .title("Objetivos del taller")
-                        .text("Aquí se describen los objetivos principales del taller.")
+                        .text("Realizado por: logopedas, psicopedagogas y terapeuta ocupacional. \uD83D\uDC99")
+                        .activity(activity)
+                        .build(),
+                Paragraph.builder()
+                        .text("\uD83D\uDCE9 ¡Plazas limitadas! Reserva ya enviándonos un mensaje. \uD83D\uDCF2")
+                        .activity(activity)
+                        .build(),
+                Paragraph.builder()
+                        .text("\uD83D\uDCB0 Precio: 80€ (taller completo) | 25€ (días sueltos) | 65€ (precios hermanos/as)")
                         .activity(activity)
                         .build()
         );
