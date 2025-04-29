@@ -41,8 +41,6 @@ public class SecurityConfig {
                                 .requestMatchers("/api/activity/**").hasAnyRole(Role.ADMIN.toString(),Role.EDITOR.toString())
                                 .requestMatchers("/api/activity").hasAnyRole(Role.ADMIN.toString(),Role.EDITOR.toString())
                                 .requestMatchers("/activities/**").permitAll() //imágenes
-                                .requestMatchers("/activities").permitAll() //imágenes
-
 
 
 

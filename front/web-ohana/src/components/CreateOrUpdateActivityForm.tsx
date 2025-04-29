@@ -133,6 +133,8 @@ function CreateActivityForm({ initialActivity }: Props) {
           showConfirmButton: false,
           timer: 1500,
         });
+        // Recargar la página después de éxito
+        window.location.reload();
       } else {
         throw new Error("No se recibió respuesta");
       }
