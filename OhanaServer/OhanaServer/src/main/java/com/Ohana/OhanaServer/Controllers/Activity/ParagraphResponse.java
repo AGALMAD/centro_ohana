@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateActivityRequest {
+public class ParagraphResponse {
     private String id;
-    private NewActivity newActivity;
+    private String title;
+    private String text;
 }

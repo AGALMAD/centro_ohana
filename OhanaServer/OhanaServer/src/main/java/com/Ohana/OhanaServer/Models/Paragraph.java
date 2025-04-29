@@ -26,7 +26,7 @@ public class Paragraph {
     private Activity activity;
 
 
-    @Column(nullable = false)
+    @Column
     private String title;
 
     @Column(nullable = false, length = 1000)

@@ -3,10 +3,10 @@ package com.Ohana.OhanaServer.Models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import java.math.BigDecimal;
+
+import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,8 +46,9 @@ public class Activity {
     private String postLink;
 
 
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Paragraph> paragraphs;
+    private List<Paragraph> paragraphs = new ArrayList<>();
+
 
 }
