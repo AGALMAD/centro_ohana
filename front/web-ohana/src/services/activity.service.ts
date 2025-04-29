@@ -71,12 +71,13 @@ class ActivityService {
     return response.data;
   }
 
-  async deleteActivity(id: string) {
-    const response = await apiService.delete(`/activity/${id}`);
-    if (!response.success) {
+  async deleteActivity(id: string): Promise<Activity | null> {
+    try {
+      const response = await apiService.delete<Activity>(`/activity/${id}`);
+      return response.data;
+    } catch (error) {
       throw new Error("Failed to delete activity");
     }
-    return response.data;
   }
 }
 

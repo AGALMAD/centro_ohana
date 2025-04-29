@@ -80,6 +80,9 @@ class ApiService {
       headers: this.getHeaders(undefined, contentType),
     };
 
+    if (body instanceof FormData) {
+      delete config.headers["Content-Type"];
+    }
     return this.sendRequest<T>(
       axios.put(`${this.BASE_URL}${path}`, body, config)
     );

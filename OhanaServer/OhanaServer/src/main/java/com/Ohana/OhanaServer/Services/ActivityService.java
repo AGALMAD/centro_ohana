@@ -14,9 +14,11 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -116,20 +118,23 @@ public class ActivityService {
                 activity.setImageUrl(newImageUrl);
             }
 
-            if(newData.getParagraphs() != null && !newData.getParagraphs().isEmpty()){
-                paragraphRepository.deleteAll(activity.getParagraphs());
+            if (newData.getParagraphs() != null) {
+                List<Paragraph> existingParagraphs = activity.getParagraphs();
+                existingParagraphs.clear();
 
-                List<Paragraph> updatedParagraphs = newData.getParagraphs().stream()
-                        .map(p -> Paragraph.builder()
-                                .title(p.getTitle())
-                                .text(p.getText())
-                                .activity(activity)
-                                .build())
-                        .toList();
+                if (!newData.getParagraphs().isEmpty()) {
+                    List<Paragraph> updatedParagraphs = newData.getParagraphs().stream()
+                            .map(p -> Paragraph.builder()
+                                    .title(p.getTitle())
+                                    .text(p.getText())
+                                    .activity(activity)
+                                    .build())
+                            .collect(Collectors.toList());
 
-                paragraphRepository.saveAll(updatedParagraphs);
-                activity.setParagraphs(updatedParagraphs);
+                    existingParagraphs.addAll(updatedParagraphs);
+                }
             }
+
 
 
             Activity updated = activityRepository.save(activity);

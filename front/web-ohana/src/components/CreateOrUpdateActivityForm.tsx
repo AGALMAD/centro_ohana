@@ -5,18 +5,47 @@ import activityService from "../services/activity.service";
 import { CreateActivityRequest } from "../models/create-activity-request";
 import { CreateParagraphRequest } from "../models/create-paragraph-request";
 import Swal from "sweetalert2";
+import { Activity } from "../models/activity";
 
-function CreateActivityForm() {
-  const [data, setFormData] = useState<CreateActivityRequest>({
-    title: "",
-    description: "",
-    startDate: "",
-    endDate: "",
-    startTimeStr: "",
-    endTimeStr: "",
-    postLink: "",
-    image: new File([], ""),
-    paragraphs: [],
+interface Props {
+  initialActivity?: Activity;
+}
+function CreateActivityForm({ initialActivity }: Props) {
+  const convertToISODate = (dateStr: string): string => {
+    const [day, month, year] = dateStr.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+  const [data, setFormData] = useState<CreateActivityRequest>(() => {
+    if (!initialActivity) {
+      return {
+        title: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        startTimeStr: "",
+        endTimeStr: "",
+        postLink: "",
+        image: new File([], ""),
+        paragraphs: [],
+      };
+    }
+
+    return {
+      title: initialActivity.title,
+      description: initialActivity.description,
+      startDate: convertToISODate(initialActivity.startDate),
+      endDate: convertToISODate(initialActivity.endDate),
+
+      startTimeStr: initialActivity.startTime,
+      endTimeStr: initialActivity.endTime,
+      postLink: initialActivity.postLink,
+      image: new File([], ""), // no se puede precargar por seguridad del navegador
+      paragraphs: initialActivity.paragraphs.map((p) => ({
+        title: p.title,
+        text: p.text,
+      })),
+    };
   });
 
   const [loading, setLoading] = useState(false);
@@ -84,31 +113,37 @@ function CreateActivityForm() {
     setLoading(true);
 
     try {
-      const response = await activityService.createActivity(data);
+      let response;
+      if (initialActivity) {
+        response = await activityService.updateActivity(
+          initialActivity.id,
+          data
+        );
+      } else {
+        response = await activityService.createActivity(data);
+      }
 
       if (response) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Actividad creada exitosamente",
+          title: initialActivity
+            ? "Actividad actualizada exitosamente"
+            : "Actividad creada exitosamente",
           showConfirmButton: false,
           timer: 1500,
         });
       } else {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Error al crear la actividad",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        throw new Error("No se recibió respuesta");
       }
     } catch (error) {
       console.error(error);
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Hubo un error al crear la actividad",
+        title: initialActivity
+          ? "Error al actualizar la actividad"
+          : "Error al crear la actividad",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -119,10 +154,6 @@ function CreateActivityForm() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-[#9a4c52] mb-6">
-        Crea una nueva actividad
-      </h2>
-
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -167,7 +198,11 @@ function CreateActivityForm() {
             Fecha de inicio:
           </label>
           <DatePicker
-            selected={data.startDate ? new Date(data.startDate) : null}
+            selected={
+              data.startDate && !isNaN(new Date(data.startDate).getTime())
+                ? new Date(data.startDate)
+                : null
+            }
             onChange={(date: Date | null) =>
               handleDateChange(date, "startDate")
             }
@@ -185,7 +220,11 @@ function CreateActivityForm() {
             Fecha de finalización:
           </label>
           <DatePicker
-            selected={data.endDate ? new Date(data.endDate) : null}
+            selected={
+              data.endDate && !isNaN(new Date(data.endDate).getTime())
+                ? new Date(data.endDate)
+                : null
+            }
             onChange={(date: Date | null) => handleDateChange(date, "endDate")}
             dateFormat="yyyy-MM-dd"
             className="mt-2 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
@@ -300,7 +339,7 @@ function CreateActivityForm() {
             name="image"
             onChange={handleFileChange}
             accept="image/*"
-            required
+            required={!initialActivity}
             className="mt-2 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           />
         </div>
@@ -310,7 +349,11 @@ function CreateActivityForm() {
           disabled={loading}
           className="mt-4 w-full py-2 bg-[#9a4c52] text-white text-lg font-semibold rounded-lg hover:bg-[#7f3d44] focus:outline-none focus:ring-2 focus:ring-[#9a4c52] transition duration-300"
         >
-          {loading ? "Cargando..." : "Crear actividad"}
+          {loading
+            ? "Cargando..."
+            : initialActivity
+            ? "Actualizar actividad"
+            : "Crear actividad"}
         </button>
       </form>
     </div>

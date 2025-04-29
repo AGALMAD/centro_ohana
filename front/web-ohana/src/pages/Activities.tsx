@@ -5,15 +5,15 @@ import activityService from "../services/activity.service";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
-import CreateActivityForm from "../components/CreateActivityForm";
+import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Activities() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
   const [activities, setActivities] = useState<Activity[]>([]);
-
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
@@ -185,6 +185,8 @@ function Activities() {
           <CreateActivityForm />
         </Modal>
       </main>
+
+      <Footer />
     </>
   );
 }

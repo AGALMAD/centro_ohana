@@ -1,18 +1,24 @@
-import React, { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
 import { Activity } from "../models/activity";
 import activityService from "../services/activity.service";
+import Footer from "../components/Footer";
+import { Edit, Trash } from "lucide-react";
+import Swal from "sweetalert2";
+import Modal from "../components/Modal";
+import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
-
+  const navigate = useNavigate();
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [activity, setActivity] = useState<Activity | null>(null);
-
   const [loading, setLoading] = useState(true);
+
+  const [showAdminView, setShowAdminView] = useState(false);
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -23,79 +29,159 @@ function ActivityPage() {
         console.error("Sin usuario autenticado");
       }
     };
-
     checkUserRole();
   }, []);
 
   useEffect(() => {
     const fetchActivity = async () => {
       setLoading(true);
-
       try {
         const activity = await activityService.getActivity(id!);
-        if (!activity) {
-          throw new Error("Activity not found");
-        }
+        if (!activity) throw new Error("Actividad no encontrada");
         setActivity(activity);
       } catch (error) {
-        console.error("Error fetching activity:", error);
+        console.error("Error al obtener la actividad:", error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchActivity();
   }, [id]);
+
+  const handleDelete = async (activityId: string) => {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará el taller permanentemente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#aaa",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const deletedActivity = await activityService.deleteActivity(
+          activityId
+        );
+        if (!deletedActivity) throw new Error("Actividad no encontrada");
+
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: "Taller eliminado correctamente",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
+
+        setTimeout(() => {
+          navigate("/activities");
+        }, 2000);
+      } catch (error) {
+        console.error("Error al eliminar la actividad:", error);
+        Swal.fire("Error", "No se pudo eliminar el taller.", "error");
+      }
+    }
+  };
 
   return (
     <>
       <Navbar />
 
-      <main className="flex flex-col items-center justify-start w-full min-h-screen bg-gray-100">
+      <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {activity && (
-          <div className="flex flex-col items-center justify-start max-w-[800px] mt-12 mb-12">
-            <div className=" flex flex-col items-center justify-center">
-              <h1 className="mb-8 text-center">{activity.title}</h1>
+          <div className="relative  max-w-xl w-full p-6 md:p-10">
+            {/* Botones de edición */}
+            {userService.currentUser?.role === "ADMIN" && (
+              <div className="absolute top-4 right-4 flex space-x-2">
+                <button
+                  onClick={() => setShowAdminView(true)}
+                  className="text-blue-600 hover:text-blue-800"
+                  title="Editar"
+                >
+                  <Edit size={20} />
+                </button>
+                <button
+                  onClick={() => handleDelete(activity.id)}
+                  className="text-red-600 hover:text-red-800"
+                  title="Eliminar"
+                >
+                  <Trash size={20} />
+                </button>
+              </div>
+            )}
+
+            {/* Título */}
+            <h1 className="text-center text-xl md:text-2xl font-bold text-[#842029] mb-6 uppercase tracking-wide">
+              {activity.title}
+            </h1>
+
+            {/* Imagen */}
+            <div className="flex justify-center mb-12">
               <img
                 src={BASE_URL + activity.imageUrl}
-                alt="Imagen Taller"
-                className=" max-w-fit max-h-[500px] "
+                alt={activity.title}
+                className="rounded-xl shadow-md w-72 h-72 object-cover"
               />
             </div>
 
-            <div>
-              <div className="mt-8">
-                <p className=" max-w-[500px]">{activity.description}</p>
-                <p className=" mt-8 ">
-                  📆Cuándo : Del {activity.startDate} al {activity.endDate}
-                </p>
-                <p className="mt-4">
-                  🕛Horario: {activity.startTime} a {activity.endTime}
-                </p>
-              </div>
+            {/* Descripción */}
+            <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-8">
+              {activity.description}
+            </p>
 
-              <div className="mt-8">
-                {activity.paragraphs.map((paragraph, index) => (
-                  <div key={index} className=" mt-4">
-                    {paragraph.title && (
-                      <h4 className="text-xl font-semibold">
-                        {paragraph.title}
-                      </h4>
-                    )}
-                    <p>{paragraph.text}</p>
-                  </div>
-                ))}
-              </div>
+            {/* Horario */}
+            <div className="mb-8">
+              <p className="text-sm text-gray-800 mb-2">
+                📅 <strong>Cuándo:</strong> Del {activity.startDate} al{" "}
+                {activity.endDate}
+              </p>
+              <p className="text-sm text-gray-800 mb-4">
+                🕒 <strong>Horario:</strong> {activity.startTime} a{" "}
+                {activity.endTime}
+              </p>
             </div>
 
-            <div className="mt-8">
-              <button className="bg-[var(--color-primary)] mr-4 text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50 ">
+            {/* Párrafos dinámicos */}
+            {activity.paragraphs.map((p) => (
+              <div key={p.id} className="mb-4">
+                {p.title && <h4 className="font-semibold">{p.title}</h4>}
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {p.text}
+                </p>
+              </div>
+            ))}
+
+            {/* Botón */}
+            <div className="text-center mt-8">
+              <a
+                href={`https://wa.me/34647494681?text=${encodeURIComponent(
+                  `Hola, estoy interesado en inscribirme en el taller "${activity.title.toLowerCase()}" `
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[var(--color-primary)] mr-4 text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
+              >
                 Inscribirse
-              </button>
+              </a>
             </div>
           </div>
         )}
+
+        {/* Vista de edición de la actividad */}
+        <Modal
+          title={"Editar taller"}
+          open={showAdminView}
+          onClose={() => setShowAdminView(false)}
+        >
+          <CreateActivityForm initialActivity={activity} />
+        </Modal>
       </main>
+
+      <Footer />
     </>
   );
 }

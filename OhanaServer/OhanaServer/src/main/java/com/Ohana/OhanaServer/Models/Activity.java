@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,8 +46,9 @@ public class Activity {
     private String postLink;
 
 
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Paragraph> paragraphs;
+    private List<Paragraph> paragraphs = new ArrayList<>();
+
 
 }
