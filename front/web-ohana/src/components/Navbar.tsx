@@ -33,7 +33,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/blog" className={styles.link}>
+            <a onClick={() => navigate("/blog")} className={styles.link}>
               Blog
             </a>
           </li>
