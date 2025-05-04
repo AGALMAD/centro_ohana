@@ -1,7 +1,6 @@
 package com.Ohana.OhanaServer.Models;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.UUID;
 
 import lombok.Data;
@@ -21,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "workshops")
-public class Workshop {
+@Table(name = "post")
+public class Post {
     @Id
     @GeneratedValue
     UUID id;
@@ -32,15 +31,12 @@ public class Workshop {
     String title;
 
     @Column(length = 1000)
-    String description;
+    String text;
+
+    @Column(nullable = false)
+    private String imageUrl;
 
     @Column(nullable = false)
     LocalDate date;
-
-    @Column(nullable = false)
-    LocalTime time;
-
-    @Column()
-    String instructor;
 
 }

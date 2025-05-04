@@ -1,7 +1,8 @@
-package com.Ohana.OhanaServer.Controllers.Workshop;
+package com.Ohana.OhanaServer.Controllers.Blog;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewWorkshopRequest {
+public class NewPost {
     String title;
-    String description;
+    String text;
+    private MultipartFile image;
     LocalDate date;
-    LocalTime time;
-    String instructor;
 }
