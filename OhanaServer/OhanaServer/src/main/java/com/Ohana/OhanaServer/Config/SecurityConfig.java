@@ -42,6 +42,11 @@ public class SecurityConfig {
                                                 .requestMatchers("/api/activity")
                                                 .hasAnyRole(Role.ADMIN.toString(), Role.EDITOR.toString())
                                                 .requestMatchers("/activities/**").permitAll() // imágenes
+                                        .requestMatchers(HttpMethod.GET, "/api/blog/**").permitAll()
+                                        .requestMatchers("/api/blog/**")
+                                        .hasAnyRole(Role.ADMIN.toString(), Role.EDITOR.toString())
+                                        .requestMatchers("/api/blog")
+                                        .hasAnyRole(Role.ADMIN.toString(), Role.EDITOR.toString())
 
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager

@@ -19,11 +19,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @RequiredArgsConstructor
 public class BlogController {
 
-    private final PostService postService = null;
+    private final PostService postService;
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {
+
         return ResponseEntity.ok(postService.getAllPost());
     }
 
