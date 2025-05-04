@@ -5,7 +5,7 @@ import userService from "./user.service";
 
 class AuthService {
   private readonly TOKEN_KEY = "token";
-  private readonly LOGIN_URL = "auth/login";
+  private readonly LOGIN_URL = "/auth/login";
 
   constructor() {}
 

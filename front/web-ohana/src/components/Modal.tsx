@@ -16,11 +16,11 @@ function Modal({ title, open, children, onClose }: Props) {
       onClick={onClose} // clic fuera del modal
     >
       <div
-        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
+        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl relative overflow-auto max-h-[90vh]" // Ajusté la altura máxima
         onClick={(e) => e.stopPropagation()} // evita que el clic dentro cierre el modal
       >
         <header className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-semibold">{title}</h1>
+          <h3 className="text-xl font-semibold">{title}</h3>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 font-bold"
@@ -28,7 +28,7 @@ function Modal({ title, open, children, onClose }: Props) {
             X
           </button>
         </header>
-        <div className="mb-4">{children}</div>
+        <div className="mb-4 overflow-auto">{children}</div>
       </div>
     </div>
   );

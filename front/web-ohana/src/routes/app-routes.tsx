@@ -1,7 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
-import UsersAdmin from "../pages/UsersAdmin/UsersAdmin";
+import UsersAdmin from "../pages/UsersAdmin";
+import Activities from "../pages/Activities";
+import ActivityPage from "../pages/Activity";
+import Contact from "../pages/Contact";
 
 function AppRoutes() {
   return (
@@ -9,6 +12,10 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/users-admin" element={<UsersAdmin />} />
+      <Route path="/activities" element={<Activities />} />
+      <Route path="/activity/:id" element={<ActivityPage />} />
+      <Route path="/contact" element={<Contact />} />
+
       <Route path="*" element={<h1>Página no encontrada</h1>} />
       <Route path="/blog" element={<h1>Blog</h1>} />
       <Route path="/talleres" element={<h1>Talleres</h1>} />

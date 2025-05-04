@@ -3,7 +3,7 @@ import { Result } from "../models/result";
 
 class ApiService {
   private readonly TOKEN_KEY = "token";
-  private readonly BASE_URL = `${import.meta.env.VITE_API_URL}`;
+  private readonly BASE_URL = `${import.meta.env.VITE_SERVER_URL}/api`;
 
   public jwt: string | null = null;
 
@@ -80,6 +80,9 @@ class ApiService {
       headers: this.getHeaders(undefined, contentType),
     };
 
+    if (body instanceof FormData) {
+      delete config.headers["Content-Type"];
+    }
     return this.sendRequest<T>(
       axios.put(`${this.BASE_URL}${path}`, body, config)
     );

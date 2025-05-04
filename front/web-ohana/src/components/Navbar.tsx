@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   link: "hover:bg-white hover:text-slate-800 py-1 px-2 rounded-md transition-colors duration-700 block",
 };
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -25,7 +28,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/talleres" className={styles.link}>
+            <a onClick={() => navigate("/activities")} className={styles.link}>
               Talleres
             </a>
           </li>
@@ -68,7 +71,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a onClick={() => navigate("/activities")} className={styles.link}>
               Talleres
             </a>
           </li>
