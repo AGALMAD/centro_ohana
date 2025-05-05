@@ -38,7 +38,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a href="/aboutus" className={styles.link}>
               Conócenos
             </a>
           </li>
@@ -76,7 +76,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#" className={styles.link}>
+            <a href="/aboutus" className={styles.link}>
               Conócenos
             </a>
           </li>
