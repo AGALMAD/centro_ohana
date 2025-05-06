@@ -23,7 +23,7 @@ export default function Navbar() {
         {/* PANTALLA GRANDE */}
         <ul className="hidden md:flex space-x-4">
           <li>
-            <a href="/" className={styles.link}>
+            <a href="/services" className={styles.link}>
               Servicios
             </a>
           </li>
@@ -61,7 +61,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <ul className="md:hidden flex flex-col text-center space-y-3 mt-4">
           <li>
-            <a href="/" className={styles.link}>
+            <a href="/services" className={styles.link}>
               Servicios
             </a>
           </li>

@@ -6,6 +6,7 @@ import Activities from "../pages/Activities";
 import ActivityPage from "../pages/Activity";
 import Contact from "../pages/Contact";
 import AboutUs from "../pages/AboutUs";
+import Services from "../pages/Services";
 
 function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ function AppRoutes() {
       <Route path="/activity/:id" element={<ActivityPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/aboutus" element={<AboutUs />} />
+      <Route path="/services" element={<Services />} />
 
       <Route path="*" element={<h1>Página no encontrada</h1>} />
     </Routes>
