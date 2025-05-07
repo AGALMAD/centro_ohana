@@ -10,7 +10,7 @@ function Services() {
         <div className="relative max-w-3xl mx-auto px-4 py-16 ">
           {/* LOGOPEDIA */}
           <section className="space-y-6">
-            <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-10">
               <img
                 src="/services/logopedia.jpg"
                 alt="Logopedia"
@@ -77,7 +77,7 @@ function Services() {
 
           {/* PSICOPEDAGOGÍA */}
           <section className=" mt-12 space-y-6">
-            <div className="flex flex-col-reverse md:flex-row items-center gap-10">
+            <div className="flex flex-col md:flex-row items-center gap-10">
               <div className="w-full md:w-1/2 space-y-4">
                 <div className="flex items-center gap-4">
                   <h2 className="text-2xl font-bold text-[#A94D56]">
@@ -145,7 +145,7 @@ function Services() {
 
           {/* TERAPIA OCUPACIONAL */}
           <section className="space-y-6">
-            <div className="flex flex-col md:flex-row items-center gap-10">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-10">
               <img
                 src="/services/terapia_ocupacional.jpg"
                 alt="Terapia Ocupacional"
