@@ -4,7 +4,7 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const styles = {
-  link: "block py-2 px-2 text-[var(--color-secondary)] text-xl font-bold transition-transform duration-300 hover:scale-105",
+  link: "block py-2 px-2 text-[var(--color-secondary)] text-xl font-bold transition-transform duration-300 hover:scale-110",
 };
 
 export default function Navbar() {
@@ -17,11 +17,11 @@ export default function Navbar() {
     >
       <div className="relative max-w-screen-xl mx-auto flex items-center justify-start px-6 py-4">
         {/* LOGO */}
-        <Link to="/" className="mr-8">
+        <Link to="/" className="mr-8 ">
           <img
             src="/logo-ohana.png"
             alt="Logo"
-            className="size-16 cursor-pointer"
+            className="size-16 cursor-pointer hover:scale-110 transition-transform duration-300"
           />
         </Link>
 
