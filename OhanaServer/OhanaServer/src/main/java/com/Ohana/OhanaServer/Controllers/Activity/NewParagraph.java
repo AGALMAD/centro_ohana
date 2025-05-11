@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class NewParagraph {
     private String title;
     private String text;
-
 }

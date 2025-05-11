@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { Activity } from "../models/activity";
 import activityService from "../services/activity.service";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
-import authService from "../services/auth.service";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
