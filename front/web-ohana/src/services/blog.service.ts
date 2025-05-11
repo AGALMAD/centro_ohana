@@ -1,15 +1,17 @@
-import { Activity } from "../models/activity";
 import { NewPostRequest } from "../models/new-post-request";
-import { Post } from "../models/post";
+import { Post, PaginatedPosts } from "../models/post";
+import { Result } from "../models/result";
 import apiService from "./api.service";
 
 class BlogService {
-  async getAllPosts() {
-    const response = await apiService.get<Post[]>("/blog");
+  async getAllPosts(page = 0, size = 5): Promise<Result<PaginatedPosts>> {
+    const response = await apiService.get<PaginatedPosts>(
+      `/blog?page=${page}&size=${size}`
+    );
     if (!response.success) {
       throw new Error("Failed to fetch all posts.");
     }
-    return response.data;
+    return response;
   }
 
   async getPost(id: string) {
@@ -25,7 +27,6 @@ class BlogService {
 
     formData.append("title", post.title);
     formData.append("text", post.text);
-    formData.append("date", post.date);
     formData.append("image", post.image);
 
     console.log("FormData de blog", formData);
@@ -43,14 +44,13 @@ class BlogService {
 
     formData.append("title", post.title);
     formData.append("text", post.text);
-    formData.append("date", post.date);
     formData.append("image", post.image);
 
     if (post.image) {
       formData.append("image", post.image);
     }
 
-    const response = await apiService.put<Activity>(`/post`, formData);
+    const response = await apiService.put<Post>(`/post`, formData);
 
     if (!response.success) {
       throw new Error("Error al actualizar el post");
@@ -64,7 +64,7 @@ class BlogService {
       const response = await apiService.delete<Post>(`/blog/${id}`);
       return response.data;
     } catch (error) {
-      throw new Error("Failed to delete activity");
+      throw new Error("Failed to delete post");
     }
   }
 }

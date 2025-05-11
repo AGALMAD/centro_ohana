@@ -2,17 +2,23 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
-import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
-import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Post } from "../models/post";
 import blogService from "../services/blog.service";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
+import CreatePostForm from "../components/CreateOrUpdatePostForm";
 
 function Blog() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
+  const [searchParams] = useSearchParams();
+  const initialPage = parseInt(searchParams.get("page") || "0", 5);
+
   const [posts, setPosts] = useState<Post[]>([]);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
@@ -35,19 +41,29 @@ function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-
       try {
-        const fetchedPosts = await blogService.getAllPosts();
-        setPosts(fetchedPosts);
+        const result = await blogService.getAllPosts(currentPage, 5);
+        if (result.success) {
+          setPosts(
+            result.data.content.sort((a, b) => {
+              const dateA = new Date(a.date);
+              const dateB = new Date(b.date);
+              return dateB.getTime() - dateA.getTime();
+            })
+          );
+          setTotalPages(result.data.totalPages);
+        } else {
+          console.error("Failed to fetch posts:", result.message);
+        }
       } catch (error) {
-        console.error("Error fetching activities:", error);
+        console.error("Error fetching posts:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
   function parseCustomDate(dateString: string): Date {
     const [day, month, year] = dateString.split("/").map(Number);
@@ -62,39 +78,41 @@ function Blog() {
   const renderPostCard = (post: Post) => (
     <div
       key={post.id}
-      className="flex items-center gap-6 p-6 max-w-lg mx-auto hover:shadow-lg transition duration-300"
+      className="flex items-center justify-center gap-6 p-6 flex-wrap max-w-6xl mx-auto"
     >
-      {/* Columna de la imagen */}
-      <div className="w-1/3">
+      {/*imagen */}
+      <div className="w-112 md:p-8">
         <img
           src={BASE_URL + post.imageUrl}
           alt={post.title}
-          className="rounded-lg w-full h-auto object-cover"
+          className="rounded-2xl w-full h-64 object-cover"
         />
       </div>
 
-      <div className="w-2/3 flex flex-col justify-between">
+      <div className="max-w-1/2 flex flex-col justify-between">
         {/* Título */}
-        <h4 className="text-xl font-bold text-[var(--color-primary)] uppercase mb-2 text-left">
+        <h4
+          className="cursor-pointer text-xl w-fit font-bold !text-[var(--color-secondary)] mb-2 text-center"
+          onClick={() => navigate(`/blog/${post.id}?page=${currentPage}`)}
+        >
           {post.title}
         </h4>
 
         {/* Texto del post*/}
-        <p className="text-sm text-[var(--color-text-dark)] mb-4 text-left">
-          {post.text.length > 150 ? post.text.slice(0, 150) + "..." : post.text}
+        <p className="text-md mt-2 font-bold text-[var(--color-text-dark)] mb-4 text-left">
+          {post.text.length > 250 ? post.text.slice(0, 250) + "..." : post.text}
         </p>
 
         {/* Botón "Ver publicación" */}
-        <div className="text-left">
-          <a
-            onClick={() => navigate(`/blog/${post.id}`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold text-[var(--color-primary)] hover:underline cursor-pointer"
-          >
-            Ver publicación
-          </a>
-        </div>
+
+        <button
+          onClick={() => navigate(`/blog/${post.id}?page=${currentPage}`)}
+          rel="noopener noreferrer"
+          className="text-sm font-semibold bg-[var(--color-secondary)] 
+           cursor-pointer text-white p-2 rounded-3xl w-fit"
+        >
+          Ver publicación
+        </button>
       </div>
     </div>
   );
@@ -149,8 +167,16 @@ function Blog() {
           open={showAdminView}
           onClose={() => setShowAdminView(false)}
         >
-          <CreateActivityForm />
+          <CreatePostForm />
         </Modal>
+
+        {/*paginación*/}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          setSearchParams={(params: any) => console.log(params)}
+        />
       </main>
 
       <Footer />

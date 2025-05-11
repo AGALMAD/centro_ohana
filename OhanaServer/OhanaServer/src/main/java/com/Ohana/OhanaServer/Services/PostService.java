@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,8 +23,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final ImageService imageService;
 
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
+    public Page<Post> getAllPost(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 
     public Post getPostById(String id) {
@@ -39,7 +42,7 @@ public class PostService {
 
             String imageUrl = null;
             if (newPost.getImage() != null) {
-                imageUrl = imageService.saveImage(newPost.getImage());
+                imageUrl = imageService.saveImageBlog(newPost.getImage());
             }
 
             Post post = Post.builder()
@@ -49,9 +52,7 @@ public class PostService {
                     .date(newPost.getDate())
                     .build();
 
-            Post savedPost = postRepository.save(post);
-
-            return savedPost;
+            return postRepository.save(post);
 
         } catch (Exception e) {
             log.error("Error al crear el post", e);
@@ -74,13 +75,11 @@ public class PostService {
             if (updatedPost.getText() != null)
                 post.setText(updatedPost.getText());
             if (updatedPost.getImage() != null && !updatedPost.getImage().isEmpty()) {
-                String newImageUrl = imageService.saveImage(updatedPost.getImage());
+                String newImageUrl = imageService.saveImageBlog(updatedPost.getImage());
                 post.setImageUrl(newImageUrl);
             }
 
-            Post updated = postRepository.save(post);
-
-            return updated;
+            return postRepository.save(post);
 
         } catch (Exception e) {
             log.error("Error al actualizar el post", e);

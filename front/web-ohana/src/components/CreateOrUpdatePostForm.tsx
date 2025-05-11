@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import activityService from "../services/activity.service";
-import { CreateActivityRequest } from "../models/create-activity-request";
-import { CreateParagraphRequest } from "../models/create-paragraph-request";
 import Swal from "sweetalert2";
-import { Activity } from "../models/activity";
 import { Post } from "../models/post";
 import { NewPostRequest } from "../models/new-post-request";
 import blogService from "../services/blog.service";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   initialPost?: Post;
@@ -39,25 +36,6 @@ function CreatePostForm({ initialPost }: Props) {
     setFormData({ ...data, [name]: value });
   };
 
-  const handleDateChange = (
-    date: Date | null,
-    field: "startDate" | "endDate"
-  ) => {
-    if (date) {
-      setFormData({
-        ...data,
-        [field]: date.toISOString().split("T")[0], // yyyy-mm-dd format
-      });
-    }
-  };
-
-  const handleTimeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: "startTimeStr" | "endTimeStr"
-  ) => {
-    setFormData({ ...data, [field]: e.target.value });
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFormData({ ...data, image: e.target.files[0] });
@@ -67,6 +45,19 @@ function CreatePostForm({ initialPost }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validación manual si no hay texto
+    if (!data.text.trim()) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "El texto no puede estar vacío.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setLoading(false);
+      return;
+    }
 
     try {
       let response;
@@ -117,14 +108,11 @@ function CreatePostForm({ initialPost }: Props) {
           >
             Título:
           </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={data.title}
-            onChange={handleInputChange}
-            required
-            className="mt-2 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
+          <ReactQuill
+            theme="snow"
+            value={data.text}
+            onChange={(content) => setFormData({ ...data, text: content })}
+            className="mt-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           />
         </div>
 
@@ -136,11 +124,12 @@ function CreatePostForm({ initialPost }: Props) {
             Texto:
           </label>
           <textarea
-            id="description"
-            name="description"
+            id="text"
+            name="text"
             value={data.text}
             onChange={handleInputChange}
             required
+            maxLength={5000}
             className="mt-2 p-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           ></textarea>
         </div>

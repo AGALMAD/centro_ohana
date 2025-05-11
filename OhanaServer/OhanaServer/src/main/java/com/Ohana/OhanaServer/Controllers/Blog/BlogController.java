@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.Ohana.OhanaServer.Models.Post;
 import com.Ohana.OhanaServer.Services.PostService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 
 @RestController
@@ -23,9 +27,13 @@ public class BlogController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
+    public ResponseEntity<Page<Post>> getAllPosts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
 
-        return ResponseEntity.ok(postService.getAllPost());
+        Page<Post> postPage = postService.getAllPost(PageRequest.of(page, size,
+                Sort.by("date").descending()));
+        return ResponseEntity.ok(postPage);
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
@@ -57,7 +65,7 @@ public class BlogController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Post> editActivity(
+    public ResponseEntity<Post> editPost(
             @RequestParam("id") String id,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "text", required = false) String text,

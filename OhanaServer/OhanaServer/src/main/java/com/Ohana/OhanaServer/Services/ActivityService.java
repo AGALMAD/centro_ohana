@@ -46,7 +46,7 @@ public class ActivityService {
 
             String imageUrl = null;
             if (newActivity.getImage() != null) {
-                imageUrl = imageService.saveImage(newActivity.getImage());
+                imageUrl = imageService.saveImageActivities(newActivity.getImage());
             }
 
             Activity activity = Activity.builder()
@@ -111,7 +111,7 @@ public class ActivityService {
                 activity.setPostLink(newData.getPostLink());
 
             if (newData.getImage() != null && !newData.getImage().isEmpty()) {
-                String newImageUrl = imageService.saveImage(newData.getImage());
+                String newImageUrl = imageService.saveImageActivities(newData.getImage());
                 activity.setImageUrl(newImageUrl);
             }
 

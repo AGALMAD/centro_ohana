@@ -30,7 +30,7 @@ public class BlogSeeder implements ApplicationRunner {
 
         List<Post> posts = List.of(
                 createPost("¿Cómo organizar mi lugar de estudio?",
-                        "blog/imagen1.jpg",
+                        "blog/post1.jpg",
                         "\u2028\u2028\uD83D\uDCCDLugar fijo: Estudiar siempre en el mismo lugar, generalmente en nuestro sitio seguro, donde nos sintamos cómodos.\n" +
                                 "\u2028\uFE0F\uD83D\uDCA1Buena iluminación: Tratar de buscar luz natural.\n" +
                                 "\u2028\uD83D\uDCDDMateriales necesarios: Mantener al alcance todos los materiales necesarios para realizar las tareas sin distracciones y sin necesidad de levantarnos.\n" +
@@ -39,7 +39,7 @@ public class BlogSeeder implements ApplicationRunner {
                                 "\u2028\uD83D\uDD07Libre de ruidos: Buscar un espacio silencioso, sin tránsito de personas.\n" +
                                 "\u2028\uD83C\uDF3FIncluir elementos relajantes: Favorecen la concentración y fomenta la atención el establecimiento de elementos relajantes como videos de chimeneas, sonido del mar, etc.\u2028", LocalDate.of(2025,3,24)),
                 createPost("Razones por las que no decir a los niños “si te portas mal no habrá regalos",
-                        "blog/imagen2.jpg",
+                        "blog/post2.jpg",
                         "\uD83C\uDF81 Le estamos mintiendo porque realmente si van a recibir regalos.\n" +
                                 "\uD83C\uDF84Es manipulación porque el adulto quiere conseguir un objetivo jugando con la ilusión del niño.\n" +
                                 "\uD83E\uDDF8 Fomenta el materialismo porque entienden que “portarse bien” implica un premio.\n" +
@@ -47,7 +47,7 @@ public class BlogSeeder implements ApplicationRunner {
                                 "\uD83D\uDD70\uFE0FProvoca un comportamiento temporal porque no se da alternativa a la conducta y su motivación tiene fin el día que reciben los regalos.\n" +
                                 "\uD83D\uDC6FFomenta la comparación porque no todos los niños pueden tener los mismos regalos.", LocalDate.of(2025,4,2)),
                 createPost("Día Nacional del Daño Cerebral Adquirido",
-                        "blog/imagen3.jpg",
+                        "blog/post3.jpg",
                         "\uD83E\uDDE0El Daño Cerebral Adquirido es una lesión repentina en el cerebro. Se caracteriza por su aparición brusca y variada de secuelas que presenta según el área del cerebro lesionada y su gravedad. Estas secuelas provocan anomalías en la percepción y en la comunicación, así como alteraciones físicas, cognitivas y emocionales. La principal causa es el ictus.\n" +
                                 "\n" +
                                 "\uD83D\uDDE3\uFE0F La intervención logopedia es fundamental para las lesiones de comunicación y lenguaje.\n" +
@@ -60,7 +60,7 @@ public class BlogSeeder implements ApplicationRunner {
                                 "\n" +
                                 "❤\uFE0FLa comunicación es un derecho para todos❤\uFE0F", LocalDate.of(2025,4,18)),
                 createPost("4 tips + 1 para cuidar la autoestima de los peques",
-                        "blog/imagen1.jpg",
+                        "blog/post4.jpg",
                         "\uD83E\uDDF0Dar autonomía: es importante que no hagamos aquello que pueden hacer solos. Te darás cuenta que les encanta aprender cosas nuevas y sentirse capaces.\n" +
                                 "\uD83E\uDEC2\uD83D\uDE18No les obligues a dar besos y abrazos. Debemos prestar atención a las decisiones de nuestros peques sobre su propio cuerpo. Esto les ayudará a sentirse respetados.\n" +
                                 "❌No mentirles. Te suena esto: “Cariño ahora volvemos y te subo en el coche” pero en realidad no vuelves, solo lo dices para convencerlo. Esto solo provoca desconfianza para el futuro.\n" +

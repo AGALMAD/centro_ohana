@@ -41,7 +41,7 @@ class ApiService {
     }
   }
 
-  async get<T = void>(
+  async get<T>(
     path: string,
     params: any = {},
     responseType?: string

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
-import activityService from "../services/activity.service";
 import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
 import { Post } from "../models/post";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
+import blogService from "../services/blog.service";
+import { useSearchParams } from "react-router-dom";
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -19,6 +20,9 @@ function BlogPost() {
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  const pageFromQuery = searchParams.get("page");
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -33,11 +37,11 @@ function BlogPost() {
   }, []);
 
   useEffect(() => {
-    const fetchActivity = async () => {
+    const fetchPost = async () => {
       setLoading(true);
       try {
-        const activity = await activityService.getActivity(id!);
-        if (!activity) throw new Error("Publicación no encontrada");
+        const post = await blogService.getPost(id!);
+        if (!post) throw new Error("Publicación no encontrada");
         setPost(post);
       } catch (error) {
         console.error("Error al obtener la publicación:", error);
@@ -45,10 +49,10 @@ function BlogPost() {
         setLoading(false);
       }
     };
-    fetchActivity();
+    fetchPost();
   }, [id]);
 
-  const handleDelete = async (activityId: string) => {
+  const handleDelete = async (postId: string) => {
     const result = await Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción eliminará la publicación permanentemente.",
@@ -62,7 +66,7 @@ function BlogPost() {
 
     if (result.isConfirmed) {
       try {
-        const deletedPost = await activityService.deleteActivity(activityId);
+        const deletedPost = await blogService.deletePost(postId);
         if (!deletedPost) throw new Error("Publicación no encontrada");
 
         Swal.fire({
@@ -91,20 +95,30 @@ function BlogPost() {
 
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
-          <div className="relative  max-w-xl w-full p-6 md:p-10">
+          <div className="relative  max-w-6xl w-full p-6 md:p-10">
+            {/* Fondo decorativo*/}
+            <div
+              className="absolute top-0 left-30 w-full h-82 z-0"
+              style={{
+                backgroundImage: "url('/vector1.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+
             {/* Botones de edición */}
             {userService.currentUser?.role === "ADMIN" && (
-              <div className="absolute top-4 right-4 flex space-x-2">
+              <div className="absolute top-4 right-4 flex space-x-2 z-2">
                 <button
                   onClick={() => setShowAdminView(true)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-blue-600 hover:text-blue-800 cursor-pointer"
                   title="Editar"
                 >
                   <Edit size={20} />
                 </button>
                 <button
                   onClick={() => handleDelete(post.id)}
-                  className="text-red-600 hover:text-red-800"
+                  className="text-red-600 hover:text-red-800 cursor-"
                   title="Eliminar"
                 >
                   <Trash size={20} />
@@ -113,22 +127,37 @@ function BlogPost() {
             )}
 
             {/* Título */}
-            <h1 className="text-center text-xl md:text-2xl font-bold text-[#842029] mb-6 uppercase tracking-wide">
+            <h1
+              className="text-center text-xl md:text-2xl  z-2 relative
+            font-bold text-[#842029] mb-6 tracking-wide"
+            >
               {post.title}
             </h1>
 
             {/* Imagen */}
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-12 relative z-2">
               <img
                 src={BASE_URL + post.imageUrl}
                 alt={post.title}
-                className="rounded-xl shadow-md w-72 h-72 object-cover"
+                className="rounded-xl shadow-md w-115 mt-8 h-72 object-cover"
               />
             </div>
 
             {/* Texto */}
-            <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-8">
+            <p
+              className="whitespace-pre-line text-sm md:text-base 
+            !text-[var(--color-text-dark)] leading-relaxed mb-8"
+            >
               {post.text}
+            </p>
+
+            <p className="text-gray-600">
+              Fecha de publicación: &nbsp;
+              {new Date(post.date).toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </p>
           </div>
         )}
@@ -141,6 +170,14 @@ function BlogPost() {
         >
           <CreatePostForm initialPost={post} />
         </Modal>
+
+        <button
+          onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}
+          className="!text-[var(--color-primary)]"
+        >
+          {" "}
+          ← Volver al blog
+        </button>
       </main>
 
       <Footer />
