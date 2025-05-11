@@ -62,39 +62,41 @@ function Blog() {
   const renderPostCard = (post: Post) => (
     <div
       key={post.id}
-      className="flex items-center gap-6 p-6 max-w-lg mx-auto hover:shadow-lg transition duration-300"
+      className="flex items-center justify-center gap-6 p-6 flex-wrap max-w-6xl mx-auto"
     >
-      {/* Columna de la imagen */}
-      <div className="w-1/3">
+      {/*imagen */}
+      <div className="w-112 md:p-8">
         <img
           src={BASE_URL + post.imageUrl}
           alt={post.title}
-          className="rounded-lg w-full h-auto object-cover"
+          className="rounded-2xl w-full h-64 object-cover"
         />
       </div>
 
-      <div className="w-2/3 flex flex-col justify-between">
+      <div className="max-w-1/2 flex flex-col justify-between">
         {/* Título */}
-        <h4 className="text-xl font-bold text-[var(--color-primary)] uppercase mb-2 text-left">
+        <h4
+          className="cursor-pointer text-xl w-fit font-bold !text-[var(--color-secondary)] mb-2 text-center"
+          onClick={() => navigate(`/blog/${post.id}`)}
+        >
           {post.title}
         </h4>
 
         {/* Texto del post*/}
-        <p className="text-sm text-[var(--color-text-dark)] mb-4 text-left">
-          {post.text.length > 150 ? post.text.slice(0, 150) + "..." : post.text}
+        <p className="text-md mt-2 font-bold text-[var(--color-text-dark)] mb-4 text-left">
+          {post.text.length > 250 ? post.text.slice(0, 250) + "..." : post.text}
         </p>
 
         {/* Botón "Ver publicación" */}
-        <div className="text-left">
-          <a
-            onClick={() => navigate(`/blog/${post.id}`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-semibold text-[var(--color-primary)] hover:underline cursor-pointer"
-          >
-            Ver publicación
-          </a>
-        </div>
+
+        <button
+          onClick={() => navigate(`/blog/${post.id}`)}
+          rel="noopener noreferrer"
+          className="text-sm font-semibold bg-[var(--color-secondary)] 
+           cursor-pointer text-white p-2 rounded-3xl w-fit"
+        >
+          Ver publicación
+        </button>
       </div>
     </div>
   );
