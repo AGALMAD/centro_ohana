@@ -95,20 +95,20 @@ function BlogPost() {
 
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
-          <div className="relative  max-w-xl w-full p-6 md:p-10">
+          <div className="relative  max-w-6xl w-full p-6 md:p-10">
             {/* Botones de edición */}
             {userService.currentUser?.role === "ADMIN" && (
               <div className="absolute top-4 right-4 flex space-x-2">
                 <button
                   onClick={() => setShowAdminView(true)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-blue-600 hover:text-blue-800 cursor-pointer"
                   title="Editar"
                 >
                   <Edit size={20} />
                 </button>
                 <button
                   onClick={() => handleDelete(post.id)}
-                  className="text-red-600 hover:text-red-800"
+                  className="text-red-600 hover:text-red-800 cursor-"
                   title="Eliminar"
                 >
                   <Trash size={20} />
@@ -117,7 +117,10 @@ function BlogPost() {
             )}
 
             {/* Título */}
-            <h1 className="text-center text-xl md:text-2xl font-bold text-[#842029] mb-6 uppercase tracking-wide">
+            <h1
+              className="text-center text-xl md:text-2xl 
+            font-bold text-[#842029] mb-6 tracking-wide"
+            >
               {post.title}
             </h1>
 
@@ -131,8 +134,17 @@ function BlogPost() {
             </div>
 
             {/* Texto */}
-            <p className="text-sm md:text-base text-gray-700 leading-relaxed mb-8">
+            <p className="whitespace-pre-line text-sm md:text-base text-gray-700 leading-relaxed mb-8">
               {post.text}
+            </p>
+
+            <p>
+              Fecha de publicación: &nbsp;
+              {new Date(post.date).toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
             </p>
           </div>
         )}

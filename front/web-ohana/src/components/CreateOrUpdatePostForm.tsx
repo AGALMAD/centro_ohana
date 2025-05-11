@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import activityService from "../services/activity.service";
-import { CreateActivityRequest } from "../models/create-activity-request";
-import { CreateParagraphRequest } from "../models/create-paragraph-request";
 import Swal from "sweetalert2";
-import { Activity } from "../models/activity";
 import { Post } from "../models/post";
 import { NewPostRequest } from "../models/new-post-request";
 import blogService from "../services/blog.service";
@@ -37,25 +32,6 @@ function CreatePostForm({ initialPost }: Props) {
   ) => {
     const { name, value } = e.target;
     setFormData({ ...data, [name]: value });
-  };
-
-  const handleDateChange = (
-    date: Date | null,
-    field: "startDate" | "endDate"
-  ) => {
-    if (date) {
-      setFormData({
-        ...data,
-        [field]: date.toISOString().split("T")[0], // yyyy-mm-dd format
-      });
-    }
-  };
-
-  const handleTimeChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: "startTimeStr" | "endTimeStr"
-  ) => {
-    setFormData({ ...data, [field]: e.target.value });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,11 +112,12 @@ function CreatePostForm({ initialPost }: Props) {
             Texto:
           </label>
           <textarea
-            id="description"
-            name="description"
+            id="text"
+            name="text"
             value={data.text}
             onChange={handleInputChange}
             required
+            maxLength={5000}
             className="mt-2 p-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           ></textarea>
         </div>

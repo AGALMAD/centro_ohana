@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,8 @@ public class BlogController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
 
-        Page<Post> postPage = postService.getAllPost(PageRequest.of(page, size));
+        Page<Post> postPage = postService.getAllPost(PageRequest.of(page, size,
+                Sort.by("date").descending()));
         return ResponseEntity.ok(postPage);
     }
 

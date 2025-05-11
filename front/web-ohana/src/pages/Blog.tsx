@@ -8,6 +8,7 @@ import { Post } from "../models/post";
 import blogService from "../services/blog.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import CreatePostForm from "../components/CreateOrUpdatePostForm";
 
 function Blog() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
@@ -42,7 +43,7 @@ function Blog() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const result = await blogService.getAllPosts(currentPage, 1);
+        const result = await blogService.getAllPosts(currentPage, 5);
         if (result.success) {
           setPosts(result.data.content);
           setTotalPages(result.data.totalPages);
@@ -161,7 +162,7 @@ function Blog() {
           open={showAdminView}
           onClose={() => setShowAdminView(false)}
         >
-          <CreateActivityForm />
+          <CreatePostForm />
         </Modal>
 
         {/*paginación*/}

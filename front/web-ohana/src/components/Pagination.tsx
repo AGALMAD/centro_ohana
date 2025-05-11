@@ -116,11 +116,11 @@ const Pagination = ({
           setSearchParams({ page: (totalPages - 1).toString() });
         }}
         className={`cursor-pointer px-4 py-2 rounded ${
-          currentPage <= totalPages - 1
+          currentPage < totalPages - 1
             ? "bg-[#9a4c52] text-white"
             : "bg-gray-200 text-black"
         }`}
-        disabled={currentPage >= totalPages - 1}
+        disabled={currentPage === totalPages - 1}
       >
         &#62;&#62;
       </button>
