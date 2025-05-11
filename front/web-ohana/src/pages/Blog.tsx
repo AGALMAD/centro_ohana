@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
-import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import Footer from "../components/Footer";
 import { Post } from "../models/post";
 import blogService from "../services/blog.service";
@@ -14,7 +13,7 @@ function Blog() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const initialPage = parseInt(searchParams.get("page") || "0", 5);
 
   const [posts, setPosts] = useState<Post[]>([]);
@@ -45,7 +44,13 @@ function Blog() {
       try {
         const result = await blogService.getAllPosts(currentPage, 5);
         if (result.success) {
-          setPosts(result.data.content);
+          setPosts(
+            result.data.content.sort((a, b) => {
+              const dateA = new Date(a.date);
+              const dateB = new Date(b.date);
+              return dateB.getTime() - dateA.getTime();
+            })
+          );
           setTotalPages(result.data.totalPages);
         } else {
           console.error("Failed to fetch posts:", result.message);

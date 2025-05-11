@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { Post } from "../models/post";
 import { NewPostRequest } from "../models/new-post-request";
 import blogService from "../services/blog.service";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   initialPost?: Post;
@@ -43,6 +45,19 @@ function CreatePostForm({ initialPost }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // Validación manual si no hay texto
+    if (!data.text.trim()) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "El texto no puede estar vacío.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setLoading(false);
+      return;
+    }
 
     try {
       let response;
@@ -93,14 +108,11 @@ function CreatePostForm({ initialPost }: Props) {
           >
             Título:
           </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={data.title}
-            onChange={handleInputChange}
-            required
-            className="mt-2 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
+          <ReactQuill
+            theme="snow"
+            value={data.text}
+            onChange={(content) => setFormData({ ...data, text: content })}
+            className="mt-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           />
         </div>
 

@@ -96,9 +96,19 @@ function BlogPost() {
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
           <div className="relative  max-w-6xl w-full p-6 md:p-10">
+            {/* Fondo decorativo*/}
+            <div
+              className="absolute top-0 left-30 w-full h-82 z-0"
+              style={{
+                backgroundImage: "url('/vector1.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+
             {/* Botones de edición */}
             {userService.currentUser?.role === "ADMIN" && (
-              <div className="absolute top-4 right-4 flex space-x-2">
+              <div className="absolute top-4 right-4 flex space-x-2 z-2">
                 <button
                   onClick={() => setShowAdminView(true)}
                   className="text-blue-600 hover:text-blue-800 cursor-pointer"
@@ -118,27 +128,30 @@ function BlogPost() {
 
             {/* Título */}
             <h1
-              className="text-center text-xl md:text-2xl 
+              className="text-center text-xl md:text-2xl  z-2 relative
             font-bold text-[#842029] mb-6 tracking-wide"
             >
               {post.title}
             </h1>
 
             {/* Imagen */}
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-12 relative z-2">
               <img
                 src={BASE_URL + post.imageUrl}
                 alt={post.title}
-                className="rounded-xl shadow-md w-72 h-72 object-cover"
+                className="rounded-xl shadow-md w-115 mt-8 h-72 object-cover"
               />
             </div>
 
             {/* Texto */}
-            <p className="whitespace-pre-line text-sm md:text-base text-gray-700 leading-relaxed mb-8">
+            <p
+              className="whitespace-pre-line text-sm md:text-base 
+            !text-[var(--color-text-dark)] leading-relaxed mb-8"
+            >
               {post.text}
             </p>
 
-            <p>
+            <p className="text-gray-600">
               Fecha de publicación: &nbsp;
               {new Date(post.date).toLocaleDateString("es-ES", {
                 day: "numeric",
@@ -158,8 +171,12 @@ function BlogPost() {
           <CreatePostForm initialPost={post} />
         </Modal>
 
-        <button onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}>
-          Volver al blog
+        <button
+          onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}
+          className="!text-[var(--color-primary)]"
+        >
+          {" "}
+          ← Volver al blog
         </button>
       </main>
 

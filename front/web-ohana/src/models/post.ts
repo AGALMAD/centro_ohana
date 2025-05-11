@@ -6,7 +6,7 @@ export interface Post {
   date: string;
 }
 
-interface PaginatedPosts {
+export interface PaginatedPosts {
   content: Post[];
   totalPages: number;
 }
