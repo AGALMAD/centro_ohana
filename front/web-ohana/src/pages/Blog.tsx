@@ -3,16 +3,22 @@ import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
-import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Post } from "../models/post";
 import blogService from "../services/blog.service";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 function Blog() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = parseInt(searchParams.get("page") || "0", 5);
+
   const [posts, setPosts] = useState<Post[]>([]);
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
@@ -35,19 +41,23 @@ function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-
       try {
-        const fetchedPosts = await blogService.getAllPosts();
-        setPosts(fetchedPosts);
+        const result = await blogService.getAllPosts(currentPage, 1);
+        if (result.success) {
+          setPosts(result.data.content);
+          setTotalPages(result.data.totalPages);
+        } else {
+          console.error("Failed to fetch posts:", result.message);
+        }
       } catch (error) {
-        console.error("Error fetching activities:", error);
+        console.error("Error fetching posts:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
   function parseCustomDate(dateString: string): Date {
     const [day, month, year] = dateString.split("/").map(Number);
@@ -77,7 +87,7 @@ function Blog() {
         {/* Título */}
         <h4
           className="cursor-pointer text-xl w-fit font-bold !text-[var(--color-secondary)] mb-2 text-center"
-          onClick={() => navigate(`/blog/${post.id}`)}
+          onClick={() => navigate(`/blog/${post.id}?page=${currentPage}`)}
         >
           {post.title}
         </h4>
@@ -90,7 +100,7 @@ function Blog() {
         {/* Botón "Ver publicación" */}
 
         <button
-          onClick={() => navigate(`/blog/${post.id}`)}
+          onClick={() => navigate(`/blog/${post.id}?page=${currentPage}`)}
           rel="noopener noreferrer"
           className="text-sm font-semibold bg-[var(--color-secondary)] 
            cursor-pointer text-white p-2 rounded-3xl w-fit"
@@ -153,6 +163,14 @@ function Blog() {
         >
           <CreateActivityForm />
         </Modal>
+
+        {/*paginación*/}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+          setSearchParams={(params: any) => console.log(params)}
+        />
       </main>
 
       <Footer />

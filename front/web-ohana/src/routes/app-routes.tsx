@@ -22,9 +22,10 @@ function AppRoutes() {
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/services" element={<Services />} />
 
-      <Route path="*" element={<h1>Página no encontrada</h1>} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
+
+      <Route path="*" element={<h1>Página no encontrada</h1>} />
     </Routes>
   );
 }

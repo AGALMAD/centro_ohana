@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
-import activityService from "../services/activity.service";
 import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
 import { Post } from "../models/post";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
+import blogService from "../services/blog.service";
+import { useSearchParams } from "react-router-dom";
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -19,6 +20,9 @@ function BlogPost() {
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  const pageFromQuery = searchParams.get("page");
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -33,11 +37,11 @@ function BlogPost() {
   }, []);
 
   useEffect(() => {
-    const fetchActivity = async () => {
+    const fetchPost = async () => {
       setLoading(true);
       try {
-        const activity = await activityService.getActivity(id!);
-        if (!activity) throw new Error("Publicación no encontrada");
+        const post = await blogService.getPost(id!);
+        if (!post) throw new Error("Publicación no encontrada");
         setPost(post);
       } catch (error) {
         console.error("Error al obtener la publicación:", error);
@@ -45,10 +49,10 @@ function BlogPost() {
         setLoading(false);
       }
     };
-    fetchActivity();
+    fetchPost();
   }, [id]);
 
-  const handleDelete = async (activityId: string) => {
+  const handleDelete = async (postId: string) => {
     const result = await Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción eliminará la publicación permanentemente.",
@@ -62,7 +66,7 @@ function BlogPost() {
 
     if (result.isConfirmed) {
       try {
-        const deletedPost = await activityService.deleteActivity(activityId);
+        const deletedPost = await blogService.deletePost(postId);
         if (!deletedPost) throw new Error("Publicación no encontrada");
 
         Swal.fire({
@@ -141,6 +145,10 @@ function BlogPost() {
         >
           <CreatePostForm initialPost={post} />
         </Modal>
+
+        <button onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}>
+          Volver al blog
+        </button>
       </main>
 
       <Footer />

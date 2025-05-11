@@ -5,3 +5,8 @@ export interface Post {
   text: string;
   date: string;
 }
+
+interface PaginatedPosts {
+  content: Post[];
+  totalPages: number;
+}

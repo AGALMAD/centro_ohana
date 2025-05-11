@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,8 +23,8 @@ public class PostService {
     private final PostRepository postRepository;
     private final ImageService imageService;
 
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
+    public Page<Post> getAllPost(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 
     public Post getPostById(String id) {
