@@ -52,8 +52,7 @@ h4 {
 }
 
 p,
-span,
-a {
+span {
   font-family: var(--font-body);
   font-weight: 400;
 }

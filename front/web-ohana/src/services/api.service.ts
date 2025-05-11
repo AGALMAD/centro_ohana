@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { Result } from "../models/result";
+import { jwtDecode } from "jwt-decode";
 
 class ApiService {
   private readonly TOKEN_KEY = "token";
@@ -99,6 +100,18 @@ class ApiService {
     };
 
     return this.sendRequest<T>(axios.delete(`${this.BASE_URL}${path}`, config));
+  }
+
+  isTokenExpired() {
+    try {
+      if (!this.jwt) return false;
+
+      const decoded = jwtDecode(this.jwt);
+      const now = Date.now() / 1000;
+      return decoded.exp < now;
+    } catch (error) {
+      return true;
+    }
   }
 }
 
