@@ -7,6 +7,8 @@ import ActivityPage from "../pages/Activity";
 import Contact from "../pages/Contact";
 import AboutUs from "../pages/AboutUs";
 import Services from "../pages/Services";
+import Blog from "../pages/Blog";
+import BlogPost from "../pages/Post";
 
 function AppRoutes() {
   return (
@@ -19,6 +21,9 @@ function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/aboutus" element={<AboutUs />} />
       <Route path="/services" element={<Services />} />
+
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<BlogPost />} />
 
       <Route path="*" element={<h1>Página no encontrada</h1>} />
     </Routes>

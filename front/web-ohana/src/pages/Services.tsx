@@ -7,14 +7,14 @@ function Services() {
     <>
       <Navbar />
       <main>
-        <div className="relative max-w-3xl mx-auto px-4 py-16 ">
+        <div className="relative max-w-5xl mx-auto px-4 py-16 ">
           {/* LOGOPEDIA */}
           <section className="space-y-6">
-            <div className="flex flex-col-reverse md:flex-row items-center gap-10">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-15">
               <img
                 src="/services/logopedia.jpg"
                 alt="Logopedia"
-                className="w-full md:w-1/2 rounded-xl shadow-md"
+                className="w-full md:w-1/3 rounded-xl shadow-md"
               />
               <div className="w-full md:w-1/2 space-y-4">
                 <div className="flex items-center gap-4">
@@ -98,7 +98,7 @@ function Services() {
               <img
                 src="/services/psicopedagogia.jpg"
                 alt="Psicopedagogía"
-                className="w-full md:w-1/2 rounded-xl shadow-md"
+                className="w-full md:w-1/3 rounded-xl shadow-md"
               />
             </div>
 
@@ -149,7 +149,7 @@ function Services() {
               <img
                 src="/services/terapia_ocupacional.jpg"
                 alt="Terapia Ocupacional"
-                className="w-full md:w-1/2 rounded-xl shadow-md"
+                className="w-full md:w-1/3 rounded-xl shadow-md"
               />
               <div className="w-full md:w-1/2 space-y-4">
                 <div className="flex items-center gap-4">
@@ -201,11 +201,22 @@ function Services() {
           </section>
 
           {/* Contacto */}
-          <section className="mt-12 text-center bg-[#F8DAD2] p-10 rounded-xl shadow-inner">
-            <h3 className="text-xl font-semibold text-[#A94D56]">
+          <section className="pt-30 text-center relative rounded-xl overflow-hidden">
+            {/**decoracion */}
+            <div
+              className="absolute top-0 left-20 sm:left-80 md:left-120 lg:left-160 
+               w-full h-48 sm:h-56 md:h-64 z-0"
+              style={{
+                backgroundImage: "url('/vector2.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+
+            <h3 className="text-xl font-semibold text-[#A94D56] z-2 relative">
               CONTÁCTANOS
             </h3>
-            <p className="text-md text-[#6e2f36] mt-4">
+            <p className="text-md text-[#6e2f36] mt-4 z-2 relative">
               Si deseas conocer más a fondo nuestros métodos de trabajo y cómo
               podemos ayudarte, estaremos encantadas de atenderte. Puedes
               visitarnos en nuestro centro o escribirnos a través de los canales
@@ -214,7 +225,7 @@ function Services() {
 
             <a
               href="/contact"
-              className="inline-block mt-6 bg-[#A94D56] text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47]"
+              className="inline-block relative z-2 mt-6 bg-[#A94D56] text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47]"
             >
               ¡Hablemos!
             </a>

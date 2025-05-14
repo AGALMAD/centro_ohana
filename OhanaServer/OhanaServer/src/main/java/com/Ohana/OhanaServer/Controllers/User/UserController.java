@@ -1,6 +1,5 @@
 package com.Ohana.OhanaServer.Controllers.User;
 
-import com.Ohana.OhanaServer.Models.User;
 import com.Ohana.OhanaServer.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +17,16 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody NewUserRequest newUser ) {
+    public ResponseEntity<UserDto> createUser(@RequestBody NewUserRequest newUser) {
         return ResponseEntity.ok(userService.register(newUser));
 
     }
-
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
-
 
     @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping
@@ -39,14 +36,12 @@ public class UserController {
         return userDto != null ? ResponseEntity.ok(userDto) : ResponseEntity.notFound().build();
     }
 
-
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping(value = "/me")
     public ResponseEntity<UserDto> getAuthenticatedUser(Principal principal) {
 
         String username = principal.getName();
         UserDto user = userService.getUserByUsername(username);
-
 
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
@@ -57,8 +52,5 @@ public class UserController {
         UserDto userDto = userService.deleteUser(id);
         return userDto != null ? ResponseEntity.ok(userDto) : ResponseEntity.notFound().build();
     }
-
-
-
 
 }

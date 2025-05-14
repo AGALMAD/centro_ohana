@@ -31,4 +31,23 @@ public class ImageController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @GetMapping("/blog/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getImageBlog(@PathVariable String filename) {
+        Path imagePath = Paths.get("src/main/resources/static/blog").resolve(filename);
+        Resource resource = new FileSystemResource(imagePath);
+
+        System.out.println("Trying to load: " + imagePath);
+        if (resource.exists()) {
+            System.out.println("Entra en resources");
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+
+                    .body(resource);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

@@ -17,19 +17,34 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ImageService {
 
-    private final Path root = Paths.get("src/main/resources/static/activities");
+    private final Path rootActivities = Paths.get("src/main/resources/static/activities");
+    private final Path rootBlog = Paths.get("src/main/resources/static/blog");
 
-    public String saveImage(MultipartFile file) throws IOException {
-        Files.createDirectories(root); // crea carpeta si no existe
+
+    public String saveImageActivities(MultipartFile file) throws IOException {
+        Files.createDirectories(rootActivities); // crea carpeta si no existe
 
         // Generar un nombre único para la imagen
         String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path filePath = root.resolve(filename);
+        Path filePath = rootActivities.resolve(filename);
 
         // Copia el archivo en la carpeta
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         return  "activities/" + filename;
+    }
+
+    public String saveImageBlog(MultipartFile file) throws IOException {
+        Files.createDirectories(rootBlog); // crea carpeta si no existe
+
+        // Generar un nombre único para la imagen
+        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+        Path filePath = rootBlog.resolve(filename);
+
+        // Copia el archivo en la carpeta
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return  "blog/" + filename;
     }
 
 }

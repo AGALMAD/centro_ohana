@@ -45,10 +45,8 @@ public class Activity {
     @Column(nullable = false)
     private String postLink;
 
-
     @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Paragraph> paragraphs = new ArrayList<>();
-
 
 }

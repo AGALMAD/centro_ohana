@@ -16,15 +16,16 @@ function Home() {
             className="w-full h-full object-cover"
           />
           <div className="absolute top-15 right-20 flex items-center justify-end m-10">
-            <h1 className="text-center text-[var(--color-primary)] text-4xl font-bold">
+            <h1 className="text-center text-[var(--color-primary)] lg:text-4xl md:text-2xl md:text-lg font-bold">
               CENTRO DE LOGOPEDIA <br /> Y PSICOPEDAGOGÍA
             </h1>
           </div>
         </section>
+
         {/* segunda seccion */}
         <section className="ml-20 mr-20 flex flex-col md:flex-row items-center gap-10 px-8 py-16">
           <img
-            className="w-70 rounded-[30%] border-4 border-[var(--color-terciary))]"
+            className="w-100 rounded-[30%] border-4 border-[var(--color-terciary))]"
             src="https://img.freepik.com/foto-gratis/aula-virtual-espacio-estudio_23-2149178680.jpg?t=st=1744989495~exp=1744993095~hmac=081fdd77ae8f9fc94f79fc650378fc19fdff8021b5073908e420543d7be5ef9f&w=996"
             alt="imagen niño"
           />
@@ -44,18 +45,15 @@ function Home() {
             ️En Centro Ohana contamos con profesionales cualificados y formados
             en diverlexia. ️Diverlexia es un método que facilita el aprendizaje
             y desarrollo de la lectoescritura. Además, somos centro distribuidor
-            de material diverlexia
+            de material diverlexia.
           </p>
         </section>
         <section className="flex justify-end">
-          <img
-            src="https://scontent-mad1-1.xx.fbcdn.net/v/t51.75761-15/468531860_18256549774280703_7568970456997503422_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sibjBzet36UQ7kNvwFbnELZ&_nc_oc=AdmOw6cpqYACpufqGUgu6-UfQPhXtG4ckG9Qvf4apvLmunLori4OFUPCon6Wxo_UklU&_nc_zt=23&_nc_ht=scontent-mad1-1.xx&_nc_gid=eZh8tJmdVvlGVaI5g46SwQ&oh=00_AfHSmViD9xwGSnhjTu2gskgpKWJQXajXmzR_QOaXPdZA2Q&oe=6808309D"
-            alt="collage"
-          />
+          <img src="/home/collage.png" alt="collage" />
         </section>
 
         {/* Servicios */}
-        <section className="px-40 text-center text-xl grid grid-cols-2 grid-rows-4 ">
+        <section className="px-40 relative z-0 -top-20 text-center text-xl grid grid-cols-2 grid-rows-4 ">
           <div className="col-start-2 col-end-3 row-start-1 row-end-3">
             <img
               src="/home/abc.png"
@@ -106,19 +104,46 @@ function Home() {
         </section>
 
         {/* Talleres */}
-        <section className="px-8 py-16 text-center rounded-t-[60px]">
-          <h2 className="text-2xl font-bold mb-4 text-[var(--color-primary)]">
+        <section className=" py-8 text-center rounded-t-[60px] relative -top-60 overflow-hidden">
+          {/**decoracion */}
+          <div
+            className="absolute top-0 left-30 relative
+               w-full h-48 sm:h-56 md:h-64 z-1"
+            style={{
+              backgroundImage: "url('/vector2.png')",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+          <h2 className="text-2xl font-bold mb-4 text-[var(--color-primary)] relative z-2">
             DESCUBRE NUESTRO TALLERES
           </h2>
-          <p className="max-w-xl mx-auto mb-6 text-[var(--color-primary)]">
-            Diseñados para estimular el desarrollo cognitivo, la creatividad y
-            la motivación, nuestros talleres ofrecen un entorno cooperativo y
-            enriquecedor que promueve valores para afrontar el mundo que nos
-            rodea. ¡Ven a descubrirlos!
-          </p>
-          <button className="text-[var(--color-text-dark)] font-semibold px-6 border border-5 border-[var(--color-terciary)] py-2 rounded-xl hover:scale-105 transition">
-            NUESTROS TALLERES
-          </button>
+          <div className="flex items-center w-fit m-auto justify-center gap-x-4 px-4">
+            <div
+              className="max-w-sm mx-auto h-75 mb-6 text-[var(--color-primary)]  relative z-2
+            flex items-center justify-center text-center px-4"
+              style={{
+                backgroundImage: "url('/vector3.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <p className="m-10">
+                Diseñados para estimular el desarrollo cognitivo, la creatividad
+                y la motivación, nuestros talleres ofrecen un entorno
+                cooperativo y enriquecedor que promueve valores para afrontar el
+                mundo que nos rodea. ¡Ven a descubrirlos!
+              </p>
+            </div>
+
+            <button
+              className=" relative z-2 text-[var(--color-text-dark)] 
+            font-semibold px-6 border border-5 border-[var(--color-terciary)] 
+            py-2 rounded-xl hover:scale-105 transition h-fit"
+            >
+              NUESTROS TALLERES
+            </button>
+          </div>
         </section>
       </div>
 

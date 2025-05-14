@@ -38,7 +38,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="#" className={styles.link}>
+            <Link to="/blog" className={styles.link}>
               Blog
             </Link>
           </li>
@@ -46,6 +46,11 @@ export default function Navbar() {
             <Link to="/aboutus" className={styles.link}>
               Conócenos
             </Link>
+          </li>
+          <li>
+            <a href="/contact" className={styles.link}>
+              Contacto
+            </a>
           </li>
         </ul>
 
@@ -79,7 +84,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="#" className={styles.link}>
+            <Link to="/blog" className={styles.link}>
               Blog
             </Link>
           </li>
