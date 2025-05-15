@@ -17,6 +17,8 @@ public class UserSeeder implements ApplicationRunner {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SeedUserProperties properties;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -36,19 +38,14 @@ public class UserSeeder implements ApplicationRunner {
 
         List<User> users = List.of(
                 User.builder()
-                        .username("admin")
-                        .password(passwordEncoder.encode("admin"))
+                        .username(properties.getAdmin1Username())
+                        .password(passwordEncoder.encode(properties.getAdmin1Password()))
                         .role(Role.ADMIN)
                         .build(),
                 User.builder()
-                        .username("editor")
-                        .password(passwordEncoder.encode("editor"))
-                        .role(Role.EDITOR)
-                        .build(),
-                User.builder()
-                        .username("user")
-                        .password(passwordEncoder.encode("user"))
-                        .role(Role.USER)
+                        .username(properties.getAdmin2Username())
+                        .password(passwordEncoder.encode(properties.getAdmin2Password()))
+                        .role(Role.ADMIN)
                         .build()
         );
 
