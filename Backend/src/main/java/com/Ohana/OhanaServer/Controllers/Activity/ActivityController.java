@@ -22,13 +22,11 @@ public class ActivityController {
 
     private final ActivityService activityService;
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List<ActivityReponse>> getAllActivities() {
         return ResponseEntity.ok(activityService.getAllActivities());
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/{id}")
     public ResponseEntity<ActivityReponse> getActivityById(@PathVariable String id) {
         ActivityReponse activity = activityService.getActivityById(id);
@@ -36,7 +34,6 @@ public class ActivityController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ActivityReponse> createActivity(
             @RequestParam("title") String title,
@@ -79,7 +76,6 @@ public class ActivityController {
         return createdActivity != null ? ResponseEntity.ok(createdActivity) : ResponseEntity.badRequest().build();
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ActivityReponse> editActivity(
             @RequestParam("id") String id,
@@ -133,7 +129,6 @@ public class ActivityController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/{id}")
     public ResponseEntity<ActivityReponse> deleteUser(@PathVariable String id) {
         ActivityReponse activity = activityService.deleteById(id);
