@@ -25,7 +25,6 @@ public class BlogController {
 
     private final PostService postService;
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<Page<Post>> getAllPosts(
             @RequestParam(defaultValue = "0") int page,
@@ -36,7 +35,6 @@ public class BlogController {
         return ResponseEntity.ok(postPage);
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable String id) {
         Post post = postService.getPostById(id);
@@ -44,7 +42,6 @@ public class BlogController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Post> newPost(
             @RequestParam("title") String title,
@@ -63,7 +60,6 @@ public class BlogController {
         return createdPost != null ? ResponseEntity.ok(createdPost) : ResponseEntity.badRequest().build();
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Post> editPost(
             @RequestParam("id") String id,
@@ -94,7 +90,6 @@ public class BlogController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/{id}")
     public ResponseEntity<Post> deletePost(@PathVariable String id) {
         Post post = postService.deleteById(id);
