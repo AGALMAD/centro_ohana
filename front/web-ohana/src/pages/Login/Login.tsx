@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./Login.css";
 import { AuthRequest } from "../../models/auth-request";
@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
 
 function Login() {
+  /* 
   const FORM_TYPES = {
-    LOGIN: "login",
+  LOGIN: "login",
     SIGNUP: "signup",
-  };
+  };*/
 
   const navigate = useNavigate();
 

@@ -48,9 +48,9 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <a href="/contact" className={styles.link}>
-              Contacto
-            </a>
+            <Link to="/contact" className={styles.link}>
+              Conócenos
+            </Link>
           </li>
         </ul>
 

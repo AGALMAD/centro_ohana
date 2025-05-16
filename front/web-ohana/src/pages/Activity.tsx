@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
@@ -17,6 +17,7 @@ function ActivityPage() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [activity, setActivity] = useState<Activity | null>(null);
+  // @ts-ignore
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
