@@ -48,7 +48,7 @@ public class SecurityConfig {
                                         .hasAnyRole(Role.ADMIN.toString(), Role.EDITOR.toString())
                                         .requestMatchers("/api/blog")
                                         .hasAnyRole(Role.ADMIN.toString(), Role.EDITOR.toString())
-
+                                        .requestMatchers("/status").permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
