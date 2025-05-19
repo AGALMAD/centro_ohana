@@ -17,6 +17,7 @@ function BlogPost() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [post, setPost] = useState<Post | null>(null);
+  // @ts-ignore
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);

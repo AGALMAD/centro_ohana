@@ -16,14 +16,17 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/users-admin" element={<UsersAdmin />} />
-      <Route path="/activities" element={<Activities />} />
-      <Route path="/activity/:id" element={<ActivityPage />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/aboutus" element={<AboutUs />} />
-      <Route path="/services" element={<Services />} />
+      <Route path="/talleres" element={<Activities />} />
+      <Route path="/talleres/:id" element={<ActivityPage />} />
+      <Route path="/contacto" element={<Contact />} />
+      <Route path="/conocenos" element={<AboutUs />} />
+      <Route path="/servicios" element={<Services />} />
 
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
+
+      <Route path="/aviso-legal" element={<h1>Aviso legal</h1>} />
+      <Route path="/privacidad" element={<h1>Politica privacidad</h1>} />
 
       <Route path="*" element={<h1>Página no encontrada</h1>} />
     </Routes>
