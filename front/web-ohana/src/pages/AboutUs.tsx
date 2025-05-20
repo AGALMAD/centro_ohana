@@ -8,7 +8,7 @@ function AboutUs() {
       <Navbar />
 
       <main>
-        <div className="max-w-5xl mx-auto px-4 py-10">
+        <div className="max-w-5xl mx-auto px-4 py-16 ">
           {/* Título e introducción */}
           <div className="text-center mb-20 flex flex-col items-center justify-center">
             <h1 className="uppercase tracking-widest mb-4">Conócenos</h1>
