@@ -1,4 +1,5 @@
 export class Result<T = void> {
+  // @ts-ignore
   message(arg0: string, message: any) {
     throw new Error("Method not implemented.");
   }

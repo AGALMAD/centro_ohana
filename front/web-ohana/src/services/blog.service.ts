@@ -39,6 +39,7 @@ class BlogService {
     return response.data;
   }
 
+  // @ts-ignore
   async updatePost(id: string, post: NewPostRequest) {
     var formData = new FormData();
 

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import userService from "../services/user.service";
+import { UserResponse } from "../models/user-response";
 
 const styles = {
   link: "block py-2 px-2 text-[var(--color-secondary)] text-xl font-bold transition-transform duration-300 hover:scale-110",
@@ -9,6 +11,18 @@ const styles = {
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  var authenticatedUser: UserResponse;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      authenticatedUser = await userService.getAuthenticatedUser();
+      userService.currentUser = authenticatedUser;
+    };
+    fetchUser();
+  }, []);
+
+  const isAdmin = authenticatedUser?.role === "ADMIN";
 
   return (
     <nav
@@ -28,12 +42,12 @@ export default function Navbar() {
         {/* MENÚ centrado en escritorio */}
         <ul className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6">
           <li>
-            <Link to="/services" className={styles.link}>
+            <Link to="/servicios" className={styles.link}>
               Servicios
             </Link>
           </li>
           <li>
-            <Link to="/activities" className={styles.link}>
+            <Link to="/talleres" className={styles.link}>
               Talleres
             </Link>
           </li>
@@ -43,15 +57,23 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/aboutus" className={styles.link}>
+            <Link to="/conocenos" className={styles.link}>
               Conócenos
             </Link>
           </li>
           <li>
-            <a href="/contact" className={styles.link}>
+            <Link to="/contacto" className={styles.link}>
               Contacto
-            </a>
+            </Link>
           </li>
+          {isAdmin ||
+            (authenticatedUser && (
+              <li>
+                <Link to="/users-admin" className={styles.link}>
+                  Administración
+                </Link>
+              </li>
+            ))}
         </ul>
 
         {/* MENÚ hamburguesa en móvil */}
@@ -74,12 +96,12 @@ export default function Navbar() {
       >
         <ul className="flex flex-col text-center space-y-3 mt-4 px-4">
           <li>
-            <Link to="/services" className={styles.link}>
+            <Link to="/servicios" className={styles.link}>
               Servicios
             </Link>
           </li>
           <li>
-            <Link to="/activities" className={styles.link}>
+            <Link to="/talleres" className={styles.link}>
               Talleres
             </Link>
           </li>
@@ -89,10 +111,23 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/aboutus" className={styles.link}>
+            <Link to="/conocenos" className={styles.link}>
               Conócenos
             </Link>
           </li>
+          <li>
+            <Link to="/contacto" className={styles.link}>
+              Contacto
+            </Link>
+          </li>
+          {isAdmin ||
+            (authenticatedUser && (
+              <li>
+                <Link to="/users-admin" className={styles.link}>
+                  Administración
+                </Link>
+              </li>
+            ))}
         </ul>
       </div>
     </nav>
