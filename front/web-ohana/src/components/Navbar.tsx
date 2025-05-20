@@ -57,6 +57,11 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
+            <Link to="/galeria" className={styles.link}>
+              Galería
+            </Link>
+          </li>
+          <li>
             <Link to="/conocenos" className={styles.link}>
               Conócenos
             </Link>
@@ -108,6 +113,11 @@ export default function Navbar() {
           <li>
             <Link to="/blog" className={styles.link}>
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/galeria" className={styles.link}>
+              Galería
             </Link>
           </li>
           <li>

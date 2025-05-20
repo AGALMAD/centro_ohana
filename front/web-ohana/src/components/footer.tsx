@@ -39,7 +39,7 @@ export default function Footer() {
         </svg>
       </div>
 
-      <div className="text-[var(--color-secondary)]">
+      <div className="bg-white text-[var(--color-secondary)]">
         <div className="max-w-6xl justify-items-center items-center mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Columna 1: info */}
           <div>

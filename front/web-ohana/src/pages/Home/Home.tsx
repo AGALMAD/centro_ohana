@@ -7,7 +7,7 @@ function Home() {
     <>
       <Navbar />
 
-      <div className="h-full bg-[var(--color-bg)] relative">
+      <div className="h-full max-w-screen-xl m-auto bg-[var(--color-bg)] relative">
         {/*imagen y titulo*/}
         <section className="flex">
           {/* Imagen  */}
