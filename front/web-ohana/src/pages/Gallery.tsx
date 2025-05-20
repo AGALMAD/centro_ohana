@@ -18,7 +18,6 @@ export default function Gallery() {
       height: photo.height,
       alt: photo.alt,
       caption: photo.caption,
-      disabled: photo.disabled,
     }));
 
   return (
@@ -68,7 +67,7 @@ export default function Gallery() {
                   zIndex: 1000,
                 }}
               >
-                {images[index].src}
+                {/* para poner un texto arriba */}
               </div>
             ),
           }}

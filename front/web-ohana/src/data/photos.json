@@ -2,803 +2,779 @@
   "photos": [
     {
       "src": "/gallery/image01.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image02.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image03.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image04.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image05.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image06.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image07.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image08.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image09.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image10.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image11.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image12.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image13.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image14.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image15.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image16.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image17.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image18.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image19.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image20.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image21.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image22.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image23.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image24.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image25.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image26.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image27.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image28.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image29.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image30.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image31.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image32.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image33.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image34.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image35.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image36.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image37.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image38.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image39.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image40.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image41.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image42.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image43.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image44.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": true
     },
     {
       "src": "/gallery/image45.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image46.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image47.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image48.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image49.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image50.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image51.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image52.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image53.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": true
     },
     {
       "src": "/gallery/image54.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image55.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image56.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image57.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image58.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image59.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": true
     },
     {
       "src": "/gallery/image60.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image61.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image62.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image63.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image64.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image65.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image66.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image67.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image68.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": true
     },
     {
       "src": "/gallery/image69.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image70.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image71.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image72.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image73.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image74.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image75.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image76.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image77.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image78.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image79.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image80.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image81.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": true
     },
     {
       "src": "/gallery/image82.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image83.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image84.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image85.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image86.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image87.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image88.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image89.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image90.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image91.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image92.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image93.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
-      "disabled": false
+      "disabled": true
     },
     {
       "src": "/gallery/image94.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image95.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1000,
       "height": 1500,
       "disabled": false
     },
     {
       "src": "/gallery/image96.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
       "disabled": false
     },
     {
       "src": "/gallery/image97.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
+      "alt": "Centro ohana",
+      "caption": "Centro ohana",
       "width": 1500,
       "height": 1000,
-      "disabled": false
-    },
-    {
-      "src": "/gallery/image98.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
-      "width": 1000,
-      "height": 1500,
-      "disabled": false
-    },
-    {
-      "src": "/gallery/image99.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
-      "width": 1500,
-      "height": 1000,
-      "disabled": false
-    },
-    {
-      "src": "/gallery/image100.webp",
-      "alt": "Centro web ohana",
-      "caption": "Centro web ohana",
-      "width": 1500,
-      "height": 1000,
-      "disabled": false
+      "disabled": true
     }
   ]
 }
