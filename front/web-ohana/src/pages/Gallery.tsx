@@ -10,12 +10,16 @@ import Footer from "../components/Footer";
 export default function Gallery() {
   const [index, setIndex] = useState<number>(-1);
 
-  const images = photos.photos.map((photo) => ({
-    src: photo.src,
-    width: photo.width,
-    height: photo.height,
-    alt: photo.alt,
-  }));
+  const images = photos.photos
+    .filter((photo) => !photo.disabled)
+    .map((photo) => ({
+      src: photo.src,
+      width: photo.width,
+      height: photo.height,
+      alt: photo.alt,
+      caption: photo.caption,
+      disabled: photo.disabled,
+    }));
 
   return (
     <>
@@ -28,7 +32,7 @@ export default function Gallery() {
           GALERIA
         </h1>
 
-        <div className="gallery-grid">
+        <div className="gallery">
           {images.map((img, i) => (
             <img
               key={i}
@@ -49,6 +53,24 @@ export default function Gallery() {
           controller={{ closeOnBackdropClick: true }}
           on={{
             view: ({ index: currentIndex }) => setIndex(currentIndex),
+          }}
+          render={{
+            slideHeader: ({ slide }) => (
+              <div
+                style={{
+                  padding: "10px",
+                  color: "white",
+                  background: "rgba(0,0,0,0.5)",
+                  position: "absolute",
+                  top: 0,
+                  width: "100%",
+                  textAlign: "center",
+                  zIndex: 1000,
+                }}
+              >
+                {images[index].src}
+              </div>
+            ),
           }}
         />
       </div>

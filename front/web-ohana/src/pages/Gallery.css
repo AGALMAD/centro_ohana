@@ -1,4 +1,4 @@
-.gallery-grid {
+.gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -7,7 +7,7 @@
 }
 
 .gallery-item {
-  height: 200px;
+  height: 250px;
   flex-grow: 1;
   border-radius: 8px;
   cursor: pointer;
