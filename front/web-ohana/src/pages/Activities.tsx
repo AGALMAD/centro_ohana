@@ -15,14 +15,14 @@ function Activities() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [showAdminView, setShowAdminView] = useState(false);
+  const [getActivities, setGetActivities] = useState(true);
 
-  console.log("User", userService.currentUser);
+  const [showAdminView, setShowAdminView] = useState(false);
 
   // Recoge el usuario autenticado al cargar la página
   // y lo almacena en el servicio de usuario
   useEffect(() => {
-    const checkUserRole = async () => {
+    const getAuthenticatedUser = async () => {
       try {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
@@ -31,13 +31,11 @@ function Activities() {
       }
     };
 
-    checkUserRole();
+    getAuthenticatedUser();
   }, []);
 
   useEffect(() => {
     const fetchActivities = async () => {
-      setLoading(true);
-
       try {
         const fetchedActivities = await activityService.getActivities();
         setActivities(fetchedActivities);

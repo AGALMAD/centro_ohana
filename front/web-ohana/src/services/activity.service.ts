@@ -1,10 +1,17 @@
+import { g } from "framer-motion/client";
 import { Activity } from "../models/activity";
 import { CreateActivityRequest } from "../models/create-activity-request";
 import apiService from "./api.service";
 
 class ActivityService {
+  public activities: Activity[] = [];
+
+  constructor() {}
+
   async getActivities() {
     const response = await apiService.get<Activity[]>("/activity");
+    console.log("Activities Response", response);
+
     if (!response.success) {
       throw new Error("Failed to fetch activities");
     }

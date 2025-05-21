@@ -34,6 +34,14 @@ class UserService {
   }
 
   public async getAuthenticatedUser(): Promise<UserResponse> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
+    if (this.currentUser) {
+      return this.currentUser;
+    }
+
     const response = await apiService.get<UserResponse>("/users/me", {});
 
     if (!response.success) {
