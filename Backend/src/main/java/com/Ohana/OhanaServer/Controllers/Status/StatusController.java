@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class StatusController {
 
-    @CrossOrigin(origins = "https://dashboard.uptimerobot.com/monitors/800548648")
+    @CrossOrigin(origins = "https://dashboard.uptimerobot.com/monitors/800571396")
     @GetMapping
     public ResponseEntity<Void> checkStatus(){
         return ResponseEntity.ok().build();
