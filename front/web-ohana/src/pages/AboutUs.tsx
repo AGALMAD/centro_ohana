@@ -1,12 +1,8 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Workers from "../data/workers.json";
 
 function AboutUs() {
   return (
     <>
-      <Navbar />
-
       <main>
         <div className="max-w-5xl mx-auto px-4 py-16 ">
           {/* Título e introducción */}
@@ -63,8 +59,6 @@ function AboutUs() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

@@ -1,10 +1,6 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 function Services() {
   return (
     <>
-      <Navbar />
       <main>
         <div className="relative max-w-5xl mx-auto px-4 py-16 ">
           <h1 className="text-center text-4xl font-title text-[#9a4c52] mb-10 pb-2">
@@ -235,7 +231,6 @@ function Services() {
           </section>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

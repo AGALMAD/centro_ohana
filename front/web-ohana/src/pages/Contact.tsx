@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import Mail from "../assets/mail_icon.svg";
 import Phone from "../assets/phone_icon.svg";
 import Location from "../assets/location_icon.svg";
-import Footer from "../components/Footer";
 
 function Contact() {
   const [message, setMessage] = useState<string>("");
@@ -19,8 +17,6 @@ function Contact() {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen bg-[--color-bg] text-[--color-text-dark] font-[--font-body] p-4">
         <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
           {/* Columna Información */}
@@ -106,7 +102,6 @@ function Contact() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
