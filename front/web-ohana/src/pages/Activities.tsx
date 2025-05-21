@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { Activity } from "../models/activity";
 import activityService from "../services/activity.service";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 
 function Activities() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
@@ -113,8 +111,6 @@ function Activities() {
 
   return (
     <>
-      <Navbar />
-
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
         <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
           NUESTROS TALLERES
@@ -184,8 +180,6 @@ function Activities() {
           <CreateActivityForm />
         </Modal>
       </main>
-
-      <Footer />
     </>
   );
 }

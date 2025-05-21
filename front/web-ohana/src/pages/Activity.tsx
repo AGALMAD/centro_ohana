@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
 import { Activity } from "../models/activity";
 import activityService from "../services/activity.service";
-import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
@@ -91,8 +89,6 @@ function ActivityPage() {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {activity && (
           <div className="relative  max-w-xl w-full p-6 md:p-10">
@@ -197,8 +193,6 @@ function ActivityPage() {
           <CreateActivityForm initialActivity={activity} />
         </Modal>
       </main>
-
-      <Footer />
     </>
   );
 }

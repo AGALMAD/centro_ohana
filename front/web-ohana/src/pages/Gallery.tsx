@@ -4,8 +4,6 @@ import "yet-another-react-lightbox/styles.css";
 import "./Gallery.css";
 
 import photos from "../data/photos.json";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export default function Gallery() {
   const [index, setIndex] = useState<number>(-1);
@@ -22,7 +20,6 @@ export default function Gallery() {
 
   return (
     <>
-      <Navbar></Navbar>
       <div
         style={{ maxWidth: "1000px", margin: "0 auto" }}
         className=" px-4 py-16 "
@@ -54,7 +51,7 @@ export default function Gallery() {
             view: ({ index: currentIndex }) => setIndex(currentIndex),
           }}
           render={{
-            slideHeader: ({ slide }) => (
+            slideHeader: ({}) => (
               <div
                 style={{
                   padding: "10px",
@@ -68,12 +65,12 @@ export default function Gallery() {
                 }}
               >
                 {/* para poner un texto arriba */}
+                {images[index].src}
               </div>
             ),
           }}
         />
       </div>
-      <Footer></Footer>
     </>
   );
 }

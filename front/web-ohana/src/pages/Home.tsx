@@ -1,28 +1,24 @@
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import { motion } from "framer-motion";
 
 function Home() {
   return (
     <>
-      <Navbar />
-
-      <div className="h-full max-w-screen-xl m-auto bg-[var(--color-bg)] relative">
+      <div className="h-full max-w-screen-xl m-auto relative -mb-20 md:-mb-60">
         {/*imagen y titulo*/}
         <section className="flex">
           {/* Imagen  */}
           <img
             src="/home/home-top.png"
             alt="Imagen"
-            className="w-full max-sm:mt-20 h-full object-cover"
+            className="w-full max-sm:mt-30 h-full object-cover"
           />
           <div
-            className="absolute  max-sm:top-0 max-sm:right-0  
+            className="absolute max-sm:top-0 max-sm:right-3 max-sm:justify-center 
           top-15 right-20 flex items-center justify-end m-10"
           >
             <h1
               className="text-center text-[var(--color-primary)] 
-            lg:text-4xl text-lg! md:text-lg font-bold"
+            lg:text-4xl text-2xl! md:text-lg font-bold"
             >
               CENTRO DE LOGOPEDIA <br /> Y PSICOPEDAGOGÍA
             </h1>
@@ -36,8 +32,8 @@ function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-100 rounded-[30%] border-4 border-[var(--color-terciary))]"
-            src="https://img.freepik.com/foto-gratis/aula-virtual-espacio-estudio_23-2149178680.jpg?t=st=1744989495~exp=1744993095~hmac=081fdd77ae8f9fc94f79fc650378fc19fdff8021b5073908e420543d7be5ef9f&w=996"
+            className="w-120 h-50 object-bottom object-cover rounded-[30%] border-4 border-[var(--color-terciary))]"
+            src="/gallery/image20.webp"
             alt="imagen niño"
           />
           <motion.p
@@ -221,15 +217,13 @@ function Home() {
               viewport={{ once: true }}
               className=" relative z-2 text-[var(--color-text-dark)] 
             font-semibold px-6 border border-5 border-[var(--color-terciary)] 
-            py-2 rounded-xl hover:scale-105 transition h-fit"
+            py-2 rounded-xl hover:scale-105 transition h-fit cursor-pointer"
             >
               NUESTROS TALLERES
             </motion.button>
           </div>
         </section>
       </div>
-
-      <Footer></Footer>
     </>
   );
 }

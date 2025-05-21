@@ -29,7 +29,7 @@ export default function Footer() {
             className="transition-all duration-300 ease-in-out delay-150"
           />
           <path
-            d="M 0 492 L 0 291 C 84.7461 278.3707 169.4923 265.7413 243 255 C 316.5077 244.2587 378.7771 235.4054 435 247 C 491.2229 258.5946 541.3995 290.6372 617 301 C 692.6005 311.3628 793.6249 300.0457 859 311 C 924.3751 321.9543 954.101 355.18 1020 342 C 1085.899 328.82 1187.9711 269.2343 1264 253 C 1340.0289 236.7657 1390.0144 263.8829 1440 291 L 1440 492 Z"
+            d="M 0 500 L 0 291 C 84.7461 278.3707 169.4923 265.7413 243 255 C 316.5077 244.2587 378.7771 235.4054 435 247 C 491.2229 258.5946 541.3995 290.6372 617 301 C 692.6005 311.3628 793.6249 300.0457 859 311 C 924.3751 321.9543 954.101 355.18 1020 342 C 1085.899 328.82 1187.9711 269.2343 1264 253 C 1340.0289 236.7657 1390.0144 263.8829 1440 291 L 1440 500 Z"
             stroke="none"
             strokeWidth="0"
             fill="white"
@@ -39,11 +39,11 @@ export default function Footer() {
         </svg>
       </div>
 
-      <div className="bg-white text-[var(--color-secondary)]">
+      <div className="w-full bg-white -top-1 relative text-[var(--color-secondary)]">
         <div className="max-w-6xl justify-items-center items-center mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Columna 1: info */}
           <div>
-            <img className="mb-8 w-42 m-auto" src={LOGOLetras} />
+            <img className="mb-8 mt-2 w-42 m-auto" src={LOGOLetras} />
             <p className="mb-1">
               📍 C/ Pintor Cipriano Maldonado,
               <br /> 7, bajo C, Torre del Mar, España

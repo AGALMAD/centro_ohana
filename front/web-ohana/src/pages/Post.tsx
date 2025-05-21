@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
-import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
@@ -92,8 +90,6 @@ function BlogPost() {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
           <div className="relative  max-w-6xl w-full p-6 md:p-10">
@@ -180,8 +176,6 @@ function BlogPost() {
           ← Volver al blog
         </button>
       </main>
-
-      <Footer />
     </>
   );
 }
