@@ -13,8 +13,6 @@ function Activities() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [getActivities, setGetActivities] = useState(true);
-
   const [showAdminView, setShowAdminView] = useState(false);
 
   // Recoge el usuario autenticado al cargar la página

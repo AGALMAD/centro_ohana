@@ -12,16 +12,18 @@ const styles = {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  var authenticatedUser: UserResponse;
+  const [authenticatedUser, setAuthenticatedUser] =
+    useState<UserResponse | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        authenticatedUser = await userService.getAuthenticatedUser();
-        if (!authenticatedUser) {
+        const userResponse = await userService.getAuthenticatedUser();
+        if (!userResponse) {
           return;
         }
 
+        setAuthenticatedUser(userResponse);
         userService.currentUser = authenticatedUser;
       } catch (error) {}
     };
@@ -77,14 +79,13 @@ export default function Navbar() {
               Contacto
             </Link>
           </li>
-          {isAdmin ||
-            (authenticatedUser && (
-              <li>
-                <Link to="/users-admin" className={styles.link}>
-                  Administración
-                </Link>
-              </li>
-            ))}
+          {isAdmin && (
+            <li>
+              <Link to="/users-admin" className={styles.link}>
+                Administración
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* MENÚ hamburguesa en móvil */}

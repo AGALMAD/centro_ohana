@@ -9,7 +9,7 @@ class UserService {
   constructor() {}
 
   public async createUser(request: NewUserRequest): Promise<UserResponse> {
-    const response = await apiService.post<UserResponse>("users", {
+    const response = await apiService.post<UserResponse>("/users", {
       username: request.username,
       password: request.password,
     });
