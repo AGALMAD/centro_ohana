@@ -17,12 +17,12 @@ function Contact() {
 
   return (
     <>
-      <main className="min-h-screen bg-[--color-bg] text-[--color-text-dark] font-[--font-body] p-4">
+      <main className="min-h-screen bg-[--color-bg] text-[--color-text-dark] font-[--font-body] p-4 mt-15">
         <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
           {/* Columna Información */}
           <div className="flex-1 p-6 ">
             <h2 className="text-2xl font-[--font-title] text-[--color-primary] text-center mb-4">
-              Contacta con nosotros
+              Contacta con nosotras
             </h2>
 
             <div className="flex items-start gap-4 mb-6">
@@ -46,7 +46,23 @@ function Contact() {
                 className="w-8 h-8 mt-1 opacity-80"
               />
               <p>
-                Llámanos o pide cita al: <b>690 64 31 96 / 647 49 46 81</b>
+                Llámanos o pide cita al:{" "}
+                <b>
+                  {" "}
+                  <a
+                    href="tel:+34690643196"
+                    className="text-[--color-secondary] font-bold underline-offset-2 hover:underline hover:text-[--color-primary] transition-colors duration-200"
+                  >
+                    690 64 31 96
+                  </a>{" "}
+                  /{" "}
+                  <a
+                    href="tel:+34647494681"
+                    className="text-[--color-secondary] font-bold underline-offset-2 hover:underline hover:text-[--color-primary] transition-colors duration-200"
+                  >
+                    647 49 46 81
+                  </a>
+                </b>
               </p>
             </div>
 
@@ -79,13 +95,14 @@ function Contact() {
 
           {/* Columna Formulario */}
           <div className="flex-1 p-6 bg-[#f3e5dc] rounded-xl shadow-xl">
-            <h2 className="text-2xl font-[--font-title] text-[#6A0572] text-center mb-4">
+            <h2 className="text-2xl font-[--font-title] text-[#6A0572] text-center mb-10">
               ¿Tienes alguna duda?
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <textarea
-                className="border-3 border-[#6A0572] rounded-md p-3 resize-none min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[--color-secondary]"
+                className="border-3 border-[#6A0572] rounded-md p-3 resize-none min-h-[150px] 
+                focus:outline-none focus:ring-2 focus:ring-[--color-secondary]"
                 placeholder="Escribe tu mensaje aquí..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -94,9 +111,15 @@ function Contact() {
 
               <button
                 type="submit"
-                className="mt-4 w-full py-2 bg-[#9a4c52] text-white text-lg font-semibold rounded-lg hover:bg-[#7f3d44] focus:outline-none focus:ring-2 focus:ring-[#9a4c52] transition duration-300"
+                className="mt-4 cursor-pointer w-full py-2 bg-[#9a4c52] text-white text-lg font-semibold rounded-lg hover:bg-[#7f3d44] focus:outline-none focus:ring-2 focus:ring-[#9a4c52] transition duration-300"
               >
-                Enviar
+                Enviar{" "}
+                <img
+                  src="whatsapp.webp"
+                  className="inline"
+                  width="25px"
+                  alt="icono de whatsapp"
+                />
               </button>
             </form>
           </div>

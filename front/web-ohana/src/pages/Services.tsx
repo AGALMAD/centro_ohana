@@ -203,8 +203,8 @@ function Services() {
           <section className="pt-30 text-center relative rounded-xl overflow-hidden">
             {/**decoracion */}
             <div
-              className="absolute top-0 left-20 sm:left-80 md:left-120 lg:left-160 
-               w-full h-48 sm:h-56 md:h-64 z-0"
+              className="absolute top-0 left-0 sm:left-100 md:left-120 lg:left-180 
+               w-full h-40 sm:h-56 md:h-64 z-0"
               style={{
                 backgroundImage: "url('/vector2.png')",
                 backgroundSize: "contain",
@@ -215,7 +215,7 @@ function Services() {
             <h3 className="text-xl font-semibold text-[#A94D56] z-2 relative">
               CONTÁCTANOS
             </h3>
-            <p className="text-md text-[#6e2f36] mt-4 z-2 relative">
+            <p className="text-lg text-[#6e2f36]  mt-4 z-2 relative">
               Si deseas conocer más a fondo nuestros métodos de trabajo y cómo
               podemos ayudarte, estaremos encantadas de atenderte. Puedes
               visitarnos en nuestro centro o escribirnos a través de los canales
@@ -224,7 +224,8 @@ function Services() {
 
             <a
               href="/contact"
-              className="inline-block relative z-2 mt-6 bg-[#A94D56] text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47]"
+              className="inline-block text-xl relative z-2 mt-6 bg-[#A94D56] 
+              text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47]"
             >
               ¡Hablemos!
             </a>
