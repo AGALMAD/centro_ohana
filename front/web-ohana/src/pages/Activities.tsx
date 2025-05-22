@@ -15,27 +15,21 @@ function Activities() {
 
   const [showAdminView, setShowAdminView] = useState(false);
 
-  console.log("User", userService.currentUser);
-
   // Recoge el usuario autenticado al cargar la página
   // y lo almacena en el servicio de usuario
   useEffect(() => {
-    const checkUserRole = async () => {
+    const getAuthenticatedUser = async () => {
       try {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
-      } catch (error) {
-        console.error("Sin usuario autenticado");
-      }
+      } catch (error) {}
     };
 
-    checkUserRole();
+    getAuthenticatedUser();
   }, []);
 
   useEffect(() => {
     const fetchActivities = async () => {
-      setLoading(true);
-
       try {
         const fetchedActivities = await activityService.getActivities();
         setActivities(fetchedActivities);
@@ -98,7 +92,7 @@ function Activities() {
         </p>
 
         <a
-          onClick={() => navigate(`/activity/${activity.id}`)}
+          onClick={() => navigate(`/taller/${activity.id}`)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm font-semibold text-[var(--color-primary)] hover:underline text-center cursor-pointer"
@@ -129,7 +123,7 @@ function Activities() {
           <div className="w-full max-w-7xl">
             {upcomingActivities.length > 0 && (
               <>
-                <h2 className="text-2xl font-semibold text-[#9a4c52] mb-4">
+                <h2 className="text-2xl font-semibold text-[#9a4c52] py-8">
                   Próximos talleres
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
@@ -140,7 +134,7 @@ function Activities() {
 
             {pastActivities.length > 0 && (
               <>
-                <h2 className="text-2xl font-semibold text-[#9a4c52] mt-8 mb-4">
+                <h2 className="text-2xl font-semibold text-[#9a4c52] py-8">
                   Talleres pasados
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

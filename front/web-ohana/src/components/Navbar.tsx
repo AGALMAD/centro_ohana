@@ -12,12 +12,20 @@ const styles = {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  var authenticatedUser: UserResponse;
+  const [authenticatedUser, setAuthenticatedUser] =
+    useState<UserResponse | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
-      authenticatedUser = await userService.getAuthenticatedUser();
-      userService.currentUser = authenticatedUser;
+      try {
+        const userResponse = await userService.getAuthenticatedUser();
+        if (!userResponse) {
+          return;
+        }
+
+        setAuthenticatedUser(userResponse);
+        userService.currentUser = authenticatedUser;
+      } catch (error) {}
     };
     fetchUser();
   }, []);
@@ -51,34 +59,41 @@ export default function Navbar() {
               Talleres
             </Link>
           </li>
-          <li>
-            <Link to="/blog" className={styles.link}>
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link to="/galeria" className={styles.link}>
-              Galería
-            </Link>
-          </li>
-          <li>
-            <Link to="/conocenos" className={styles.link}>
-              Conócenos
-            </Link>
-          </li>
+
           <li>
             <Link to="/contacto" className={styles.link}>
               Contacto
             </Link>
           </li>
-          {isAdmin ||
-            (authenticatedUser && (
+
+          <li className="relative group">
+            <span className={`${styles.link} cursor-pointer`}>Más ▾</span>
+            <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-[var(--color-bg)] shadow-md rounded-lg z-50 pt-2 px-4 min-w-[160px]">
               <li>
-                <Link to="/users-admin" className={styles.link}>
-                  Administración
+                <Link to="/galeria" className={styles.link}>
+                  Galería
                 </Link>
               </li>
-            ))}
+              <li>
+                <Link to="/conocenos" className={styles.link}>
+                  Conócenos
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className={styles.link}>
+                  Blog
+                </Link>
+              </li>
+            </ul>
+          </li>
+
+          {isAdmin && (
+            <li>
+              <Link to="/users-admin" className={styles.link}>
+                Administración
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* MENÚ hamburguesa en móvil */}
@@ -95,11 +110,11 @@ export default function Navbar() {
       <div
         className={`md:hidden overflow-hidden transition-all duration-800 ${
           isMenuOpen
-            ? "max-h-96 opacity-100 translate-y-0"
+            ? "max-h-[600px] opacity-100 translate-y-0"
             : "max-h-0 opacity-0 -translate-y-2"
         }`}
       >
-        <ul className="flex flex-col text-center space-y-3 mt-4 px-4">
+        <ul className="flex flex-col text-center gap-4 py-6 px-6">
           <li>
             <Link to="/servicios" className={styles.link}>
               Servicios
@@ -130,14 +145,14 @@ export default function Navbar() {
               Contacto
             </Link>
           </li>
-          {isAdmin ||
-            (authenticatedUser && (
-              <li>
-                <Link to="/users-admin" className={styles.link}>
-                  Administración
-                </Link>
-              </li>
-            ))}
+
+          {isAdmin && (
+            <li>
+              <Link to="/users-admin" className={styles.link}>
+                Administración
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

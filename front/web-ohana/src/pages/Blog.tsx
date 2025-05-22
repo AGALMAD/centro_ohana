@@ -21,24 +21,23 @@ function Blog() {
 
   const [showAdminView, setShowAdminView] = useState(false);
 
-  console.log("User", userService.currentUser);
-
   useEffect(() => {
-    const checkUserRole = async () => {
+    const getAuthenticatedUser = async () => {
       try {
-        const user = await userService.getAuthenticatedUser();
-        userService.currentUser = user;
+        if (userService.currentUser === null) {
+          const user = await userService.getAuthenticatedUser();
+          userService.currentUser = user;
+        }
       } catch (error) {
         console.error("Sin usuario autenticado");
       }
     };
 
-    checkUserRole();
+    getAuthenticatedUser();
   }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setLoading(true);
       try {
         const result = await blogService.getAllPosts(currentPage, 5);
         if (result.success) {

@@ -31,7 +31,7 @@ public class UserService {
         User user = User.builder()
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.EDITOR)
+                .role(request.getRole())
                 .build();
 
         userRepository.save(user);
@@ -63,29 +63,8 @@ public class UserService {
             Optional<User> optionalUser = userRepository.findById(UUID.fromString(newData.getId()));
 
             if (optionalUser.isPresent()) {
-                return updateUserInDB(optionalUser.get(),
-                        NewUserRequest.builder()
-                                .username(newData.getUsername())
-                                .password(newData.getPassword())
-                                .build());
-
-            }
-
-        } catch (Exception e) {
-            log.error("e: ", e);
-        }
-
-        return null;
-
-    }
-
-    public UserDto updateAuthenticatedUser(String username, NewUserRequest newData) {
-
-        try {
-            Optional<User> optionalUser = userRepository.findByUsername(username);
-
-            if (optionalUser.isPresent()) {
                 return updateUserInDB(optionalUser.get(), newData);
+
             }
 
         } catch (Exception e) {
@@ -96,7 +75,8 @@ public class UserService {
 
     }
 
-    private UserDto updateUserInDB(User user, NewUserRequest newData) {
+
+    private UserDto updateUserInDB(User user, UpdateUserRequest newData) {
 
         if (newData.getUsername() != null && !newData.getUsername().isBlank()) {
             user.setUsername(newData.getUsername().trim());
@@ -104,6 +84,10 @@ public class UserService {
 
         if (newData.getPassword() != null && !newData.getPassword().isBlank()) {
             user.setPassword(passwordEncoder.encode(newData.getPassword()));
+        }
+
+        if (newData.getRole() != null ) {
+            user.setRole(newData.getRole());
         }
 
         User updatedUser = userRepository.save(user);
