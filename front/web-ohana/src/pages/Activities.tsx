@@ -123,7 +123,7 @@ function Activities() {
           <div className="w-full max-w-7xl">
             {upcomingActivities.length > 0 && (
               <>
-                <h2 className="text-2xl font-semibold text-[#9a4c52] mb-4">
+                <h2 className="text-2xl font-semibold text-[#9a4c52] py-8">
                   Próximos talleres
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
@@ -134,7 +134,7 @@ function Activities() {
 
             {pastActivities.length > 0 && (
               <>
-                <h2 className="text-2xl font-semibold text-[#9a4c52] mt-8 mb-4">
+                <h2 className="text-2xl font-semibold text-[#9a4c52] py-8">
                   Talleres pasados
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
