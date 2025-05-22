@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Mail from "../assets/mail_icon.svg";
 import Phone from "../assets/phone_icon.svg";
 import Location from "../assets/location_icon.svg";
+import { Helmet } from "react-helmet";
 
 function Contact() {
   const [message, setMessage] = useState<string>("");
@@ -17,6 +18,31 @@ function Contact() {
 
   return (
     <>
+      <Helmet>
+        <title>Contacto | Centro Ohana en Torre del Mar</title>
+        <meta
+          name="description"
+          content="¿Tienes dudas? Ponte en contacto con nosotras. Estamos en Torre del Mar y ofrecemos atención personalizada en logopedia y psicopedagogía."
+        />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph para compartir en redes */}
+        <meta
+          property="og:title"
+          content="Contacto | Centro Ohana en Torre del Mar"
+        />
+        <meta
+          property="og:description"
+          content="Llámanos, escríbenos o visítanos. Encuentra aquí toda la información de contacto de Centro Ohana."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.centrohana.com/contacto" />
+        <meta
+          property="og:image"
+          content="https://www.centrohana.com/gallery/image69.webp"
+        />
+      </Helmet>
+
       <main className="min-h-screen bg-[--color-bg] text-[--color-text-dark] font-[--font-body] p-4 mt-15">
         <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
           {/* Columna Información */}

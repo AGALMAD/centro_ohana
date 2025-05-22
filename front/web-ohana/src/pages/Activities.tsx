@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import userService from "../services/user.service";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Activities() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
@@ -105,6 +106,30 @@ function Activities() {
 
   return (
     <>
+      <Helmet>
+        <title>Talleres y Actividades | Centro Ohana</title>
+        <meta
+          name="description"
+          content="Descrubre nuestros talleres y actividades de Centro Ohana. Espacios de aprendizaje, crecimiento y diversión."
+        />
+        <meta name="robots" content="index, follow" />
+
+        <meta
+          property="og:title"
+          content="Talleres y Actividades | Centro Ohana"
+        />
+        <meta
+          property="og:description"
+          content="Participa en nuestros talleres de logopedia, desarrollo infantil, habilidades sociales y mucho más."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.centrohana.com/talleres" />
+        <meta
+          property="og:image"
+          content="https://www.centrohana.com/gallery/image27.webp"
+        />
+      </Helmet>
+
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
         <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
           NUESTROS TALLERES

@@ -1,11 +1,39 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Home() {
   const navigate = useNavigate();
 
   return (
     <>
+      <Helmet>
+        <title>Centro Ohana | Logopedia y Psicopedagogía</title>
+        <meta
+          name="description"
+          content="Centro especializado en logopedia, psicopedagogía, terapia ocupacional y talleres infantiles en Torre del Mar. Atención profesional a niños, jóvenes y adultos."
+        />
+        <meta
+          name="keywords"
+          content="logopedia, Málaga, Torre del Mar, psicopedagogía, terapia ocupacional, centro infantil, talleres infantiles, desarrollo infantil, diverlexia, Málaga"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Centro Ohana | Logopedia y Psicopedagogía"
+        />
+        <meta
+          property="og:description"
+          content="Servicios de logopedia, psicopedagogía, terapia ocupacional y talleres. Centro Diverlexia. Atención personalizada en Torre del Mar."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://centrohana.com/" />
+        <meta
+          property="og:image"
+          content="https://centrohana.com/images/logo-ohana-letras.jpeg"
+        />
+      </Helmet>
+
       <div className="h-full max-w-screen-xl m-auto relative -mb-20 xl:-mb-60">
         {/*imagen y titulo*/}
         <section

@@ -4,8 +4,12 @@ import "slick-carousel/slick/slick-theme.css";
 import workers from "../data/workers.json";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
+import { Helmet } from "react-helmet";
 
 function AboutUs() {
+  {
+    /* los ajustes del slider */
+  }
   const settings = {
     accessibility: true,
     dots: true,
@@ -43,6 +47,31 @@ function AboutUs() {
 
   return (
     <>
+      <Helmet>
+        <title>Conócenos | Centro Ohana</title>
+        <meta
+          name="description"
+          content="Conoce al equipo de Centro Ohana. Descubre nuestra historia, valores y a las profesionales que te acompañarán en tu bienestar personal y familiar."
+        />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph para redes sociales */}
+        <meta property="og:title" content="Conócenos | Centro Ohana" />
+        <meta
+          property="og:description"
+          content="Somos un equipo profesional de logopedas y psicopedagogas que trabaja con dedicación para acompañar a personas y familias en su desarrollo y bienestar."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://www.centrohana.com/conocenos"
+        />
+        <meta
+          property="og:image"
+          content="https://www.centrohana.com/equipo.webp"
+        />
+      </Helmet>
+
       <main>
         <div className="max-w-5xl mx-auto px-4 py-16 ">
           {/* Título e introducción */}
@@ -110,30 +139,33 @@ function AboutUs() {
             ))}
           </div>
 
-          {/* tarjetas con trabajadores */}
+          {/* tarjetas con trabajadoras */}
           <motion.div
-            className="w-3/4 m-auto"
+            className="w-3/4 m-auto mt-20"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true }}
           >
+            <h1 className="uppercase tracking-widest mb-4 text-center">
+              Nuestro equipo
+            </h1>
             <div className="mt-20">
               <Slider {...settings}>
                 {workers.workers.map((d) => (
                   <div
                     key={d.name}
-                    className="bg-white h-[300px] text-[var(--color-primary)] rounded-xl"
+                    className="bg-white h-[330px] text-[var(--color-primary)] rounded-xl"
                   >
-                    <div className="h-56 bg-[var(--color-terciary)] flex justify-center items-center rounded-t-xl">
+                    <div className="h-60 bg-[var(--color-terciary)] flex justify-center items-center rounded-t-xl">
                       <img
                         src={d.img}
                         alt=""
-                        className="h-44 object-cover w-44 rounded-full"
+                        className="h-50 object-cover w-50 rounded-full"
                       />
                     </div>
 
-                    <div className="flex flex-col items-center justify-center gap-2 p-2">
+                    <div className="flex flex-col items-center justify-center gap-2 p-4">
                       <p className="text-xl font-semibold">{d.name}</p>
                       <p className="text-center">{d.especialidad}</p>
                     </div>
