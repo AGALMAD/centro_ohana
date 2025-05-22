@@ -59,11 +59,13 @@ export default function Navbar() {
               Talleres
             </Link>
           </li>
+
           <li>
-            <Link to="/blog" className={styles.link}>
-              Blog
+            <Link to="/contacto" className={styles.link}>
+              Contacto
             </Link>
           </li>
+
           <li className="relative group">
             <span className={`${styles.link} cursor-pointer`}>Más ▾</span>
             <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-[var(--color-bg)] shadow-md rounded-lg z-50 pt-2 px-4 min-w-[160px]">
@@ -78,8 +80,8 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link to="/contacto" className={styles.link}>
-                  Contacto
+                <Link to="/blog" className={styles.link}>
+                  Blog
                 </Link>
               </li>
             </ul>
