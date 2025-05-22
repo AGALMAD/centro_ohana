@@ -66,9 +66,9 @@ function Home() {
             className="max-w-[350px] max-h-[260px]"
           >
             <img
-              src="/gallery/image20.webp"
+              src="/home/recurso1.png"
               alt="imagen niño"
-              className="max-w-[350px] max-h-[260px] object-cover object-bottom rounded-[30%] border-4 border-[var(--color-terciary)]"
+              className="object-cover object-bottom rounded-[30%] border-4 border-[var(--color-terciary)]"
             />
           </motion.div>
           <motion.p

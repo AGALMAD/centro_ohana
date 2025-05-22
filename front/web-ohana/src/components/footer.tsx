@@ -55,6 +55,7 @@ export default function Footer() {
           <div className="flex flex-col items-center">
             <div className="flex space-x-4 mb-3">
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://www.facebook.com/OhanaCentrodeLogopediayPsicopedagogia"
                 aria-label="Facebook"
                 target="_blank"
@@ -62,6 +63,7 @@ export default function Footer() {
                 <FaFacebook size={42} className="text-blue-600" />
               </a>
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://www.instagram.com/centro_ohana_"
                 aria-label="Instagram"
                 target="_blank"
@@ -69,6 +71,7 @@ export default function Footer() {
                 <FaInstagram size={42} className="text-pink-500" />
               </a>
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://wa.me/34690643196"
                 target="_blank"
                 aria-label="WhatsApp"
@@ -76,8 +79,13 @@ export default function Footer() {
                 <FaWhatsapp size={42} className="text-green-500" />
               </a>
             </div>
-            <p className="mb-1 pt-4">📞+34 690 64 31 96</p>
-            <p>📞+34 647 49 46 81</p>
+            <p className="mb-1 pt-4">
+              <a href="tel:+34690643196">📞+34 690 64 31 96</a>
+            </p>
+            <p>
+              {" "}
+              <a href="tel:+34647494681">📞+34 647 49 46 81</a>
+            </p>
           </div>
         </div>
 
