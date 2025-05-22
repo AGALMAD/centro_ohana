@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { UserResponse } from "../models/user-response";
 import Modal from "../components/Modal";
 import CreateOrUpdateUser from "../components/CreateOrUpdateUserForm";
@@ -110,8 +109,6 @@ function UsersAdmin() {
 
   return (
     <>
-      <Navbar />
-
       {!loading && (
         <main className="flex justify-center h-[100vh]">
           <div className="max-w-3xl w-full mt-12 px-4 py-6 bg-[#f3f2f2] rounded-lg shadow-xl">

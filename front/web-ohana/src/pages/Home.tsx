@@ -1,51 +1,82 @@
-import Footer from "../../components/Footer";
-import Navbar from "../../components/Navbar";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
-      <Navbar />
-
-      <div className="h-full bg-[var(--color-bg)] relative">
+      <div className="h-full max-w-screen-xl m-auto relative -mb-20 xl:-mb-60">
         {/*imagen y titulo*/}
-        <section className="flex">
-          {/* Imagen  */}
-          <img
-            src="/home/home-top.png"
-            alt="Imagen"
-            className="w-full max-sm:mt-20 h-full object-cover"
-          />
-          <div
-            className="absolute  max-sm:top-0 max-sm:right-0  
-          top-15 right-20 flex items-center justify-end m-10"
-          >
+        <section
+          className="relative flex max-xl:items-center h-[78vh] max-xl:flex-col max-xl:gap-70 
+          max-xl:items-start items-end gap-10 xl:gap-45 xl:h-[84vh] "
+        >
+          {/* Imagen */}
+          <div className="absolute right-0 top-40 md:top-5 h-full ">
+            <img
+              src="/home/portada-ohana.webp"
+              alt="Centro ohana"
+              className="h-8/10 md:h-full w-full object-cover max-sm:object-[90%_100%] opacity-80"
+            />
+          </div>
+
+          {/*texto*/}
+          <div className="flex flex-col items-center md:items-start relative mt-20 z-10 px-10 max-sm:w-full max-sm:px-4">
             <h1
-              className="text-center text-[var(--color-primary)] 
-            lg:text-4xl text-lg! md:text-lg font-bold"
+              className="text-[var(--color-primary)]
+            font-bold text-2xl! sm:text-3xl! xl:text-5xl! text-center"
             >
               CENTRO DE LOGOPEDIA <br /> Y PSICOPEDAGOGÍA
             </h1>
+
+            <br />
+
+            {/**linea decoracion */}
+            <div className="mt-50 hidden xl:block">
+              <img
+                src="home/line.png"
+                alt="Línea de decoración"
+                className="w-50 md:w-90"
+              />
+            </div>
           </div>
+
+          <motion.button
+            onClick={() => navigate("/servicios")}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true }}
+            className=" z-10 text-white bg-[var(--color-terciary)] text-xl
+            font-semibold px-6 w-fit border border-5 border-white
+            py-2 rounded-xl md:mr-20 hover:scale-105 transition h-fit cursor-pointer mb-8 max-md:self-center max-xl:self-end"
+          >
+            CONOCER MÁS
+          </motion.button>
         </section>
 
         {/* segunda seccion */}
-        <section className="m-auto max-w-6xl  flex flex-col md:flex-row items-center gap-10 px-8 py-16">
-          <motion.img
+        <section className="m-auto mt-10 max-w-5xl flex flex-col md:flex-row items-center gap-10 px-8 py-16">
+          <motion.div
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-100 rounded-[30%] border-4 border-[var(--color-terciary))]"
-            src="https://img.freepik.com/foto-gratis/aula-virtual-espacio-estudio_23-2149178680.jpg?t=st=1744989495~exp=1744993095~hmac=081fdd77ae8f9fc94f79fc650378fc19fdff8021b5073908e420543d7be5ef9f&w=996"
-            alt="imagen niño"
-          />
+            className="max-w-[350px] max-h-[260px]"
+          >
+            <img
+              src="/gallery/image20.webp"
+              alt="imagen niño"
+              className="max-w-[350px] max-h-[260px] object-cover object-bottom rounded-[30%] border-4 border-[var(--color-terciary)]"
+            />
+          </motion.div>
           <motion.p
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className=" text-center md:text-left text-xl text-[var(--color-text-dark)]"
+            className="text-center md:text-left text-xl text-[var(--color-text-dark)]"
           >
             Somos un centro especializado en psicopedagogía, logopedia y terapia
             ocupacional, con una gran experiencia en evaluación e intervención
@@ -90,7 +121,7 @@ function Home() {
           viewport={{ once: true }}
           className="flex justify-end mt-20 md:mt-0"
         >
-          <img src="/home/collage.png" alt="collage" />
+          <img src="/home/collage-ohana.webp" alt="collage" />
         </motion.section>
 
         {/* Servicios */}
@@ -110,7 +141,7 @@ function Home() {
               className="mx-auto mb-2 max-w-25"
               alt="icono"
             />
-            <h3 className="font-bold mb-1 text-[var(--color-text-dark)]">
+            <h3 className="max-sm:text-lg! max-sm:gap-4! font-bold mb-1 text-[var(--color-text-dark)]">
               LOGOPEDIA
             </h3>
             <p className="text-[var(--color-primary)]">
@@ -151,7 +182,7 @@ function Home() {
               className="mx-auto mb-2 max-w-25"
               alt="icono"
             />
-            <h3 className="font-bold mb-1 text-[var(--color-text-dark)]">
+            <h3 className="max-sm:text-lg! max-sm:gap-4! font-bold mb-1 text-[var(--color-text-dark)]">
               TERAPIA OCUPACIONAL
             </h3>
             <p className="text-[var(--color-primary)]">
@@ -215,21 +246,20 @@ function Home() {
             </motion.div>
 
             <motion.button
+              onClick={() => navigate("/talleres")}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
               viewport={{ once: true }}
               className=" relative z-2 text-[var(--color-text-dark)] 
             font-semibold px-6 border border-5 border-[var(--color-terciary)] 
-            py-2 rounded-xl hover:scale-105 transition h-fit"
+            py-2 rounded-xl hover:scale-105 transition h-fit cursor-pointer"
             >
               NUESTROS TALLERES
             </motion.button>
           </div>
         </section>
       </div>
-
-      <Footer></Footer>
     </>
   );
 }

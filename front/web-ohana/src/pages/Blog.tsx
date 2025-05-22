@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
-import Footer from "../components/Footer";
 import { Post } from "../models/post";
 import blogService from "../services/blog.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -118,8 +116,6 @@ function Blog() {
 
   return (
     <>
-      <Navbar />
-
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
         <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
           NUESTRAS PUBLICACIONES
@@ -170,15 +166,15 @@ function Blog() {
         </Modal>
 
         {/*paginación*/}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-          setSearchParams={(params: any) => console.log(params)}
-        />
+        {posts.length !== 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+            setSearchParams={(params: any) => console.log(params)}
+          />
+        )}
       </main>
-
-      <Footer />
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function Navbar() {
         </Link>
 
         {/* MENÚ centrado en escritorio */}
-        <ul className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6">
+        <ul className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-3">
           <li>
             <Link to="/servicios" className={styles.link}>
               Servicios
@@ -54,6 +54,11 @@ export default function Navbar() {
           <li>
             <Link to="/blog" className={styles.link}>
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/galeria" className={styles.link}>
+              Galería
             </Link>
           </li>
           <li>
@@ -108,6 +113,11 @@ export default function Navbar() {
           <li>
             <Link to="/blog" className={styles.link}>
               Blog
+            </Link>
+          </li>
+          <li>
+            <Link to="/galeria" className={styles.link}>
+              Galería
             </Link>
           </li>
           <li>

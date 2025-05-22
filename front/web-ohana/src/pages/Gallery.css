@@ -1,0 +1,35 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px;
+  justify-content: center;
+}
+
+.gallery-item {
+  height: 250px;
+  flex-grow: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+/* tablets */
+@media (max-width: 768px) {
+  .gallery-item {
+    flex-basis: calc(50% - 12px); /* 2 columnas */
+  }
+}
+
+/* móviles */
+@media (max-width: 480px) {
+  .gallery-item {
+    flex-basis: 100%; /* 1 columna */
+    height: auto;
+  }
+}
