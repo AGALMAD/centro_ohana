@@ -16,8 +16,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      authenticatedUser = await userService.getAuthenticatedUser();
-      userService.currentUser = authenticatedUser;
+      try {
+        authenticatedUser = await userService.getAuthenticatedUser();
+        if (!authenticatedUser) {
+          return;
+        }
+
+        userService.currentUser = authenticatedUser;
+      } catch (error) {}
     };
     fetchUser();
   }, []);

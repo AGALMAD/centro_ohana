@@ -25,9 +25,7 @@ function ActivityPage() {
       try {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
-      } catch (error) {
-        console.error("Sin usuario autenticado");
-      }
+      } catch (error) {}
     };
     checkUserRole();
   }, []);

@@ -24,9 +24,7 @@ function Activities() {
       try {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
-      } catch (error) {
-        console.error("Sin usuario autenticado");
-      }
+      } catch (error) {}
     };
 
     getAuthenticatedUser();
@@ -96,7 +94,7 @@ function Activities() {
         </p>
 
         <a
-          onClick={() => navigate(`/activity/${activity.id}`)}
+          onClick={() => navigate(`/taller/${activity.id}`)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm font-semibold text-[var(--color-primary)] hover:underline text-center cursor-pointer"

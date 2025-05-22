@@ -23,6 +23,10 @@ class UserService {
   }
 
   public async getAllUsers(): Promise<UserResponse[]> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
     const response = await apiService.get<UserResponse[]>("/users", {});
 
     if (!response.success) {
