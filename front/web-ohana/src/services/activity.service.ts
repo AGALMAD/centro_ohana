@@ -1,4 +1,3 @@
-import { g } from "framer-motion/client";
 import { Activity } from "../models/activity";
 import { CreateActivityRequest } from "../models/create-activity-request";
 import apiService from "./api.service";

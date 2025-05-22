@@ -12,6 +12,7 @@ class UserService {
     const response = await apiService.post<UserResponse>("/users", {
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {
@@ -59,10 +60,13 @@ class UserService {
   public async updateUserData(
     request: UpdateUserRequest
   ): Promise<UserResponse> {
+    console.log("Update User request:", request);
+
     const response = await apiService.put<UserResponse>("/users", {
       id: request.id,
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {

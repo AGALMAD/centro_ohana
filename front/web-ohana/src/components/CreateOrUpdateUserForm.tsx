@@ -16,6 +16,8 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
 
   const [username, setUsername] = useState(user?.username || "");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState(user?.role || "USER");
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -33,6 +35,7 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
           id: user!.id,
           username,
           password: password || undefined,
+          role,
         };
         await onSubmit?.(updatedUser);
         if (user!.id === userService.currentUser?.id) {
@@ -42,6 +45,7 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
         const newUser: NewUserRequest = {
           username,
           password,
+          role,
         };
         await onSubmit?.(newUser);
       }
@@ -90,6 +94,22 @@ function CreateOrUpdateUser({ user, onSubmit, onClose }: Props) {
           required={!isEditing}
         />
       </div>
+
+      {userService.currentUser.id !== user?.id && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Rol</label>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            required
+          >
+            <option value="USER">Usuario</option>
+            <option value="EDITOR">Editor</option>
+            <option value="ADMIN">Administrador</option>
+          </select>
+        </div>
+      )}
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
       {success && (
