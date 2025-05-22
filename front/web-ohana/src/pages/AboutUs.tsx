@@ -2,6 +2,7 @@ import about from "../data/aboutUs.json";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import workers from "../data/workers.json";
+import { motion } from "framer-motion";
 import Slider from "react-slick";
 
 function AboutUs() {
@@ -65,7 +66,13 @@ function AboutUs() {
                 } items-start md:items-center gap-10`}
               >
                 {/* Imagen estilo polaroid */}
-                <div className="w-full md:w-1/2 flex md:justify-start justify-center">
+                <motion.div
+                  className="w-full md:w-1/2 flex md:justify-start justify-center"
+                  initial={{ rotate: -2 }}
+                  whileInView={{ rotate: 0 }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
                   <div
                     className={`bg-white rounded-xl shadow-md p-4 w-full max-w-md flex flex-col items-center self-center ${
                       index % 2 === 0 ? "rotate-[-2deg]" : "rotate-[2deg]"
@@ -80,10 +87,16 @@ function AboutUs() {
                     </div>
                     <h3 className="mt-4 text-center text-xl">{worker.name}</h3>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Texto */}
-                <div className="w-full md:w-1/2 flex flex-col gap-4 self-center max-w-md">
+                <motion.div
+                  className="w-full md:w-1/2 flex flex-col gap-4 self-center max-w-md"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                >
                   {worker.paragraphs.map((p, i) => (
                     <p
                       key={i}
@@ -92,13 +105,19 @@ function AboutUs() {
                       {p.text}
                     </p>
                   ))}
-                </div>
+                </motion.div>
               </div>
             ))}
           </div>
 
           {/* tarjetas con trabajadores */}
-          <div className="w-3/4 m-auto">
+          <motion.div
+            className="w-3/4 m-auto"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
             <div className="mt-20">
               <Slider {...settings}>
                 {workers.workers.map((d) => (
@@ -122,7 +141,7 @@ function AboutUs() {
                 ))}
               </Slider>
             </div>
-          </div>
+          </motion.div>
         </div>
       </main>
     </>
