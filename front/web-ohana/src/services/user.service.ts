@@ -9,9 +9,10 @@ class UserService {
   constructor() {}
 
   public async createUser(request: NewUserRequest): Promise<UserResponse> {
-    const response = await apiService.post<UserResponse>("users", {
+    const response = await apiService.post<UserResponse>("/users", {
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {
@@ -23,6 +24,10 @@ class UserService {
   }
 
   public async getAllUsers(): Promise<UserResponse[]> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
     const response = await apiService.get<UserResponse[]>("/users", {});
 
     if (!response.success) {
@@ -34,6 +39,14 @@ class UserService {
   }
 
   public async getAuthenticatedUser(): Promise<UserResponse> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
+    if (this.currentUser) {
+      return this.currentUser;
+    }
+
     const response = await apiService.get<UserResponse>("/users/me", {});
 
     if (!response.success) {
@@ -47,10 +60,13 @@ class UserService {
   public async updateUserData(
     request: UpdateUserRequest
   ): Promise<UserResponse> {
+    console.log("Update User request:", request);
+
     const response = await apiService.put<UserResponse>("/users", {
       id: request.id,
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {

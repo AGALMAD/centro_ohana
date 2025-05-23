@@ -99,7 +99,7 @@ function CreatePostForm({ initialPost }: Props) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded-lg shadow-lg">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -108,11 +108,15 @@ function CreatePostForm({ initialPost }: Props) {
           >
             Título:
           </label>
-          <ReactQuill
-            theme="snow"
-            value={data.text}
-            onChange={(content) => setFormData({ ...data, text: content })}
-            className="mt-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
+          <input
+            id="title"
+            name="title"
+            type="text"
+            value={data.title}
+            onChange={handleInputChange}
+            required
+            className="mt-2 p-2 w-full border border-gray-300 rounded-xs 
+      focus:outline-none focus:ring-1 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           />
         </div>
 
@@ -121,25 +125,29 @@ function CreatePostForm({ initialPost }: Props) {
             htmlFor="text"
             className="block text-sm font-semibold text-[#9a4c52]"
           >
-            Texto:
+            Contenido del post:
           </label>
-          <textarea
-            id="text"
-            name="text"
+          <ReactQuill
+            theme="snow"
             value={data.text}
-            onChange={handleInputChange}
-            required
-            maxLength={5000}
-            className="mt-2 p-2 w-full h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
-          ></textarea>
+            onChange={(content) => setFormData({ ...data, text: content })}
+            className="mt-2 w-full h-40  
+     "
+          />
         </div>
-
+        <br />
+        <br />
         <div className="mb-4">
+          <label className="block text-sm font-semibold text-[#9a4c52] mb-2">
+            Imagen:
+          </label>
           <label
             htmlFor="image"
-            className="block text-sm font-semibold text-[#9a4c52]"
+            className="inline-block cursor-pointer px-4 py-2 bg-[#9a4c52] text-white rounded-md hover:bg-[#7f3d44] transition"
           >
-            Imagen:
+            {data.image?.name
+              ? `📷 ${data.image.name}`
+              : "📷 Seleccionar imagen"}
           </label>
           <input
             type="file"
@@ -148,14 +156,16 @@ function CreatePostForm({ initialPost }: Props) {
             onChange={handleFileChange}
             accept="image/*"
             required={!initialPost}
-            className="mt-2 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
+            className="hidden"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="mt-4 w-full py-2 bg-[#9a4c52] text-white text-lg font-semibold rounded-lg hover:bg-[#7f3d44] focus:outline-none focus:ring-2 focus:ring-[#9a4c52] transition duration-300"
+          className="mt-4 w-full py-2 bg-[#9a4c52] text-white text-lg 
+          font-semibold rounded-lg hover:bg-[#7f3d44] focus:outline-none 
+          focus:ring-2 focus:ring-[#9a4c52] transition duration-300"
         >
           {loading
             ? "Cargando..."

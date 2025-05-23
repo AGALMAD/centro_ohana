@@ -6,6 +6,7 @@ import userService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 function UsersAdmin() {
   const [allUsers, setAllUsers] = useState<UserResponse[] | null>(null);
@@ -109,6 +110,9 @@ function UsersAdmin() {
 
   return (
     <>
+      <Helmet>
+        <title>Administración | Centro Ohana</title>
+      </Helmet>
       {!loading && (
         <main className="flex justify-center h-[100vh]">
           <div className="max-w-3xl w-full mt-12 px-4 py-6 bg-[#f3f2f2] rounded-lg shadow-xl">
@@ -303,9 +307,10 @@ function UsersAdmin() {
         </div>
       </Modal>
 
+      {/* Spinner de carga */}
       {loading && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+          <div className="w-16 h-16 border-4 border-[#9a4c52] border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
     </>

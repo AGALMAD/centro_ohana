@@ -8,6 +8,7 @@ import { Post } from "../models/post";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
 import blogService from "../services/blog.service";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -90,6 +91,9 @@ function BlogPost() {
 
   return (
     <>
+      <Helmet>
+        <title>Blog | Centro Ohana</title>
+      </Helmet>
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
           <div className="relative  max-w-6xl w-full p-6 md:p-10">

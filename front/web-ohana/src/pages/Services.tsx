@@ -1,6 +1,36 @@
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+
 function Services() {
   return (
     <>
+      <Helmet>
+        <title>Servicios | Centro Ohana</title>
+        <meta
+          name="description"
+          content="Servicios de logopedia, psicopedagogía, terapia ocupacional, musicoterapia y talleres para el desarrollo integral de niños y adultos en Torre del Mar."
+        />
+        <meta
+          name="keywords"
+          content="logopedia, Málaga, Torre del Mar, psicopedagogía, terapia ocupacional, musicoterapia, talleres infantiles, desarrollo infantil, Centro Ohana"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Servicios de Logopedia, Psicopedagogía y Terapias | Centro Ohana"
+        />
+        <meta
+          property="og:description"
+          content="Centro Ohana. Descubre nuestros servicios: logopedia, psicopedagogía, terapia ocupacional, musicoterapia y talleres para el bienestar de niños y adultos en Torre del Mar."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://centrohana.com/servicios" />
+        <meta
+          property="og:image"
+          content="https://centrohana.com/gallery/image13.webp"
+        />
+      </Helmet>
+
       <main>
         <div className="relative max-w-5xl mx-auto px-4 py-16 ">
           <h1 className="text-center text-4xl font-title text-[#9a4c52] mb-10 pb-2">
@@ -10,12 +40,22 @@ function Services() {
           {/* LOGOPEDIA */}
           <section className="space-y-6">
             <div className="flex flex-col-reverse md:flex-row items-center gap-15">
-              <img
-                src="/services/logopedia.jpg"
+              <motion.img
+                src="/services/image3.webp"
                 alt="Logopedia"
                 className="w-full md:w-1/3 rounded-xl shadow-md"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               />
-              <div className="w-full md:w-1/2 space-y-4">
+              <motion.div
+                className="w-full md:w-1/2 space-y-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
                 <div className="flex items-center gap-4">
                   <img
                     src="/services/logopedia_icono.png"
@@ -33,10 +73,16 @@ function Services() {
                   todas las edades para mejorar sus habilidades comunicativas y
                   su calidad de vida.
                 </p>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="space-y-4 mt-12">
+            <motion.div
+              className="space-y-4 mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <p className="text-lg text-[#6e2f36]">
                 Entre las áreas que abarca la logopedia se incluyen:
               </p>
@@ -63,13 +109,17 @@ function Services() {
                 integral que abarque todas las áreas de la comunicación y el
                 lenguaje.
               </p>
-            </div>
+            </motion.div>
 
             <div className="flex justify-end">
-              <img
+              <motion.img
                 src="/services/wave.png"
                 alt="Wave"
                 className="h-10 md:h-14 my-12 object-contain"
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               />
             </div>
           </section>
@@ -77,7 +127,13 @@ function Services() {
           {/* PSICOPEDAGOGÍA */}
           <section className=" mt-12 space-y-6">
             <div className="flex flex-col md:flex-row items-center gap-10">
-              <div className="w-full md:w-1/2 space-y-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="w-full md:w-1/2 space-y-4"
+              >
                 <div className="flex items-center gap-4">
                   <h2 className="text-2xl font-bold text-[#A94D56]">
                     Psicopedagogía
@@ -93,15 +149,25 @@ function Services() {
                   aprendizaje y de las dificultades que pueden surgir en este
                   ámbito.
                 </p>
-              </div>
-              <img
-                src="/services/psicopedagogia.jpg"
+              </motion.div>
+              <motion.img
+                src="/services/image4.webp"
                 alt="Psicopedagogía"
                 className="w-full md:w-1/3 rounded-xl shadow-md"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               />
             </div>
 
-            <div className="space-y-4 mt-12">
+            <motion.div
+              className="space-y-4 mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <p className="text-lg text-[#6e2f36]">
                 Intervenimos en casos de:
               </p>
@@ -131,13 +197,17 @@ function Services() {
                 Además, colaboramos estrechamente con familias y escuelas para
                 garantizar un enfoque integral en el proceso educativo del niño.
               </p>
-            </div>
+            </motion.div>
 
             <div className="flex justify-start">
-              <img
+              <motion.img
                 src="/services/wave.png"
                 alt="Wave"
                 className="h-10 md:h-14 my-12 object-contain"
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               />
             </div>
           </section>
@@ -145,12 +215,22 @@ function Services() {
           {/* TERAPIA OCUPACIONAL */}
           <section className="space-y-6">
             <div className="flex flex-col-reverse md:flex-row items-center gap-10">
-              <img
-                src="/services/terapia_ocupacional.jpg"
+              <motion.img
+                src="/services/image1.webp"
                 alt="Terapia Ocupacional"
-                className="w-full md:w-1/3 rounded-xl shadow-md"
+                className="w-full md:w-1/3 object-cover rounded-xl shadow-md"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               />
-              <div className="w-full md:w-1/2 space-y-4">
+              <motion.div
+                className="w-full md:w-1/2 space-y-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
                 <div className="flex items-center gap-4">
                   <img
                     src="/services/terapia_ocupacional_icono.png"
@@ -166,10 +246,16 @@ function Services() {
                   autonomía y participación de las personas en las actividades
                   de la vida diaria.
                 </p>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="space-y-4 mt-12">
+            <motion.div
+              className="space-y-4 mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <p className="text-lg text-[#6e2f36]">
                 Trabajamos en áreas como:
               </p>
@@ -196,38 +282,50 @@ function Services() {
                 vida y facilitando su participación en entornos escolares y
                 sociales.
               </p>
-            </div>
+            </motion.div>
           </section>
 
           {/* Contacto */}
           <section className="pt-30 text-center relative rounded-xl overflow-hidden">
             {/**decoracion */}
-            <div
-              className="absolute top-0 left-20 sm:left-80 md:left-120 lg:left-160 
-               w-full h-48 sm:h-56 md:h-64 z-0"
+            <motion.div
+              className="absolute top-0 left-0 sm:left-100 md:left-120 lg:left-180 
+               w-full h-40 sm:h-56 md:h-64 z-0"
               style={{
                 backgroundImage: "url('/vector2.png')",
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
               }}
-            ></div>
-
-            <h3 className="text-xl font-semibold text-[#A94D56] z-2 relative">
-              CONTÁCTANOS
-            </h3>
-            <p className="text-md text-[#6e2f36] mt-4 z-2 relative">
-              Si deseas conocer más a fondo nuestros métodos de trabajo y cómo
-              podemos ayudarte, estaremos encantadas de atenderte. Puedes
-              visitarnos en nuestro centro o escribirnos a través de los canales
-              de comunicación que prefieras.
-            </p>
-
-            <a
-              href="/contact"
-              className="inline-block relative z-2 mt-6 bg-[#A94D56] text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47]"
+              initial={{ opacity: 0, x: -300, rotate: -90 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
             >
-              ¡Hablemos!
-            </a>
+              <h3 className="text-xl font-semibold text-[#A94D56] z-2 relative">
+                CONTÁCTANOS
+              </h3>
+              <p className="text-lg text-[#6e2f36]  mt-4 z-2 relative">
+                Si deseas conocer más a fondo nuestros métodos de trabajo y cómo
+                podemos ayudarte, estaremos encantadas de atenderte. Puedes
+                visitarnos en nuestro centro o escribirnos a través de los
+                canales de comunicación que prefieras.
+              </p>
+
+              <a
+                href="/contact"
+                className="inline-block text-xl relative z-2 mt-6 bg-[#A94D56] 
+              text-white px-6 py-2 rounded-full shadow-md hover:bg-[#913E47] 
+              transform transition-transform duration-300 hover:scale-105"
+              >
+                ¡Hablemos!
+              </a>
+            </motion.div>
           </section>
         </div>
       </main>
