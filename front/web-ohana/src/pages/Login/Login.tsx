@@ -5,7 +5,6 @@ import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
-import { s } from "framer-motion/client";
 
 function Login() {
   const navigate = useNavigate();

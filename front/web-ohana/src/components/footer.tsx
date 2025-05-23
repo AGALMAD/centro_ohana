@@ -92,12 +92,13 @@ export default function Footer() {
         {/* copyright */}
         <div className="mt-2 text-center text-[var(--color-primary)] pt-10">
           <a href="/aviso-legal">Aviso legal</a> |{" "}
-          <a href="/privacidad">Política de privacidad</a>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
         </div>
 
         <div className="mt-4 text-center text-xs text-[var(--color-primary)]">
-          © {new Date().getFullYear()} Todos los derechos reservados.  Diseño
-          web: María Rosales y Alejandro Gálvez
+          © {new Date().getFullYear()} Centro Hana. Todos los derechos
+          reservados. <br />
+          Diseño web: María Rosales y Alejandro Gálvez.
         </div>
         <br />
       </div>
