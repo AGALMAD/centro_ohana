@@ -65,7 +65,6 @@ export default function Gallery() {
                 }}
               >
                 {/* para poner un texto arriba */}
-                {images[index].src}
               </div>
             ),
           }}
