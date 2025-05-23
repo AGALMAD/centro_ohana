@@ -29,10 +29,10 @@ class BlogService {
     formData.append("text", post.text);
     formData.append("image", post.image);
 
-    console.log("FormData de blog", formData);
+    //console.log("FormData de blog", formData);
 
     const response = await apiService.post<Post>("/blog", formData);
-    console.log("Response", response);
+    //console.log("Response", response);
     if (!response.success) {
       throw new Error("Error al crear un post nuevo.");
     }

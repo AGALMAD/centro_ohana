@@ -86,10 +86,21 @@ function ActivityPage() {
     }
   };
 
+  const isBeforeStart = () => {
+    if (!activity) return false;
+
+    const today = new Date();
+    const start = new Date(activity.startDate);
+    today.setHours(0, 0, 0, 0);
+    start.setHours(0, 0, 0, 0);
+
+    return today <= start;
+  };
+
   return (
     <>
       <Helmet>
-        <title>{activity.title} | Centro Ohana</title>
+        <title>Taller | Centro Ohana</title>
       </Helmet>
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {activity && (
@@ -157,17 +168,19 @@ function ActivityPage() {
 
             {/* Botón e Icono de Instagram */}
             <div className="flex justify-center items-center mt-12">
-              <a
-                href={`https://wa.me/34647494681?text=${encodeURIComponent(
-                  `Hola, estoy interesado en inscribirme en el taller "${activity.title.toLowerCase()}"`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Contactar por WhatsApp"
-                className="bg-[var(--color-primary)] text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
-              >
-                Inscribirse
-              </a>
+              {isBeforeStart() && (
+                <a
+                  href={`https://wa.me/34647494681?text=${encodeURIComponent(
+                    `¡Hola! Me gustaría inscribirme en el taller ${activity.title.toLowerCase()}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Contactar por WhatsApp"
+                  className="bg-[var(--color-primary)] text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
+                >
+                  Inscribirse
+                </a>
+              )}
 
               <a
                 href={activity.postLink || "#"}

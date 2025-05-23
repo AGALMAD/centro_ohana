@@ -19,7 +19,7 @@ class UserService {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Register response:", response);
+    //console.log("Register response:", response);
     return response.data;
   }
 
@@ -34,7 +34,7 @@ class UserService {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("All Users response", response);
+    // console.log("All Users response", response);
     return response.data;
   }
 
@@ -53,14 +53,14 @@ class UserService {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Authenticated user response", response);
+    //console.log("Authenticated user response", response);
     return response.data;
   }
 
   public async updateUserData(
     request: UpdateUserRequest
   ): Promise<UserResponse> {
-    console.log("Update User request:", request);
+    // console.log("Update User request:", request);
 
     const response = await apiService.put<UserResponse>("/users", {
       id: request.id,
@@ -73,7 +73,7 @@ class UserService {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Update User response:", response);
+    // console.log("Update User response:", response);
     return response.data;
   }
 
@@ -84,7 +84,7 @@ class UserService {
       throw new Error("Delete user failed");
     }
 
-    console.log("Delete User response:", response);
+    //console.log("Delete User response:", response);
     return response.data;
   }
 }

@@ -100,14 +100,6 @@ export default function Navbar() {
             </ul>
           </li>
 
-          {isAdmin && (
-            <li>
-              <Link to="/users-admin" className={styles.link}>
-                Administración
-              </Link>
-            </li>
-          )}
-
           {isLoggedIn && authenticatedUser && (
             <div className={`${styles.link} relative group`}>
               <span className="cursor-pointer text-md!">
@@ -117,7 +109,7 @@ export default function Navbar() {
                 className="absolute left-0 top-full bg-[var(--color-bg)] 
               shadow-md rounded-md hidden group-hover:block z-50"
               >
-                {!isAdmin && (
+                {isAdmin && (
                   <li>
                     <Link
                       to="/users-admin"
