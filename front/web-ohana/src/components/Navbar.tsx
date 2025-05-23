@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
 import { UserResponse } from "../models/user-response";
+import { useAuth } from "../context/auth-context";
+import authService from "../services/auth.service";
 
 const styles = {
   link: "block py-2 px-2 text-[var(--color-secondary)] text-xl font-bold transition-transform duration-300 hover:scale-110",
@@ -15,20 +17,31 @@ export default function Navbar() {
   const [authenticatedUser, setAuthenticatedUser] =
     useState<UserResponse | null>(null);
 
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const userResponse = await userService.getAuthenticatedUser();
-        if (!userResponse) {
-          return;
+        if (userResponse) {
+          setAuthenticatedUser(userResponse);
+        } else {
+          setAuthenticatedUser(null);
         }
-
-        setAuthenticatedUser(userResponse);
-        userService.currentUser = authenticatedUser;
-      } catch (error) {}
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setAuthenticatedUser(null);
+      }
     };
-    fetchUser();
-  }, []);
+
+    if (isLoggedIn) {
+      fetchUser();
+    } else {
+      setAuthenticatedUser(null);
+    }
+  }, [isLoggedIn]);
 
   const isAdmin = authenticatedUser?.role === "ADMIN";
 
@@ -94,6 +107,40 @@ export default function Navbar() {
               </Link>
             </li>
           )}
+
+          {isLoggedIn && authenticatedUser && (
+            <div className={`${styles.link} relative group`}>
+              <span className="cursor-pointer text-md!">
+                {authenticatedUser.username} ▾
+              </span>
+              <ul
+                className="absolute left-0 top-full bg-[var(--color-bg)] 
+              shadow-md rounded-md hidden group-hover:block z-50"
+              >
+                {!isAdmin && (
+                  <li>
+                    <Link
+                      to="/users-admin"
+                      className="block px-4 py-2 hover:bg-[var(--color-primary)]"
+                    >
+                      Administración
+                    </Link>
+                  </li>
+                )}
+
+                <li
+                  className="px-4 py-2 hover:bg-[var(--color-primary)] cursor-pointer"
+                  onClick={async () => {
+                    await authService.logout();
+                    setIsLoggedIn(false);
+                    navigate("/login");
+                  }}
+                >
+                  Cerrar sesión
+                </li>
+              </ul>
+            </div>
+          )}
         </ul>
 
         {/* MENÚ hamburguesa en móvil */}
@@ -151,6 +198,19 @@ export default function Navbar() {
               <Link to="/users-admin" className={styles.link}>
                 Administración
               </Link>
+            </li>
+          )}
+
+          {isLoggedIn && authenticatedUser && (
+            <li
+              className={styles.link}
+              onClick={async () => {
+                await authService.logout();
+                setIsLoggedIn(false);
+                navigate("/login");
+              }}
+            >
+              Cerrar sesión ({authenticatedUser.username})
             </li>
           )}
         </ul>

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../../context/auth-context";
 
 function Login() {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const { setIsLoggedIn } = useAuth();
 
     setLoading(true);
     apiService.jwt = null; // Limpiar el token JWT antes de iniciar sesión
@@ -44,6 +47,7 @@ function Login() {
         }).then(() => {
           navigate("/");
         });
+        setIsLoggedIn(true);
       }
     } catch (error: any) {
       console.error("Error:", error);
