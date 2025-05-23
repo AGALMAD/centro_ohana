@@ -5,7 +5,7 @@ function Services() {
   return (
     <>
       <Helmet>
-        <title>Servicios de Logopedia y Psicopedagogía | Centro Ohana</title>
+        <title>Servicios | Centro Ohana</title>
         <meta
           name="description"
           content="Servicios de logopedia, psicopedagogía, terapia ocupacional, musicoterapia y talleres para el desarrollo integral de niños y adultos en Torre del Mar."

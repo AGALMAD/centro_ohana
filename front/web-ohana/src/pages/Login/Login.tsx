@@ -5,6 +5,7 @@ import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const navigate = useNavigate();
@@ -67,6 +68,10 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Acceso | Centro Ohana</title>
+      </Helmet>
+
       <main className="max-w-md mx-auto mt-20 p-6 bg-[#fde4ff] shadow-lg rounded-xl">
         <div className="flex justify-center gap-8 mb-12">
           <h1 className="text-2xl font-bold text-[#6A0572]">Iniciar Sesión</h1>

@@ -6,6 +6,7 @@ import blogService from "../services/blog.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
+import { Helmet } from "react-helmet";
 
 function Blog() {
   const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
@@ -116,6 +117,9 @@ function Blog() {
 
   return (
     <>
+      <Helmet>
+        <title>Blog | Centro Ohana</title>
+      </Helmet>
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
         <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
           NUESTRAS PUBLICACIONES

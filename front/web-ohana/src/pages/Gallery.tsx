@@ -2,6 +2,7 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import "./Gallery.css";
+import { Helmet } from "react-helmet";
 
 import photos from "../data/photos.json";
 
@@ -20,6 +21,10 @@ export default function Gallery() {
 
   return (
     <>
+      <Helmet>
+        <title>Galería | Centro Ohana</title>
+      </Helmet>
+
       <div
         style={{ maxWidth: "1000px", margin: "0 auto" }}
         className=" px-4 py-16 "

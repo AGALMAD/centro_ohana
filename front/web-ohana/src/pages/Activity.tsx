@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import Modal from "../components/Modal";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import InstagramIcon from "../assets/instagram.png";
+import { Helmet } from "react-helmet";
 
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
@@ -87,6 +88,9 @@ function ActivityPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{activity.title} | Centro Ohana</title>
+      </Helmet>
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {activity && (
           <div className="relative  max-w-xl w-full p-6 md:p-10">

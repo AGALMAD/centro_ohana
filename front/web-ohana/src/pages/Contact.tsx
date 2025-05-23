@@ -22,7 +22,7 @@ function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contacto | Centro Ohana en Torre del Mar</title>
+        <title>Contacto | Centro Ohana</title>
         <meta
           name="description"
           content="¿Tienes dudas? Ponte en contacto con nosotras. Estamos en Torre del Mar y ofrecemos atención personalizada en logopedia y psicopedagogía."
