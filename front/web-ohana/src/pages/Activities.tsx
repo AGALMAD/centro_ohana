@@ -7,7 +7,6 @@ import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
 
 function Activities() {
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -72,7 +71,7 @@ function Activities() {
       className="relative bg-[var(--color-bg)] rounded-xl shadow-xl p-6 flex items-start gap-4 max-w-lg mx-auto hover:shadow-2xl transition duration-300"
     >
       <img
-        src={BASE_URL + activity.imageUrl}
+        src={activity.imageUrl}
         alt={activity.title}
         className="rounded-lg w-1/2 h-auto min-h-48 object-cover"
       />
