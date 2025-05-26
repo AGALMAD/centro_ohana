@@ -16,11 +16,12 @@ public class CloudinaryService {
 
     private final Cloudinary cloudinary;
 
-    public String uploadImage(File file, String folder) throws IOException {
-        Map<?, ?> uploadResult = cloudinary.uploader().upload(file, ObjectUtils.asMap(
+    public String uploadImage(byte[] bytes, String folder) throws IOException {
+        Map<?, ?> uploadResult = cloudinary.uploader().upload(bytes, ObjectUtils.asMap(
                 "folder", folder,
                 "resource_type", "image"
         ));
         return uploadResult.get("secure_url").toString();
     }
+
 }
