@@ -82,7 +82,7 @@ public class ActivitySeeder implements ApplicationRunner {
 
         String imageUrl = localImageFilename;
 
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/activities/" + imageUrl)) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/" + imageUrl)) {
             if (is == null) {
                 throw new FileNotFoundException("Imagen no encontrada en recursos: " + imageUrl);
             }
