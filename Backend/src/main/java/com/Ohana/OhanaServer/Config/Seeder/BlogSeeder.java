@@ -10,7 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -80,11 +82,12 @@ public class BlogSeeder implements ApplicationRunner {
 
     private Post createPost(String title, String localImageFilename, String text, LocalDate date) {
         String imageUrl = localImageFilename;
-        try {
-            Path imagePath = Paths.get("src/main/resources/static", localImageFilename);
-            File file = imagePath.toFile();
-            // Sube la imagen y obtiene la URL de Cloudinary
-            imageUrl = cloudinaryService.uploadImage(file, "blog");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/blog/" + imageUrl)) {
+            if (is == null) {
+                throw new FileNotFoundException("Imagen no encontrada en recursos: " + imageUrl);
+            }
+            byte[] bytes = is.readAllBytes();
+            imageUrl = cloudinaryService.uploadImage(bytes, "blog");
         } catch (IOException e) {
             throw new RuntimeException("Error al subir imagen del blog a Cloudinary", e);
         }

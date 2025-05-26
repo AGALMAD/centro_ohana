@@ -11,9 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.Console;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
@@ -84,12 +82,13 @@ public class ActivitySeeder implements ApplicationRunner {
 
         String imageUrl = localImageFilename;
 
-        try {
-            Path imagePath = Paths.get("src/main/resources/static", localImageFilename);
-            File file = imagePath.toFile();
-            // Sube la imagen y obtiene la URL de Cloudinary
-            imageUrl = cloudinaryService.uploadImage(file, "blog");
-        } catch (IOException e) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/activities/" + imageUrl)) {
+            if (is == null) {
+                throw new FileNotFoundException("Imagen no encontrada en recursos: " + imageUrl);
+            }
+            byte[] bytes = is.readAllBytes();
+            imageUrl = cloudinaryService.uploadImage(bytes, "activities");
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
 
