@@ -174,7 +174,7 @@ function BlogPost() {
 
         <button
           onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}
-          className="!text-[var(--color-primary)]"
+          className="cursor-pointer !text-[var(--color-primary)]"
         >
           {" "}
           ← Volver al blog
