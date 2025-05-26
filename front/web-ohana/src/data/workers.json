@@ -1,36 +1,34 @@
 {
   "workers": [
     {
-      "id": 1,
-      "name": "Rocío",
-      "paragraphs": [
-        {
-          "text": "🙋🏻‍♀️ Ella es Rocío, Graduada en Logopedia, Máster en Atención Temprana y Especialista en Motricidad Orofacial (Nivel avanzado)"
-        },
-        {
-          "text": "✅ Es la encargada de la evaluación, intervención y seguimiento en el área de logopedia, a nivel familiar, adulto, juvenil e infantil."
-        },
-        {
-          "text": "🫂 El poder comunicarse, es un derecho humano básico y el medio por el cual ejercemos todos los demás derechos💕"
-        }
-      ],
-      "image": "rocio.png"
+      "name": "Silvia",
+      "img": "/workers/silvia.webp",
+      "especialidad": "Pedagoga"
     },
     {
-      "id": 2,
       "name": "Ana",
-      "paragraphs": [
-        {
-          "text": "👩‍💼 Ella es Ana, diplomada en educación social, licenciada en psicopedagogía, máster en juventud y sociedad, máster en psicología infantil y adolescente, máster en rehabilitación neuropsicológica y mediadora familiar."
-        },
-        {
-          "text": "🖊️ Es la encargada de la evaluación, diagnóstico e intervención en el área de reeducación pedagógica a nivel familiar, infantil y juvenil."
-        },
-        {
-          "text": "🎇 Si un/a niño/a no puede aprender de la forma en que le enseñamos quizás deberíamos enseñar de la forma en que aprenden."
-        }
-      ],
-      "image": "ana.jpg"
+      "img": "/workers/ana-psicopedagoga.webp",
+      "especialidad": "Psicopedagoga"
+    },
+    {
+      "name": "Carmen",
+      "img": "/workers/carmen.webp",
+      "especialidad": "Logopeda"
+    },
+    {
+      "name": "Ana",
+      "img": "/workers/ana-logopeda.webp",
+      "especialidad": "Logopeda"
+    },
+    {
+      "name": "Rocío",
+      "img": "/workers/rocio-psico.webp",
+      "especialidad": "Psicóloga"
+    },
+    {
+      "name": "Rocío",
+      "img": "/workers/rocio-logopeda.webp",
+      "especialidad": "Logopeda"
     }
   ]
 }

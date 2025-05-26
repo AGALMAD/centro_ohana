@@ -19,20 +19,20 @@ class AuthService {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Login response:", response);
+    //console.log("Login response:", response);
     //guarda el token
     localStorage.setItem("token", response.data.token);
     apiService.jwt = response.data.token;
 
     //almacena el usuario autenticado
     userService.currentUser = await userService.getAuthenticatedUser();
-    console.log("Authenticated user:", userService.currentUser);
+    //console.log("Authenticated user:", userService.currentUser);
 
     return response.data;
   }
 
   public async logout(): Promise<void> {
-    console.log("Logging out...");
+    //console.log("Logging out...");
     localStorage.removeItem(this.TOKEN_KEY);
     apiService.jwt = null;
   }

@@ -29,7 +29,7 @@ export default function Footer() {
             className="transition-all duration-300 ease-in-out delay-150"
           />
           <path
-            d="M 0 492 L 0 291 C 84.7461 278.3707 169.4923 265.7413 243 255 C 316.5077 244.2587 378.7771 235.4054 435 247 C 491.2229 258.5946 541.3995 290.6372 617 301 C 692.6005 311.3628 793.6249 300.0457 859 311 C 924.3751 321.9543 954.101 355.18 1020 342 C 1085.899 328.82 1187.9711 269.2343 1264 253 C 1340.0289 236.7657 1390.0144 263.8829 1440 291 L 1440 492 Z"
+            d="M 0 500 L 0 291 C 84.7461 278.3707 169.4923 265.7413 243 255 C 316.5077 244.2587 378.7771 235.4054 435 247 C 491.2229 258.5946 541.3995 290.6372 617 301 C 692.6005 311.3628 793.6249 300.0457 859 311 C 924.3751 321.9543 954.101 355.18 1020 342 C 1085.899 328.82 1187.9711 269.2343 1264 253 C 1340.0289 236.7657 1390.0144 263.8829 1440 291 L 1440 500 Z"
             stroke="none"
             strokeWidth="0"
             fill="white"
@@ -39,11 +39,11 @@ export default function Footer() {
         </svg>
       </div>
 
-      <div className="text-[var(--color-secondary)]">
+      <div className="w-full bg-white -top-1 relative text-[var(--color-secondary)]">
         <div className="max-w-6xl justify-items-center items-center mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Columna 1: info */}
           <div>
-            <img className="mb-8 w-42 m-auto" src={LOGOLetras} />
+            <img className="mb-8 mt-2 w-42 m-auto" src={LOGOLetras} />
             <p className="mb-1">
               📍 C/ Pintor Cipriano Maldonado,
               <br /> 7, bajo C, Torre del Mar, España
@@ -55,6 +55,7 @@ export default function Footer() {
           <div className="flex flex-col items-center">
             <div className="flex space-x-4 mb-3">
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://www.facebook.com/OhanaCentrodeLogopediayPsicopedagogia"
                 aria-label="Facebook"
                 target="_blank"
@@ -62,6 +63,7 @@ export default function Footer() {
                 <FaFacebook size={42} className="text-blue-600" />
               </a>
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://www.instagram.com/centro_ohana_"
                 aria-label="Instagram"
                 target="_blank"
@@ -69,6 +71,7 @@ export default function Footer() {
                 <FaInstagram size={42} className="text-pink-500" />
               </a>
               <a
+                className="transform transition-transform duration-300 hover:scale-105"
                 href="https://wa.me/34690643196"
                 target="_blank"
                 aria-label="WhatsApp"
@@ -76,20 +79,26 @@ export default function Footer() {
                 <FaWhatsapp size={42} className="text-green-500" />
               </a>
             </div>
-            <p className="mb-1 pt-4">📞+34 690 64 31 96</p>
-            <p>📞+34 647 49 46 81</p>
+            <p className="mb-1 pt-4">
+              <a href="tel:+34690643196">📞+34 690 64 31 96</a>
+            </p>
+            <p>
+              {" "}
+              <a href="tel:+34647494681">📞+34 647 49 46 81</a>
+            </p>
           </div>
         </div>
 
         {/* copyright */}
         <div className="mt-2 text-center text-[var(--color-primary)] pt-10">
           <a href="/aviso-legal">Aviso legal</a> |{" "}
-          <a href="/privacidad">Política de privacidad</a>
+          <a href="/politica-de-privacidad">Política de privacidad</a>
         </div>
 
         <div className="mt-4 text-center text-xs text-[var(--color-primary)]">
-          © {new Date().getFullYear()} Todos los derechos reservados.  Diseño
-          web: María Rosales y Alejandro Gálvez
+          © {new Date().getFullYear()} Centro Hana. Todos los derechos
+          reservados. <br />
+          Diseño web: María Rosales y Alejandro Gálvez.
         </div>
         <br />
       </div>

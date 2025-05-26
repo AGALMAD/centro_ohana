@@ -1,29 +1,28 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar";
 import "./Login.css";
 import { AuthRequest } from "../../models/auth-request";
 import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
+import { Helmet } from "react-helmet";
+import { useAuth } from "../../context/auth-context";
 
 function Login() {
-  /* 
-  const FORM_TYPES = {
-  LOGIN: "login",
-    SIGNUP: "signup",
-  };*/
-
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth();
 
   //Para almacenar el nombre de usuario y la contraseña
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    setLoading(true);
     apiService.jwt = null; // Limpiar el token JWT antes de iniciar sesión
 
     const requestBody: AuthRequest = {
@@ -47,6 +46,7 @@ function Login() {
         }).then(() => {
           navigate("/");
         });
+        setIsLoggedIn(true);
       }
     } catch (error: any) {
       console.error("Error:", error);
@@ -55,6 +55,8 @@ function Login() {
       setTimeout(() => {
         setError(null);
       }, 5000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -69,7 +71,9 @@ function Login() {
 
   return (
     <>
-      <Navbar />
+      <Helmet>
+        <title>Acceso | Centro Ohana</title>
+      </Helmet>
 
       <main className="max-w-md mx-auto mt-20 p-6 bg-[#fde4ff] shadow-lg rounded-xl">
         <div className="flex justify-center gap-8 mb-12">
@@ -123,6 +127,13 @@ function Login() {
             Iniciar Sesión
           </button>
         </form>
+
+        {/* Spinner de carga */}
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+            <div className="w-16 h-16 border-4 border-[#9a4c52] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
       </main>
     </>
   );

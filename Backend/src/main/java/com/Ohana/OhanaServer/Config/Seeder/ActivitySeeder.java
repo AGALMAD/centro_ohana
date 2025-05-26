@@ -4,11 +4,16 @@ package com.Ohana.OhanaServer.Config.Seeder;
 import com.Ohana.OhanaServer.Models.Activity;
 import com.Ohana.OhanaServer.Models.Paragraph;
 import com.Ohana.OhanaServer.Repositories.ActivityRepository;
+import com.Ohana.OhanaServer.Services.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
@@ -19,6 +24,7 @@ import java.util.List;
 public class ActivitySeeder implements ApplicationRunner {
 
     private final ActivityRepository activityRepository;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -70,9 +76,22 @@ public class ActivitySeeder implements ApplicationRunner {
         System.out.println("Talleres guardados exitosamente.");
     }
 
-    private Activity createActivity(String title, String imageUrl, String description, String postLink, Date startDate, Date endDate) {
+    private Activity createActivity(String title, String localImageFilename, String description, String postLink, Date startDate, Date endDate) {
         Time startTime = new Time(startDate.getTime());
         Time endTime = new Time(endDate.getTime());
+
+        String imageUrl = localImageFilename;
+
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/" + imageUrl)) {
+            if (is == null) {
+                throw new FileNotFoundException("Imagen no encontrada en recursos: " + imageUrl);
+            }
+            byte[] bytes = is.readAllBytes();
+            imageUrl = cloudinaryService.uploadImage(bytes, "activities");
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         Activity activity = Activity.builder()
                 .title(title)
@@ -84,6 +103,7 @@ public class ActivitySeeder implements ApplicationRunner {
                 .endTime(endTime)
                 .postLink(postLink)
                 .build();
+
 
         List<Paragraph> paragraphs = List.of(
                 Paragraph.builder()

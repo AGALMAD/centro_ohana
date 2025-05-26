@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
-import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
@@ -10,11 +8,11 @@ import { Post } from "../models/post";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
 import blogService from "../services/blog.service";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [post, setPost] = useState<Post | null>(null);
   // @ts-ignore
@@ -92,8 +90,9 @@ function BlogPost() {
 
   return (
     <>
-      <Navbar />
-
+      <Helmet>
+        <title>Blog | Centro Ohana</title>
+      </Helmet>
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {post && (
           <div className="relative  max-w-6xl w-full p-6 md:p-10">
@@ -138,7 +137,7 @@ function BlogPost() {
             {/* Imagen */}
             <div className="flex justify-center mb-12 relative z-2">
               <img
-                src={BASE_URL + post.imageUrl}
+                src={post.imageUrl}
                 alt={post.title}
                 className="rounded-xl shadow-md w-115 mt-8 h-72 object-cover"
               />
@@ -174,14 +173,12 @@ function BlogPost() {
 
         <button
           onClick={() => navigate(`/blog?page=${pageFromQuery || 0}`)}
-          className="!text-[var(--color-primary)]"
+          className="cursor-pointer !text-[var(--color-primary)]"
         >
           {" "}
           ← Volver al blog
         </button>
       </main>
-
-      <Footer />
     </>
   );
 }

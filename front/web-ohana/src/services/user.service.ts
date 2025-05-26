@@ -9,55 +9,71 @@ class UserService {
   constructor() {}
 
   public async createUser(request: NewUserRequest): Promise<UserResponse> {
-    const response = await apiService.post<UserResponse>("users", {
+    const response = await apiService.post<UserResponse>("/users", {
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Register response:", response);
+    //console.log("Register response:", response);
     return response.data;
   }
 
   public async getAllUsers(): Promise<UserResponse[]> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
     const response = await apiService.get<UserResponse[]>("/users", {});
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("All Users response", response);
+    // console.log("All Users response", response);
     return response.data;
   }
 
   public async getAuthenticatedUser(): Promise<UserResponse> {
+    if (!apiService.jwt) {
+      throw new Error("No token found");
+    }
+
+    if (this.currentUser) {
+      return this.currentUser;
+    }
+
     const response = await apiService.get<UserResponse>("/users/me", {});
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Authenticated user response", response);
+    //console.log("Authenticated user response", response);
     return response.data;
   }
 
   public async updateUserData(
     request: UpdateUserRequest
   ): Promise<UserResponse> {
+    // console.log("Update User request:", request);
+
     const response = await apiService.put<UserResponse>("/users", {
       id: request.id,
       username: request.username,
       password: request.password,
+      role: request.role,
     });
 
     if (!response.success) {
       throw new Error("Login failed: Token not received");
     }
 
-    console.log("Update User response:", response);
+    // console.log("Update User response:", response);
     return response.data;
   }
 
@@ -68,7 +84,7 @@ class UserService {
       throw new Error("Delete user failed");
     }
 
-    console.log("Delete User response:", response);
+    //console.log("Delete User response:", response);
     return response.data;
   }
 }

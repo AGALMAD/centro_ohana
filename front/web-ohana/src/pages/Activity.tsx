@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import userService from "../services/user.service";
 import { Activity } from "../models/activity";
 import activityService from "../services/activity.service";
-import Footer from "../components/Footer";
 import { Edit, Trash } from "lucide-react";
 import Swal from "sweetalert2";
 import Modal from "../components/Modal";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import InstagramIcon from "../assets/instagram.png";
+import { Helmet } from "react-helmet";
 
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [activity, setActivity] = useState<Activity | null>(null);
   // @ts-ignore
@@ -27,9 +25,7 @@ function ActivityPage() {
       try {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
-      } catch (error) {
-        console.error("Sin usuario autenticado");
-      }
+      } catch (error) {}
     };
     checkUserRole();
   }, []);
@@ -89,10 +85,22 @@ function ActivityPage() {
     }
   };
 
+  const isBeforeStart = () => {
+    if (!activity) return false;
+
+    const today = new Date();
+    const start = new Date(activity.startDate);
+    today.setHours(0, 0, 0, 0);
+    start.setHours(0, 0, 0, 0);
+
+    return today <= start;
+  };
+
   return (
     <>
-      <Navbar />
-
+      <Helmet>
+        <title>Taller | Centro Ohana</title>
+      </Helmet>
       <main className="min-h-screen w-full flex flex-col items-center px-4 py-10">
         {activity && (
           <div className="relative  max-w-xl w-full p-6 md:p-10">
@@ -124,7 +132,7 @@ function ActivityPage() {
             {/* Imagen */}
             <div className="flex justify-center mb-12">
               <img
-                src={BASE_URL + activity.imageUrl}
+                src={activity.imageUrl}
                 alt={activity.title}
                 className="rounded-xl shadow-md w-72 h-72 object-cover"
               />
@@ -159,17 +167,19 @@ function ActivityPage() {
 
             {/* Botón e Icono de Instagram */}
             <div className="flex justify-center items-center mt-12">
-              <a
-                href={`https://wa.me/34647494681?text=${encodeURIComponent(
-                  `Hola, estoy interesado en inscribirme en el taller "${activity.title.toLowerCase()}"`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Contactar por WhatsApp"
-                className="bg-[var(--color-primary)] text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
-              >
-                Inscribirse
-              </a>
+              {isBeforeStart() && (
+                <a
+                  href={`https://wa.me/34647494681?text=${encodeURIComponent(
+                    `¡Hola! Me gustaría inscribirme en el taller ${activity.title.toLowerCase()}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Contactar por WhatsApp"
+                  className="bg-[var(--color-primary)] text-white text-xl font-bold py-2 px-6 rounded-lg shadow-md hover:bg-[#7f3d44] hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9a4c52] focus:ring-opacity-50"
+                >
+                  Inscribirse
+                </a>
+              )}
 
               <a
                 href={activity.postLink || "#"}
@@ -197,8 +207,6 @@ function ActivityPage() {
           <CreateActivityForm initialActivity={activity} />
         </Modal>
       </main>
-
-      <Footer />
     </>
   );
 }

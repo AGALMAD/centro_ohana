@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import userService from "../services/user.service";
-import Footer from "../components/Footer";
 import { Post } from "../models/post";
 import blogService from "../services/blog.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
+import { Helmet } from "react-helmet";
 
 function Blog() {
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -23,24 +21,23 @@ function Blog() {
 
   const [showAdminView, setShowAdminView] = useState(false);
 
-  console.log("User", userService.currentUser);
-
   useEffect(() => {
-    const checkUserRole = async () => {
+    const getAuthenticatedUser = async () => {
       try {
-        const user = await userService.getAuthenticatedUser();
-        userService.currentUser = user;
+        if (userService.currentUser === null) {
+          const user = await userService.getAuthenticatedUser();
+          userService.currentUser = user;
+        }
       } catch (error) {
         console.error("Sin usuario autenticado");
       }
     };
 
-    checkUserRole();
+    getAuthenticatedUser();
   }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setLoading(true);
       try {
         const result = await blogService.getAllPosts(currentPage, 5);
         if (result.success) {
@@ -83,13 +80,13 @@ function Blog() {
       {/*imagen */}
       <div className="w-112 md:p-8">
         <img
-          src={BASE_URL + post.imageUrl}
+          src={post.imageUrl}
           alt={post.title}
           className="rounded-2xl w-full h-64 object-cover"
         />
       </div>
 
-      <div className="max-w-1/2 flex flex-col justify-between">
+      <div className="lg:max-w-1/2 flex flex-col justify-between">
         {/* Título */}
         <h4
           className="cursor-pointer text-xl w-fit font-bold !text-[var(--color-secondary)] mb-2 text-center"
@@ -119,10 +116,11 @@ function Blog() {
 
   return (
     <>
-      <Navbar />
-
+      <Helmet>
+        <title>Blog | Centro Ohana</title>
+      </Helmet>
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
-        <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
+        <h1 className="text-4xl font-title text-center text-[#9a4c52] mb-10 pb-2">
           NUESTRAS PUBLICACIONES
         </h1>
 
@@ -171,15 +169,15 @@ function Blog() {
         </Modal>
 
         {/*paginación*/}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-          setSearchParams={(params: any) => console.log(params)}
-        />
+        {posts.length !== 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+            setSearchParams={(params: any) => console.log(params)}
+          />
+        )}
       </main>
-
-      <Footer />
     </>
   );
 }
