@@ -42,16 +42,14 @@ class BlogService {
   // @ts-ignore
   async updatePost(id: string, post: NewPostRequest) {
     var formData = new FormData();
-
+    formData.append("id", id);
     formData.append("title", post.title);
     formData.append("text", post.text);
-    formData.append("image", post.image);
-
     if (post.image) {
       formData.append("image", post.image);
     }
 
-    const response = await apiService.put<Post>(`/post`, formData);
+    const response = await apiService.put<Post>(`/blog`, formData);
 
     if (!response.success) {
       throw new Error("Error al actualizar el post");

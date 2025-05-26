@@ -10,6 +10,7 @@ import { useAuth } from "../../context/auth-context";
 
 function Login() {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth();
 
   //Para almacenar el nombre de usuario y la contraseña
   const [username, setUsername] = useState("");
@@ -20,8 +21,6 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const { setIsLoggedIn } = useAuth();
 
     setLoading(true);
     apiService.jwt = null; // Limpiar el token JWT antes de iniciar sesión

@@ -17,7 +17,14 @@ export default function Navbar() {
   const [authenticatedUser, setAuthenticatedUser] =
     useState<UserResponse | null>(null);
 
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  let isLoggedIn = false;
+  let setIsLoggedIn: (val: boolean) => void = () => {};
+
+  try {
+    ({ isLoggedIn, setIsLoggedIn } = useAuth());
+  } catch (err) {
+    console.warn("Auth context not ready in Navbar:", err);
+  }
 
   const navigate = useNavigate();
 
@@ -153,7 +160,10 @@ export default function Navbar() {
             : "max-h-0 opacity-0 -translate-y-2"
         }`}
       >
-        <ul className="flex flex-col text-center gap-4 py-6 px-6">
+        <ul
+          className="flex flex-col text-center gap-4 py-6 px-6"
+          onClick={() => setIsMenuOpen(false)}
+        >
           <li>
             <Link to="/servicios" className={styles.link}>
               Servicios

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Post } from "../models/post";
 import { NewPostRequest } from "../models/new-post-request";
 import blogService from "../services/blog.service";
-import ReactQuill from "react-quill";
+//import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 interface Props {
@@ -127,12 +127,14 @@ function CreatePostForm({ initialPost }: Props) {
           >
             Contenido del post:
           </label>
-          <ReactQuill
-            theme="snow"
+
+          <textarea
+            id="text"
+            name="text"
             value={data.text}
-            onChange={(content) => setFormData({ ...data, text: content })}
-            className="mt-2 w-full h-40  
-     "
+            onChange={handleInputChange}
+            className="mt-2 w-full h-50 border border-gray-300 rounded-xs 
+      focus:outline-none focus:ring-1 focus:ring-[#9a4c52] focus:border-[#9a4c52]"
           />
         </div>
         <br />

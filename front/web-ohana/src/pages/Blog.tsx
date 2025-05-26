@@ -87,7 +87,7 @@ function Blog() {
         />
       </div>
 
-      <div className="max-w-1/2 flex flex-col justify-between">
+      <div className="lg:max-w-1/2 flex flex-col justify-between">
         {/* Título */}
         <h4
           className="cursor-pointer text-xl w-fit font-bold !text-[var(--color-secondary)] mb-2 text-center"
@@ -121,7 +121,7 @@ function Blog() {
         <title>Blog | Centro Ohana</title>
       </Helmet>
       <main className="flex flex-col items-center px-4 py-8 min-h-screen">
-        <h1 className="text-4xl font-title text-[#9a4c52] mb-10 pb-2">
+        <h1 className="text-4xl font-title text-center text-[#9a4c52] mb-10 pb-2">
           NUESTRAS PUBLICACIONES
         </h1>
 
