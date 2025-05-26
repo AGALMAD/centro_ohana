@@ -82,7 +82,7 @@ public class BlogSeeder implements ApplicationRunner {
 
     private Post createPost(String title, String localImageFilename, String text, LocalDate date) {
         String imageUrl = localImageFilename;
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/blog/" + imageUrl)) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/" + imageUrl)) {
             if (is == null) {
                 throw new FileNotFoundException("Imagen no encontrada en recursos: " + imageUrl);
             }
