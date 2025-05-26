@@ -17,8 +17,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ImageService {
 
-    private final Path rootActivities = Paths.get("src/main/resources/static/activities");
-    private final Path rootBlog = Paths.get("src/main/resources/static/blog");
+    private final Path rootActivities = Paths.get("uploads/activities");
+    private final Path rootBlog = Paths.get("uploads/blog");
 
 
     public String saveImageActivities(MultipartFile file) throws IOException {
