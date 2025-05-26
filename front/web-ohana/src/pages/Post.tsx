@@ -13,7 +13,6 @@ import { Helmet } from "react-helmet";
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [post, setPost] = useState<Post | null>(null);
   // @ts-ignore
@@ -138,7 +137,7 @@ function BlogPost() {
             {/* Imagen */}
             <div className="flex justify-center mb-12 relative z-2">
               <img
-                src={BASE_URL + post.imageUrl}
+                src={post.imageUrl}
                 alt={post.title}
                 className="rounded-xl shadow-md w-115 mt-8 h-72 object-cover"
               />
