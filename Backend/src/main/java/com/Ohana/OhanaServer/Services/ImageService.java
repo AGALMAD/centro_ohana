@@ -1,15 +1,14 @@
 package com.Ohana.OhanaServer.Services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -17,35 +16,26 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ImageService {
 
-    private final Path rootActivities = Paths.get("uploads/activities");
-    private final Path rootBlog = Paths.get("uploads/blog");
-
+    private final Cloudinary cloudinary;
 
     public String saveImageActivities(MultipartFile file) throws IOException {
-        Files.createDirectories(rootActivities); // crea carpeta si no existe
-
-        // Generar un nombre único para la imagen
-        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path filePath = rootActivities.resolve(filename);
-
-        // Copia el archivo en la carpeta
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        return  "activities/" + filename;
+        return uploadToCloudinary(file, "activities");
     }
 
     public String saveImageBlog(MultipartFile file) throws IOException {
-        Files.createDirectories(rootBlog); // crea carpeta si no existe
-
-        // Generar un nombre único para la imagen
-        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path filePath = rootBlog.resolve(filename);
-
-        // Copia el archivo en la carpeta
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        return  "blog/" + filename;
+        return uploadToCloudinary(file, "blog");
     }
 
+    private String uploadToCloudinary(MultipartFile file, String folder) throws IOException {
+        String uniqueFilename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+
+        Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
+                "folder", folder,
+                "public_id", uniqueFilename,
+                "resource_type", "image"
+        ));
+
+        return uploadResult.get("secure_url").toString();
+    }
 }
 

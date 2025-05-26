@@ -9,7 +9,6 @@ import CreatePostForm from "../components/CreateOrUpdatePostForm";
 import { Helmet } from "react-helmet";
 
 function Blog() {
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -81,7 +80,7 @@ function Blog() {
       {/*imagen */}
       <div className="w-112 md:p-8">
         <img
-          src={BASE_URL + post.imageUrl}
+          src={post.imageUrl}
           alt={post.title}
           className="rounded-2xl w-full h-64 object-cover"
         />

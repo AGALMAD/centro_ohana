@@ -13,7 +13,6 @@ import { Helmet } from "react-helmet";
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const BASE_URL = `${import.meta.env.VITE_SERVER_URL}/`;
 
   const [activity, setActivity] = useState<Activity | null>(null);
   // @ts-ignore
@@ -133,7 +132,7 @@ function ActivityPage() {
             {/* Imagen */}
             <div className="flex justify-center mb-12">
               <img
-                src={BASE_URL + activity.imageUrl}
+                src={activity.imageUrl}
                 alt={activity.title}
                 className="rounded-xl shadow-md w-72 h-72 object-cover"
               />

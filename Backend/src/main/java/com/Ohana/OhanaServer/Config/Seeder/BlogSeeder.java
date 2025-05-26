@@ -3,11 +3,16 @@ package com.Ohana.OhanaServer.Config.Seeder;
 
 import com.Ohana.OhanaServer.Models.Post;
 import com.Ohana.OhanaServer.Repositories.PostRepository;
+import com.Ohana.OhanaServer.Services.CloudinaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +21,7 @@ import java.util.List;
 public class BlogSeeder implements ApplicationRunner {
 
     private final PostRepository postRepository;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -72,19 +78,23 @@ public class BlogSeeder implements ApplicationRunner {
         System.out.println("Posts guardados exitosamente.");
     }
 
-    private Post createPost(String title, String imageUrl,
-                            String text,
-                            LocalDate date) {
+    private Post createPost(String title, String localImageFilename, String text, LocalDate date) {
+        String imageUrl = localImageFilename;
+        try {
+            Path imagePath = Paths.get("src/main/resources/static", localImageFilename);
+            File file = imagePath.toFile();
+            // Sube la imagen y obtiene la URL de Cloudinary
+            imageUrl = cloudinaryService.uploadImage(file, "blog");
+        } catch (IOException e) {
+            throw new RuntimeException("Error al subir imagen del blog a Cloudinary", e);
+        }
 
-
-        Post post = Post.builder()
+        return Post.builder()
                 .title(title)
                 .imageUrl(imageUrl)
                 .text(text)
                 .date(date)
                 .build();
-
-        return post;
     }
 
 }
