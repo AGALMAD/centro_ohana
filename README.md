@@ -1,12 +1,25 @@
 # Centro Ohana
 
-Centro Ohana es una página web desarrollada para **[Centro Ohana](https://www.instagram.com/centro_ohana/)**, una empresa dedicada a:  
+
+Centro Ohana es una página web desarrollada para **[Centro Ohana](https://www.instagram.com/centro_ohana_/)**, una empresa dedicada a:  
   
 **Logopedia 👄**  
 **Psicopedagogía 🧠**  
 **Terapia ocupacional 👣**  
   
 Su propósito es brindar una plataforma clara, accesible y profesional donde padres y tutores puedan informarse sobre los servicios ofrecidos, contactar con especialistas y conocer el enfoque del centro.
+
+---
+
+## 📑 Índice
+
+- [🧠 ¿Qué ofrece el sitio?](#-qué-ofrece-el-sitio)
+- [🛠️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
+- [🚀 Cómo instalar y ejecutar el proyecto](#-cómo-instalar-y-ejecutar-el-proyecto)
+- [📦 Despliegue](#-despliegue)
+
+---
+
 
 ## 🧠 ¿Qué ofrece el sitio?
 
@@ -84,4 +97,6 @@ npm run dev
 
 ### 🖼️ Almacenamiento de imágenes
 - ☁️ **[Cloudinary](https://cloudinary.com/)**: Servicio para gestión y entrega de imágenes en la nube.
+
+**[Enlace a página desplegada](https://centrohana.com/)**:
 
