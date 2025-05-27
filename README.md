@@ -32,6 +32,8 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
 - Formulario de contacto para agendar consultas o realizar preguntas.
 - Diseño responsivo, optimizado para móviles, tablets y escritorio.
 
+---
+
 ## 🛠️ Tecnologías utilizadas
 
 - **Frontend:** [React](https://reactjs.org/)
@@ -90,6 +92,7 @@ cd frontend
 npm install
 npm run dev
 ```
+---
 
 ## 📦 Despliegue
 
@@ -104,8 +107,9 @@ npm run dev
 
 **[Enlace a página desplegada](https://centrohana.com/)**:
 
+---
 
-## 🙋‍♀️ Autores
+## Autores
 
 Proyecto desarrollado con ❤️ por:
 
