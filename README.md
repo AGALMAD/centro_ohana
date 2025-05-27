@@ -17,6 +17,7 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
 - [🛠️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
 - [🚀 Cómo instalar y ejecutar el proyecto](#-cómo-instalar-y-ejecutar-el-proyecto)
 - [📦 Despliegue](#-despliegue)
+- [🙋‍♀️ Autores](#-autores)
 
 ---
 
@@ -56,6 +57,10 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
     - Spring Security
     - JWT
 
+  - **Configuración por entorno:**
+    - Uso de archivos `application.properties` diferenciados para los perfiles de **desarrollo** y **producción**.
+    - Las credenciales sensibles (como acceso a base de datos, JWT, Cloudinary, etc.) están protegidas mediante **variables de entorno**, garantizando un despliegue seguro.
+
   - **Documentación de API:**
     - Swagger / Springdoc OpenAPI
 
@@ -65,6 +70,7 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
 
   - **Servicios en la nube:**
     - Cloudinary (gestión de imágenes y archivos multimedia)
+
 
 ---
 
