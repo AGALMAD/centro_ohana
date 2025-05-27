@@ -120,8 +120,8 @@ Proyecto desarrollado con ❤️ por:
 
 ### 👩‍💻 [Maria Rosales](https://github.com/maria99r)
 - 🐙 GitHub: [maria99r](https://github.com/maria99r)
-- 📧 Email:
-- 💼 LinkedIn: [linkedin.com/in/maria99r]()
+- 📧 Email: maria99r@hotmail.com
+- 💼 LinkedIn: [linkedin.com/in/mariarosalesroman](https://www.linkedin.com/in/mariarosalesroman/)
 
 ---
 > Si tienes dudas, sugerencias o quieres colaborar, no dudes en ponerte en contacto con nosotros.
