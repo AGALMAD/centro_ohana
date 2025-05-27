@@ -41,9 +41,8 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
   - **Tailwind CSS:** Framework CSS utilitario para diseño rápido y responsivo.
   - **Axios:** Cliente HTTP para hacer peticiones al backend.
   - **Framer Motion:** Biblioteca para animaciones fluidas y atractivas.
-  - **React Icons** y **Lucide React:** Iconografía personalizada y moderna.
-  - **SweetAlert2:** Modales personalizados y alertas elegantes.
-  - **React Slick:** Carrusel dinámico para testimonios o imágenes.
+  - **SweetAlert:** Modales personalizados y alertas elegantes.
+  - **React Slick:** Carrusel dinámico de imágenes.
   - **Lightbox:** Visualización de imágenes ampliadas estilo galería.
 
 - **Backend:** [Spring Boot 3.3.10](https://spring.io/projects/spring-boot)
@@ -62,7 +61,6 @@ Su propósito es brindar una plataforma clara, accesible y profesional donde pad
 
   - **Productividad del desarrollador:**
     - Lombok (anotaciones para reducir código repetitivo)
-    - Spring Boot DevTools (recarga automática)
     - MapStruct (conversión entre entidades y DTOs)
 
   - **Servicios en la nube:**
@@ -99,4 +97,22 @@ npm run dev
 - ☁️ **[Cloudinary](https://cloudinary.com/)**: Servicio para gestión y entrega de imágenes en la nube.
 
 **[Enlace a página desplegada](https://centrohana.com/)**:
+
+
+## 🙋‍♀️ Autores
+
+Proyecto desarrollado con ❤️ por:
+
+### 👨‍💻 [Alejandro Gálvez](https://github.com/AGALMAD)
+- 🐙 GitHub: [AGALMAD](https://github.com/AGALMAD)
+- 📧 Email: galvezmaduenoalejandro@gmail.com  
+- 💼 LinkedIn: [linkedin.com/in/alejandrogalma](https://www.linkedin.com/in/alejandrogalma/)
+
+### 👩‍💻 [Maria Rosales](https://github.com/maria99r)
+- 🐙 GitHub: [maria99r](https://github.com/maria99r)
+- 📧 Email:
+- 💼 LinkedIn: [linkedin.com/in/maria99r]()
+
+---
+> Si tienes dudas, sugerencias o quieres colaborar, no dudes en ponerte en contacto con nosotros.
 
