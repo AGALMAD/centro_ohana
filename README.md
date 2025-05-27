@@ -109,7 +109,7 @@ npm run dev
 
 ---
 
-## Autores
+## 🙋‍♀️ Autores
 
 Proyecto desarrollado con ❤️ por:
 
