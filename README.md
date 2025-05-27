@@ -1,7 +1,7 @@
 # Centro Ohana
 
 
-Centro Ohana es una página web desarrollada para **[Centro Ohana](https://www.instagram.com/centro_ohana_/)**, una empresa dedicada a:  
+Web desarrollada para **[Centro Ohana](https://www.instagram.com/centro_ohana_/)**, una empresa dedicada a:  
   
 **Logopedia 👄**  
 **Psicopedagogía 🧠**  
