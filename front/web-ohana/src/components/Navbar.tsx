@@ -75,8 +75,8 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/talleres" className={styles.link}>
-              Talleres
+            <Link to="/conocenos" className={styles.link}>
+              Conócenos
             </Link>
           </li>
 
@@ -95,8 +95,8 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link to="/conocenos" className={styles.link}>
-                  Conócenos
+                <Link to="/talleres" className={styles.link}>
+                  Talleres
                 </Link>
               </li>
               <li>
@@ -170,6 +170,17 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
+            <Link to="/conocenos" className={styles.link}>
+              Conócenos
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/galeria" className={styles.link}>
+              Galería
+            </Link>
+          </li>
+          <li>
             <Link to="/talleres" className={styles.link}>
               Talleres
             </Link>
@@ -177,16 +188,6 @@ export default function Navbar() {
           <li>
             <Link to="/blog" className={styles.link}>
               Blog
-            </Link>
-          </li>
-          <li>
-            <Link to="/galeria" className={styles.link}>
-              Galería
-            </Link>
-          </li>
-          <li>
-            <Link to="/conocenos" className={styles.link}>
-              Conócenos
             </Link>
           </li>
           <li>

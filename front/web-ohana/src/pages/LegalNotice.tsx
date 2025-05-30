@@ -22,20 +22,23 @@ export default function LegalNotice() {
             <br />
             - Nombre comercial: CENTRO OHANA
             <br />
-            - Titular: ROCÍO RUIZ ROJO y ANA GONZALEZ MORILLO
+            - Cotitulares: MARÍA DEL ROCÍO RUIZ ROJO y ANA GONZÁLEZ MORILLO
             <br />
-            - NIF: [NIF]
+            - DNI Rocío: 42196729-D
+            <br />
+            - DNI Ana: 53741149-Q
             <br />
             - Domicilio: Calle Pintor Cipriano Maldonado, 7, bajo C, Torre del
-            Mar, España
+            Mar, 29740 Málaga, España
             <br />
-            - Teléfono: 647 49 46 81
+            - Teléfono: : +34 690 64 31 96 | +34 647 49 46 81
             <br />
             - Email: centroohana@gmail.com
             <br />
             - Dominio web: https://centrohana.com
-            <br />- Colegiación profesional: [Ej. Colegio Oficial de Psicología,
-            nº colegiado]
+            <br />
+            - Nº Colegiado Rocío: 29/1399 | NICA 49.470
+            <br />- Nº Colegiado Ana: 1206/42196729
           </p>
 
           <p>

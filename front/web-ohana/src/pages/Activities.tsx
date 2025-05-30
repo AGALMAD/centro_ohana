@@ -129,8 +129,8 @@ function Activities() {
         />
       </Helmet>
 
-      <main className="flex flex-col items-center px-4 py-8 min-h-screen">
-        <h1 className="text-4xl text-center font-title text-[#9a4c52] mb-10 pb-2">
+      <main className="flex flex-col items-center px-4 py-16 min-h-screen">
+        <h1 className="text-4xl text-center font-title text-[#9a4c52]  mb-10 pb-2">
           NUESTROS TALLERES
         </h1>
 

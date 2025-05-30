@@ -16,10 +16,11 @@ export default function PrivacyPolicy() {
           <p>
             <strong>1. INFORMACIÓN AL USUARIO</strong>
             <br />
-            <b>ROCÍO RUIZ ROJO</b>, en adelante RESPONSABLE, es el responsable
-            del tratamiento de los datos personales del Usuario y le informa que
-            estos datos serán tratados de conformidad con el Reglamento (UE)
-            2016/679 (GDPR) y la Ley Orgánica 3/2018 (LOPDGDD).
+            <b>ROCÍO RUIZ ROJO</b> y <b>ANA GONZÁLEZ MORILLO</b>, en adelante
+            RESPONSABLES, son las responsables del tratamiento de los datos
+            personales del Usuario y le informan que estos datos serán tratados
+            de conformidad con el Reglamento (UE) 2016/679 (GDPR) y la Ley
+            Orgánica 3/2018 (LOPDGDD).
           </p>
 
           <p>
@@ -58,7 +59,7 @@ export default function PrivacyPolicy() {
           <p>
             <strong>Datos de contacto:</strong>
             <br />
-            ROCÍO RUIZ ROJO <br />
+            ROCÍO RUIZ ROJO y ANA GONZÁLEZ MORILLO <br />
             Email: centrohana@gmail.com
           </p>
 
@@ -73,7 +74,7 @@ export default function PrivacyPolicy() {
           <p>
             <strong>3. SEGURIDAD</strong>
             <br />
-            El RESPONSABLE aplica las medidas técnicas y organizativas
+            LAS RESPONSABLES aplican las medidas técnicas y organizativas
             necesarias para proteger los datos personales conforme a la
             normativa vigente.
           </p>
