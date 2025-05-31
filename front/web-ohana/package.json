@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "postbuild": "node --loader ts-node/esm src/scripts/generate-sitemap.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -24,6 +25,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^7.5.0",
     "react-slick": "^0.30.3",
+    "sitemap": "^8.0.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.19.1",
     "tailwindcss": "^4.1.2",
@@ -38,7 +40,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
     "vite": "^5.2.0"
   }
 }
