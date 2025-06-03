@@ -9,7 +9,7 @@ class ActivityService {
 
   async getActivities() {
     const response = await apiService.get<Activity[]>("/activity");
-    console.log("Activities Response", response);
+    // console.log("Activities Response", response);
 
     if (!response.success) {
       throw new Error("Failed to fetch activities");

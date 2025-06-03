@@ -5,10 +5,12 @@ import TokenWatcher from "./components/TokenWatcher";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/auth-context";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <TokenWatcher />
         <Navbar />

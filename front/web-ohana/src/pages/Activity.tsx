@@ -9,16 +9,27 @@ import Modal from "../components/Modal";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import InstagramIcon from "../assets/instagram.png";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../context/auth-context";
 
 function ActivityPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { isLoggedIn } = useAuth();
+
+  const { authenticatedUser } = useAuth();
 
   const [activity, setActivity] = useState<Activity | null>(null);
   // @ts-ignore
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setShowAdminView(false);
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -105,7 +116,8 @@ function ActivityPage() {
         {activity && (
           <div className="relative  max-w-xl w-full p-6 md:p-10">
             {/* Botones de edición */}
-            {userService.currentUser?.role === "ADMIN" && (
+            {(authenticatedUser?.role === "ADMIN" ||
+              authenticatedUser?.role === "EDITOR") && (
               <div className="absolute top-4 right-4 flex space-x-2">
                 <button
                   onClick={() => setShowAdminView(true)}

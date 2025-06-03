@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../context/auth-context";
 
 function UsersAdmin() {
+  const { isLoggedIn } = useAuth();
+
   const [allUsers, setAllUsers] = useState<UserResponse[] | null>(null);
 
   // Modal para editar o crear usuario
@@ -23,6 +26,12 @@ function UsersAdmin() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {

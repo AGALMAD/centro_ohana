@@ -96,7 +96,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-4 text-center text-xs text-[var(--color-primary)]">
-          © {new Date().getFullYear()} Centro Hana. Todos los derechos
+          © {new Date().getFullYear()} Centro Ohana. Todos los derechos
           reservados. <br />
           Diseño web: María Rosales y Alejandro Gálvez.
         </div>

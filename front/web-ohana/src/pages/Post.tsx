@@ -9,16 +9,25 @@ import CreatePostForm from "../components/CreateOrUpdatePostForm";
 import blogService from "../services/blog.service";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../context/auth-context";
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { authenticatedUser, isLoggedIn } = useAuth();
 
   const [post, setPost] = useState<Post | null>(null);
   // @ts-ignore
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setShowAdminView(false);
+    }
+  }, [isLoggedIn]);
 
   const [searchParams] = useSearchParams();
   const pageFromQuery = searchParams.get("page");
@@ -29,7 +38,7 @@ function BlogPost() {
         const user = await userService.getAuthenticatedUser();
         userService.currentUser = user;
       } catch (error) {
-        console.error("Sin usuario autenticado");
+        //console.error("Sin usuario autenticado");
       }
     };
     checkUserRole();
@@ -107,7 +116,8 @@ function BlogPost() {
             ></div>
 
             {/* Botones de edición */}
-            {userService.currentUser?.role === "ADMIN" && (
+            {(authenticatedUser?.role === "ADMIN" ||
+              authenticatedUser?.role === "EDITOR") && (
               <div className="absolute top-4 right-4 flex space-x-2 z-2">
                 <button
                   onClick={() => setShowAdminView(true)}

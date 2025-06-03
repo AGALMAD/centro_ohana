@@ -6,27 +6,40 @@ import userService from "../services/user.service";
 import CreateActivityForm from "../components/CreateOrUpdateActivityForm";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../context/auth-context";
+import { UserResponse } from "../models/user-response";
 
 function Activities() {
   const navigate = useNavigate();
+
+  const { isLoggedIn } = useAuth();
+  const [currentUser, setCurrentUser] = useState<UserResponse | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (isLoggedIn) {
+        const user = await userService.getAuthenticatedUser();
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
+      }
+    };
+    fetchUser();
+  }, [isLoggedIn]);
 
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [showAdminView, setShowAdminView] = useState(false);
 
-  // Recoge el usuario autenticado al cargar la página
-  // y lo almacena en el servicio de usuario
   useEffect(() => {
-    const getAuthenticatedUser = async () => {
-      try {
-        const user = await userService.getAuthenticatedUser();
-        userService.currentUser = user;
-      } catch (error) {}
-    };
+    if (!isLoggedIn) {
+      setShowAdminView(false);
+    }
+  }, [isLoggedIn]);
 
-    getAuthenticatedUser();
-  }, []);
+  const isAdminOrEditor =
+    currentUser?.role === "ADMIN" || currentUser?.role === "EDITOR";
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -170,7 +183,7 @@ function Activities() {
         )}
 
         {/* Botón de añadir actividad */}
-        {userService.currentUser?.role === "ADMIN" && (
+        {isAdminOrEditor && (
           <div>
             <button
               type="button"

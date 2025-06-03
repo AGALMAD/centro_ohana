@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { AuthRequest } from "../../models/auth-request";
-import authService from "../../services/auth.service";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api.service";
@@ -10,7 +9,8 @@ import { useAuth } from "../../context/auth-context";
 
 function Login() {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAuth();
+
+  const { isLoggedIn, authenticatedUser, logout, login } = useAuth();
 
   //Para almacenar el nombre de usuario y la contraseña
   const [username, setUsername] = useState("");
@@ -31,23 +31,19 @@ function Login() {
     };
 
     try {
-      const response = await authService.login(requestBody);
+      await login(requestBody);
 
-      if (response) {
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "Has iniciado sesión correctamente.",
-          icon: "success",
-          confirmButtonText: "Continuar",
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
-          toast: true,
-        }).then(() => {
-          navigate("/");
-        });
-        setIsLoggedIn(true);
-      }
+      Swal.fire({
+        title: "¡Éxito!",
+        text: "Has iniciado sesión correctamente.",
+        icon: "success",
+        confirmButtonText: "Continuar",
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+      });
+      navigate("/");
     } catch (error: any) {
       console.error("Error:", error);
       setError("Nombre de usuario o contraseña incorrectos.");
@@ -68,6 +64,26 @@ function Login() {
       setPassword(value);
     }
   };
+
+  if (isLoggedIn && authenticatedUser) {
+    return (
+      <main className="max-w-md mx-auto mt-20 p-6 bg-[#fde4ff] shadow-lg rounded-xl text-center">
+        <h2 className="text-xl font-bold mb-4">
+          Sesión iniciada como{" "}
+          <span className="text-purple-700">{authenticatedUser.username}</span>
+        </h2>
+        <button
+          onClick={async () => {
+            await logout();
+          }}
+          className="bg-[#6A0572] text-white py-2 px-4 rounded hover:bg-[#784a7b] font-bold 
+          cursor-pointer transition duration-200"
+        >
+          Cerrar sesión
+        </button>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -95,6 +111,7 @@ function Login() {
               className="mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
               onChange={handleChange}
+              autoComplete="username"
             />
           </div>
 
@@ -113,6 +130,7 @@ function Login() {
               className="mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
               onChange={handleChange}
+              autoComplete="current-password"
             />
           </div>
 
@@ -122,7 +140,9 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-[#6A0572] text-white py-2 px-4 rounded hover:bg-[#784a7b] font-bold cursor-pointer transition duration-200"
+            disabled={loading}
+            className="w-full bg-[#6A0572] text-white py-2 px-4 rounded hover:bg-[#784a7b] 
+            font-bold cursor-pointer transition duration-200"
           >
             Iniciar Sesión
           </button>

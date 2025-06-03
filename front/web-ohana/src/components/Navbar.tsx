@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
-import userService from "../services/user.service";
-import { UserResponse } from "../models/user-response";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
-import authService from "../services/auth.service";
 
 const styles = {
   link: "block py-2 px-2 text-[var(--color-secondary)] text-xl font-bold transition-transform duration-300 hover:scale-110",
@@ -14,41 +11,7 @@ const styles = {
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [authenticatedUser, setAuthenticatedUser] =
-    useState<UserResponse | null>(null);
-
-  let isLoggedIn = false;
-  let setIsLoggedIn: (val: boolean) => void = () => {};
-
-  try {
-    ({ isLoggedIn, setIsLoggedIn } = useAuth());
-  } catch (err) {
-    console.warn("Auth context not ready in Navbar:", err);
-  }
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userResponse = await userService.getAuthenticatedUser();
-        if (userResponse) {
-          setAuthenticatedUser(userResponse);
-        } else {
-          setAuthenticatedUser(null);
-        }
-      } catch (error) {
-        console.error("Error fetching user:", error);
-        setAuthenticatedUser(null);
-      }
-    };
-
-    if (isLoggedIn) {
-      fetchUser();
-    } else {
-      setAuthenticatedUser(null);
-    }
-  }, [isLoggedIn]);
+  const { isLoggedIn, authenticatedUser, logout } = useAuth();
 
   const isAdmin = authenticatedUser?.role === "ADMIN";
 
@@ -87,7 +50,9 @@ export default function Navbar() {
           </li>
 
           <li className="relative group">
-            <span className={`${styles.link} cursor-pointer`}>Más ▾</span>
+            <span className={`${styles.link} cursor-pointer whitespace-nowrap`}>
+              Más ▾
+            </span>
             <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-[var(--color-bg)] shadow-md rounded-lg z-50 pt-2 px-4 min-w-[160px]">
               <li>
                 <Link to="/galeria" className={styles.link}>
@@ -109,7 +74,7 @@ export default function Navbar() {
 
           {isLoggedIn && authenticatedUser && (
             <div className={`${styles.link} relative group`}>
-              <span className="cursor-pointer text-md!">
+              <span className="cursor-pointer whitespace-nowrap text-md!">
                 {authenticatedUser.username} ▾
               </span>
               <ul
@@ -130,9 +95,7 @@ export default function Navbar() {
                 <li
                   className="px-4 py-2 hover:bg-[var(--color-primary)] cursor-pointer"
                   onClick={async () => {
-                    await authService.logout();
-                    setIsLoggedIn(false);
-                    navigate("/login");
+                    await logout();
                   }}
                 >
                   Cerrar sesión
@@ -208,9 +171,7 @@ export default function Navbar() {
             <li
               className={styles.link}
               onClick={async () => {
-                await authService.logout();
-                setIsLoggedIn(false);
-                navigate("/login");
+                await logout();
               }}
             >
               Cerrar sesión ({authenticatedUser.username})

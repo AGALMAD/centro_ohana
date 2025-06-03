@@ -7,9 +7,14 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import CreatePostForm from "../components/CreateOrUpdatePostForm";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../context/auth-context";
+import { UserResponse } from "../models/user-response";
 
 function Blog() {
   const navigate = useNavigate();
+
+  const { isLoggedIn } = useAuth();
+  const [currentUser, setCurrentUser] = useState<UserResponse | null>(null);
 
   const [searchParams] = useSearchParams();
   const initialPage = parseInt(searchParams.get("page") || "0", 5);
@@ -22,19 +27,22 @@ function Blog() {
   const [showAdminView, setShowAdminView] = useState(false);
 
   useEffect(() => {
-    const getAuthenticatedUser = async () => {
-      try {
-        if (userService.currentUser === null) {
-          const user = await userService.getAuthenticatedUser();
-          userService.currentUser = user;
-        }
-      } catch (error) {
-        console.error("Sin usuario autenticado");
+    if (!isLoggedIn) {
+      setShowAdminView(false);
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (isLoggedIn) {
+        const user = await userService.getAuthenticatedUser();
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
       }
     };
-
-    getAuthenticatedUser();
-  }, []);
+    fetchUser();
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -66,6 +74,9 @@ function Blog() {
     const [day, month, year] = dateString.split("/").map(Number);
     return new Date(year, month - 1, day);
   }
+
+  const isAdminOrEditor =
+    currentUser?.role === "ADMIN" || currentUser?.role === "EDITOR";
 
   const allPosts = posts.sort(
     (a, b) =>
@@ -140,7 +151,7 @@ function Blog() {
         )}
 
         {/* Botón de añadir nuevo post */}
-        {userService.currentUser?.role === "ADMIN" && (
+        {isAdminOrEditor && (
           <div>
             <button
               type="button"
