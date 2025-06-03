@@ -75,7 +75,7 @@ function ActivityPage() {
         });
 
         setTimeout(() => {
-          navigate("/activities");
+          navigate("/talleres");
         }, 2000);
       } catch (error) {
         console.error("Error al eliminar la actividad:", error);
