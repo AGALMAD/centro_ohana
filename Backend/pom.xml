@@ -106,12 +106,13 @@
 			<version>1.6.3</version>
 		</dependency>
 
-		<!-- Dependencia de Posgresql -->
+		<!-- Dependencia de MySQL -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.7.5</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>com.cloudinary</groupId>
